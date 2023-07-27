@@ -6,9 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages,
   System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.WinXCtrls,
-  RALServer, RALRoutes, RALRequest, RALResponse, RALParams, RALIndyServer,
-  RALTypes, RALAuthentication, RALConsts, Vcl.ComCtrls;
+  Vcl.WinXCtrls, RALServer, RALRoutes, RALRequest, RALResponse,
+  RALParams, RALIndyServer, RALTypes, RALAuthentication, RALConsts,
+  Vcl.ComCtrls;
 
 type
   TfPrincipal = class(TForm)
@@ -21,15 +21,15 @@ type
     ListView1: TListView;
     lServerPath: TLabel;
     procedure poolerrclientesReply(Sender: TObject; ARequest: TRALRequest;
-      var AResponse: TRALResponse);
+      AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
     procedure ping(Sender: TObject; ARequest: TRALRequest;
-      var AResponse: TRALResponse);
+      AResponse: TRALResponse);
     procedure test(Sender: TObject; ARequest: TRALRequest;
-      var AResponse: TRALResponse);
+      AResponse: TRALResponse);
     procedure FormCreate(Sender: TObject);
     procedure Log(Sender: TObject; ARequest: TRALRequest;
-      var AResponse: TRALResponse);
+       AResponse: TRALResponse);
   private
     { Private declarations }
   public
@@ -44,7 +44,7 @@ implementation
 {$R *.dfm}
 
 procedure TfPrincipal.poolerrclientesReply(Sender: TObject;
-  ARequest: TRALRequest; var AResponse: TRALResponse);
+  ARequest: TRALRequest; AResponse: TRALResponse);
 var
   nome: string;
   vParam: TRALParam;
@@ -58,7 +58,7 @@ begin
 end;
 
 procedure TfPrincipal.test(Sender: TObject; ARequest: TRALRequest;
-  var AResponse: TRALResponse);
+  AResponse: TRALResponse);
 begin
   AResponse.ContentType := 'text/plain';
   AResponse.ResponseText := 'pong';
@@ -80,7 +80,7 @@ begin
 end;
 
 procedure TfPrincipal.Log(Sender: TObject; ARequest: TRALRequest;
-  var AResponse: TRALResponse);
+  AResponse: TRALResponse);
 var
   response: string;
 begin
@@ -94,7 +94,7 @@ begin
 end;
 
 procedure TfPrincipal.ping(Sender: TObject; ARequest: TRALRequest;
-var AResponse: TRALResponse);
+                           AResponse: TRALResponse);
 begin
   // No http verb is checked here, so it'll answer the same to any incomming
   // This is a simple GET, POST, PUT, PATCH, DELETE request against /ping endpoint

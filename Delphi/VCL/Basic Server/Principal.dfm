@@ -10,7 +10,9 @@ object fPrincipal: TfPrincipal
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  OldCreateOrder = True
   OnCreate = FormCreate
+  PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 8
@@ -71,7 +73,7 @@ object fPrincipal: TfPrincipal
     Authentication = RALBasicAuth
     BruteForceProtection.Enabled = True
     BruteForceProtection.ExpirationMin = 30
-    BruteForceProtection.MaxTry = 3
+    BruteForceProtection.MaxTry = 10
     Port = 8000
     Routes = <
       item
@@ -107,7 +109,7 @@ object fPrincipal: TfPrincipal
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    OnClientRequest = Log
+    OnResponse = Log
     Left = 56
     Top = 104
   end
