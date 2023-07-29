@@ -14,13 +14,13 @@ type
   TfPrincipal = class(TForm)
     ToggleSwitch1: TToggleSwitch;
     RALBasicAuth: TRALServerBasicAuth;
-    Server: TRALIndyServer;
     Memo2: TMemo;
     Label1: TLabel;
     Label2: TLabel;
     ListView1: TListView;
     lServerPath: TLabel;
-    procedure poolerrclientesReply(Sender: TObject; ARequest: TRALRequest;
+    Server: TRALIndyServer;
+    procedure Clientes(Sender: TObject; ARequest: TRALRequest;
       AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
     procedure ping(Sender: TObject; ARequest: TRALRequest;
@@ -28,10 +28,13 @@ type
     procedure test(Sender: TObject; ARequest: TRALRequest;
       AResponse: TRALResponse);
     procedure FormCreate(Sender: TObject);
-    procedure Log(Sender: TObject; ARequest: TRALRequest;
-       AResponse: TRALResponse);
+    procedure ServerRequest(Sender: TObject; ARequest: TRALRequest;
+      AResponse: TRALResponse);
+    procedure ServerResponse(Sender: TObject; ARequest: TRALRequest;
+      AResponse: TRALResponse);
   private
     { Private declarations }
+    procedure CreateRoutes;
   public
     { Public declarations }
   end;
@@ -43,8 +46,8 @@ implementation
 
 {$R *.dfm}
 
-procedure TfPrincipal.poolerrclientesReply(Sender: TObject;
-  ARequest: TRALRequest; AResponse: TRALResponse);
+procedure TfPrincipal.Clientes(Sender: TObject; ARequest: TRALRequest;
+  AResponse: TRALResponse);
 var
   nome: string;
   vParam: TRALParam;
@@ -70,36 +73,55 @@ begin
   end;
 end;
 
+procedure TfPrincipal.CreateRoutes;
+begin
+  Server.CreateRoute('test', test);
+  Server.CreateRoute('clientes', Clientes);
+  Server.CreateRoute('ping', ping);
+end;
+
 procedure TfPrincipal.FormCreate(Sender: TObject);
 var
   I: Integer;
 begin
+  // setting the events here via code to allow quick update of the examples
+  Server.OnRequest := ServerRequest;
+  Server.OnResponse := ServerResponse;
+  CreateRoutes;
+
   ListView1.Clear;
   for I := 0 to pred(Server.Routes.Count) do
     ListView1.Items.Add.Caption := TRALRoute(Server.Routes.Items[I]).RouteName;
 end;
 
-procedure TfPrincipal.Log(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
-var
-  response: string;
-begin
-  response := AResponse.ResponseText;
-  TThread.Queue(nil,
-    procedure
-    begin
-      Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
-      Memo2.Lines.Append('RESPONSE: ' + response);
-    end);
-end;
-
 procedure TfPrincipal.ping(Sender: TObject; ARequest: TRALRequest;
-                           AResponse: TRALResponse);
+  AResponse: TRALResponse);
 begin
   // No http verb is checked here, so it'll answer the same to any incomming
   // This is a simple GET, POST, PUT, PATCH, DELETE request against /ping endpoint
   // which results in a 'pong' response
   AResponse.ResponseText := 'pong';
+end;
+
+procedure TfPrincipal.ServerRequest(Sender: TObject; ARequest: TRALRequest;
+  AResponse: TRALResponse);
+begin
+//  TThread.Queue(nil,
+//    procedure
+//    begin
+//      Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
+//    end);
+end;
+
+procedure TfPrincipal.ServerResponse(Sender: TObject; ARequest: TRALRequest;
+AResponse: TRALResponse);
+begin
+//    Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
+//  TThread.Queue(nil,
+//    procedure
+//    begin
+//      Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
+//    end);
 end;
 
 procedure TfPrincipal.ToggleSwitch1Click(Sender: TObject);

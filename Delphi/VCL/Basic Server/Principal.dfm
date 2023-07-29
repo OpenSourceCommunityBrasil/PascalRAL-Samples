@@ -10,9 +10,7 @@ object fPrincipal: TfPrincipal
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = True
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 8
@@ -70,47 +68,23 @@ object fPrincipal: TfPrincipal
   end
   object Server: TRALIndyServer
     Active = False
-    Authentication = RALBasicAuth
     BruteForceProtection.Enabled = True
     BruteForceProtection.ExpirationMin = 30
-    BruteForceProtection.MaxTry = 10
+    BruteForceProtection.MaxTry = 3
     Port = 8000
-    Routes = <
-      item
-        RouteDomain = '/'
-        RouteName = 'ping'
-        AllowedMethods = [amALL]
-        SkipAuthMethods = []
-        Callback = False
-        OnReply = ping
-      end
-      item
-        RouteDomain = '/'
-        RouteName = 'test'
-        AllowedMethods = [amALL]
-        SkipAuthMethods = [amALL]
-        Callback = False
-        OnReply = test
-      end>
+    Routes = <>
     ServerStatus.Strings = (
-      '<html>'
-      '<head>'
-      '<title>RALServer - $ralversion;</title>'
-      '</head>'
-      '<body>'
-      '<h1>Server OnLine</h1>'
-      '<h4>Version: $ralversion;</h4>'
-      '<h4>Engine: $ralengine;</h4>'
-      '</body>'
-      '</html>')
+      
+        '<html><head><title>RALServer - 0.2.0 - alpha</title></head><body' +
+        '><h1>Server OnLine</h1><h4>Version: 0.2.0 - alpha</h4><h4>Engine' +
+        ': $ralengine;</h4></body></html>')
     SessionTimeout = 0
     ShowServerStatus = True
     SSL.Enabled = False
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    OnResponse = Log
-    Left = 56
-    Top = 104
+    Left = 224
+    Top = 16
   end
 end
