@@ -27,14 +27,14 @@ object fPrincipal: TfPrincipal
     Caption = 'Log'
   end
   object lServerPath: TLabel
-    Left = 102
-    Top = 8
+    Left = 286
+    Top = 34
     Width = 54
     Height = 13
     Caption = 'ServerPath'
   end
   object ToggleSwitch1: TToggleSwitch
-    Left = 8
+    Left = 323
     Top = 8
     Width = 72
     Height = 20
@@ -58,6 +58,17 @@ object fPrincipal: TfPrincipal
     Columns = <>
     TabOrder = 2
     ViewStyle = vsList
+  end
+  object lePort: TLabeledEdit
+    Left = 8
+    Top = 18
+    Width = 89
+    Height = 21
+    EditLabel.Width = 20
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Port'
+    TabOrder = 3
+    Text = ''
   end
   object RALBasicAuth: TRALServerBasicAuth
     AuthDialog = True
@@ -84,7 +95,7 @@ object fPrincipal: TfPrincipal
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    Left = 224
-    Top = 16
+    Left = 304
+    Top = 112
   end
 end

@@ -8,7 +8,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   Vcl.WinXCtrls, RALServer, RALRoutes, RALRequest, RALResponse,
   RALParams, RALIndyServer, RALTypes, RALAuthentication, RALConsts,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, Vcl.Mask, Vcl.ExtCtrls;
 
 type
   TfPrincipal = class(TForm)
@@ -20,6 +20,7 @@ type
     ListView1: TListView;
     lServerPath: TLabel;
     Server: TRALIndyServer;
+    lePort: TLabeledEdit;
     procedure Clientes(Sender: TObject; ARequest: TRALRequest;
       AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
@@ -35,6 +36,7 @@ type
   private
     { Private declarations }
     procedure CreateRoutes;
+    procedure SetupServer;
   public
     { Public declarations }
   end;
@@ -81,17 +83,8 @@ begin
 end;
 
 procedure TfPrincipal.FormCreate(Sender: TObject);
-var
-  I: Integer;
 begin
-  // setting the events here via code to allow quick update of the examples
-  Server.OnRequest := ServerRequest;
-  Server.OnResponse := ServerResponse;
-  CreateRoutes;
-
-  ListView1.Clear;
-  for I := 0 to pred(Server.Routes.Count) do
-    ListView1.Items.Add.Caption := TRALRoute(Server.Routes.Items[I]).RouteName;
+  //
 end;
 
 procedure TfPrincipal.ping(Sender: TObject; ARequest: TRALRequest;
@@ -106,31 +99,53 @@ end;
 procedure TfPrincipal.ServerRequest(Sender: TObject; ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
-//  TThread.Queue(nil,
-//    procedure
-//    begin
-//      Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
-//    end);
+  // TThread.Queue(nil,
+  // procedure
+  // begin
+  // Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
+  // end);
 end;
 
 procedure TfPrincipal.ServerResponse(Sender: TObject; ARequest: TRALRequest;
-AResponse: TRALResponse);
+  AResponse: TRALResponse);
 begin
-//    Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
-//  TThread.Queue(nil,
-//    procedure
-//    begin
-//      Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
-//    end);
+  // Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
+  // TThread.Queue(nil,
+  // procedure
+  // begin
+  // Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
+  // end);
+end;
+
+procedure TfPrincipal.SetupServer;
+var
+  I: Integer;
+begin
+  // setting the events here via code to allow quick update of the examples
+  Server.Port := StrToIntDef(lePort.Text, 0);
+  Server.OnRequest := ServerRequest;
+  Server.OnResponse := ServerResponse;
+  CreateRoutes;
+
+  ListView1.Clear;
+  for I := 0 to pred(Server.Routes.Count) do
+    ListView1.Items.Add.Caption := TRALRoute(Server.Routes.Items[I]).RouteName;
+
+  Server.Active := true;
 end;
 
 procedure TfPrincipal.ToggleSwitch1Click(Sender: TObject);
 begin
-  Server.Active := ToggleSwitch1.State = tssOn;
-  if Server.Active then
+  if ToggleSwitch1.State = tssOn then
+  begin
+    SetupServer;
     lServerPath.Caption := 'http://localhost:' + Server.Port.ToString
+  end
   else
+  begin
+    Server.Active := False;
     lServerPath.Caption := 'Offline';
+  end;
 end;
 
 end.
