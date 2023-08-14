@@ -70,15 +70,7 @@ object fPrincipal: TfPrincipal
     TabOrder = 3
     Text = ''
   end
-  object RALBasicAuth: TRALServerBasicAuth
-    AuthDialog = True
-    UserName = 'testeuser'
-    Password = 'testepass'
-    Left = 184
-    Top = 112
-  end
   object Server: TRALIndyServer
-    Active = False
     BruteForceProtection.Enabled = True
     BruteForceProtection.ExpirationMin = 30
     BruteForceProtection.MaxTry = 3
@@ -95,7 +87,11 @@ object fPrincipal: TfPrincipal
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    Left = 304
-    Top = 112
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    Active = False
+    Left = 216
+    Top = 16
   end
 end
