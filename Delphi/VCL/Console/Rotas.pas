@@ -30,7 +30,7 @@ end;
 procedure TRotas.CreateRoute(AServer: TRALServer);
 begin
   AServer.CreateRoute('console', Console);
-  AServer.CreateRoute('', Default);
+  AServer.CreateRoute('teste', Default);
 end;
 
 procedure TRotas.Default(Sender: TObject; ARequest: TRALRequest; AResponse: TRALResponse);

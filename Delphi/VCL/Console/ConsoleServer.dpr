@@ -7,8 +7,6 @@ uses
   System.SysUtils,
   RALServer,
   RALSynopseServer,
-  RALRequest,
-  RALResponse,
   Rotas in 'Rotas.pas';
 
 var
