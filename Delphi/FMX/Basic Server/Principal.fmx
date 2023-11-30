@@ -1,0 +1,109 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 227
+  ClientWidth = 404
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Edit1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Position.X = 8.000000000000000000
+    Position.Y = 24.000000000000000000
+    object Label1: TLabel
+      Align = Top
+      Margins.Top = -20.000000000000000000
+      Position.Y = -20.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Trimming = None
+      Text = 'Port'
+      TabOrder = 0
+    end
+  end
+  object Switch1: TSwitch
+    IsChecked = False
+    Position.X = 136.000000000000000000
+    Position.Y = 19.000000000000000000
+    TabOrder = 3
+  end
+  object lServerInfo: TLabel
+    Position.X = 222.000000000000000000
+    Position.Y = 24.000000000000000000
+    TextSettings.Trimming = None
+    Text = 'serverinfo'
+    TabOrder = 4
+  end
+  object ListView1: TListView
+    ItemAppearanceClassName = 'TCustomizeItemObjects'
+    ItemEditAppearanceClassName = 'TCustomizeItemObjects'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Position.X = 8.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 116.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 285.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Viewport.Width = 281.000000000000000000
+    Viewport.Height = 141.000000000000000000
+  end
+  object RALIndyServer1: TRALIndyServer
+    Active = False
+    BruteForceProtection.Enabled = True
+    BruteForceProtection.ExpirationMin = 30
+    BruteForceProtection.MaxTry = 3
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    Options = []
+    Port = 8000
+    Routes = <
+      item
+        RouteDomain = '/'
+        RouteName = 'ping'
+        AllowedMethods = [amALL]
+        SkipAuthMethods = []
+        Callback = False
+        OnReply = RALIndyServer1Routes_pingReply
+      end>
+    ServerStatus.Strings = (
+      
+        '<html><head><title>RALServer - 0.7.0 - alpha</title></head><body' +
+        '><h1>Server OnLine</h1><h4>Version: 0.7.0 - alpha</h4><h4>Engine' +
+        ': %ralengine%</h4></body></html>')
+    ShowServerStatus = True
+    CompressType = ctNone
+    CORSOptions.Enabled = False
+    CORSOptions.AllowOrigin = '*'
+    CORSOptions.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding')
+    CORSOptions.MaxAge = 86400
+    CriptoOptions.CriptType = crNone
+    SSL.Enabled = False
+    SSL.SSLOptions.Mode = sslmUnassigned
+    SSL.SSLOptions.VerifyMode = []
+    SSL.SSLOptions.VerifyDepth = 0
+    Left = 320
+    Top = 8
+  end
+end

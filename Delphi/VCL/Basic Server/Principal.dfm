@@ -71,9 +71,14 @@ object fPrincipal: TfPrincipal
     Text = ''
   end
   object Server: TRALIndyServer
+    Active = False
     BruteForceProtection.Enabled = True
     BruteForceProtection.ExpirationMin = 30
     BruteForceProtection.MaxTry = 3
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    Options = []
     Port = 8000
     Routes = <>
     ServerStatus.Strings = (
@@ -83,14 +88,22 @@ object fPrincipal: TfPrincipal
         ': $ralengine;</h4></body></html>')
     SessionTimeout = 0
     ShowServerStatus = True
+    CompressType = ctNone
+    CORSOptions.Enabled = False
+    CORSOptions.AllowOrigin = '*'
+    CORSOptions.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding')
+    CORSOptions.MaxAge = 86400
+    CriptoOptions.CriptType = crNone
     SSL.Enabled = False
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    IPConfig.IPv4Bind = '0.0.0.0'
-    IPConfig.IPv6Bind = '::'
-    IPConfig.IPv6Enabled = False
-    Active = False
     Left = 216
     Top = 16
   end

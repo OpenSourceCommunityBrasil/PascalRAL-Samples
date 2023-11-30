@@ -10,7 +10,7 @@ uses
   Vcl.ComCtrls, Vcl.Mask, Vcl.ExtCtrls,
 
   RALServer, RALRoutes, RALRequest, RALResponse, RALParams, RALIndyServer, RALTypes,
-  RALConsts, RALMIMETypes
+  RALConsts, RALMIMETypes, RALCustomObjects
 
     ;
 
@@ -24,16 +24,14 @@ type
     lServerPath: TLabel;
     Server: TRALIndyServer;
     lePort: TLabeledEdit;
-    procedure Clientes(Sender: TObject; ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
-    procedure ping(Sender: TObject; ARequest: TRALRequest; AResponse: TRALResponse);
-    procedure test(Sender: TObject; ARequest: TRALRequest; AResponse: TRALResponse);
-    procedure multiroute(Sender: TObject; ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure test(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure multiroute(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure FormCreate(Sender: TObject);
-    procedure ServerRequest(Sender: TObject; ARequest: TRALRequest;
-      AResponse: TRALResponse);
-    procedure ServerResponse(Sender: TObject; ARequest: TRALRequest;
-      AResponse: TRALResponse);
+    procedure ServerRequest(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure ServerResponse(ARequest: TRALRequest; AResponse: TRALResponse);
   private
     { Private declarations }
     procedure CreateRoutes;
@@ -49,22 +47,20 @@ implementation
 
 {$R *.dfm}
 
-procedure TfPrincipal.Clientes(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
+procedure TfPrincipal.Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
 var
   nome: string;
   vParam: TRALParam;
 begin
   nome := 'erro';
-  vParam := ARequest.Params.ParamByName['nome'];
+  vParam := ARequest.ParamByName('nome');
   if vParam <> nil then
     nome := vParam.AsString;
 
   AResponse.ResponseText := nome;
 end;
 
-procedure TfPrincipal.test(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
+procedure TfPrincipal.test(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
   // This is one way to answer, where you can set individually the data on the parameters
   // or you can use AResponse.Answer(statuscode, text, contenttype) to do the same thing
@@ -94,14 +90,12 @@ begin
   //
 end;
 
-procedure TfPrincipal.multiroute(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
+procedure TfPrincipal.multiroute(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
   AResponse.Answer(200, 'hello long route name', rctTEXTPLAIN);
 end;
 
-procedure TfPrincipal.ping(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
+procedure TfPrincipal.ping(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
   // No http verb is checked here, so it'll answer the same to any incomming
   // This is a simple GET, POST, PUT, PATCH, DELETE request against /ping endpoint
@@ -109,14 +103,12 @@ begin
   AResponse.Answer(200, 'pong', rctTEXTPLAIN);
 end;
 
-procedure TfPrincipal.ServerRequest(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
+procedure TfPrincipal.ServerRequest(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
   // Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
 end;
 
-procedure TfPrincipal.ServerResponse(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
+procedure TfPrincipal.ServerResponse(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
   // Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
 end;

@@ -1,7 +1,6 @@
 program Console;
 
 {$APPTYPE CONSOLE}
-
 {$R *.res}
 
 uses
@@ -16,19 +15,18 @@ type
 
   TRALApplication = class(TComponent)
   private
-    FServer : TRALIndyServer;
+    FServer: TRALIndyServer;
   protected
-    procedure teste(Sender: TObject; ARequest: TRALRequest; AResponse: TRALResponse);
-    procedure DoRun;
+    procedure teste(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure Run;
   public
-    constructor Create(TheOwner : TComponent); override;
+    constructor Create(Owner: TComponent); override;
     destructor Destroy; override;
-    procedure WriteHelp; virtual;
   end;
 
-{ TRALApplication }
+  { TRALApplication }
 
-constructor TRALApplication.Create(TheOwner: TComponent);
+constructor TRALApplication.Create(Owner: TComponent);
 begin
   inherited;
   FServer := TRALIndyServer.Create(nil);
@@ -40,31 +38,26 @@ begin
   inherited;
 end;
 
-procedure TRALApplication.DoRun;
+procedure TRALApplication.Run;
 begin
   inherited;
-  FServer.CreateRoute('teste',teste);
-
+  FServer.CreateRoute('teste', teste);
   FServer.Active := True;
-
+  Writeln('server running on port', fserver.Port);
+  writeln('press any key to end application...');
   Readln;
 end;
 
-procedure TRALApplication.teste(Sender: TObject; ARequest: TRALRequest;
-  AResponse: TRALResponse);
+procedure TRALApplication.teste(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
   AResponse.ResponseText := 'RALTeste';
 end;
 
-procedure TRALApplication.WriteHelp;
-begin
-
-end;
-
 var
-  Application : TRALApplication;
+  Application: TRALApplication;
+
 begin
   Application := TRALApplication.Create(nil);
-  Application.DoRun;
+  Application.Run;
   Application.Free;
 end.

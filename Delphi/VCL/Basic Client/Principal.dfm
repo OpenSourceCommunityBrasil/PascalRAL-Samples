@@ -10,8 +10,7 @@ object fPrincipal: TfPrincipal
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  OnCreate = FormCreate
   TextHeight = 13
   object Button1: TButton
     Left = 8
@@ -47,10 +46,14 @@ object fPrincipal: TfPrincipal
     RequestTimeout = 0
     UseSSL = False
     UserAgent = 'RALClient 0.2.0 - alpha; Engine Indy 10.6.2.5366'
+    KeepAlive = True
+    CompressType = ctGZip
+    CriptoOptions.CriptType = crNone
     Left = 56
     Top = 72
   end
   object basic: TRALClientBasicAuth
+    AutoGetToken = True
     UserName = 'testeuser'
     Password = 'testepass'
     Left = 112
