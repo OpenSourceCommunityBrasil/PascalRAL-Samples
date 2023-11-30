@@ -9,9 +9,9 @@
         <Filename Value="Console.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="2"/>
-        <CursorPos X="31" Y="6"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="43"/>
+        <CursorPos X="19" Y="24"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -33,8 +33,38 @@
         <CursorPos X="15" Y="18"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="D:\IDE\lazarus\fpcsrc\packages\fcl-base\src\custapp.pp"/>
+        <UnitName Value="CustApp"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="34"/>
+        <CursorPos X="3" Y="30"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory HistoryIndex="3">
+      <Position>
+        <Filename Value="Console.lpr"/>
+        <Caret Line="39" Column="12" TopLine="22"/>
+      </Position>
+      <Position>
+        <Filename Value="Console.lpr"/>
+        <Caret Line="14" Column="14"/>
+      </Position>
+      <Position>
+        <Filename Value="Console.lpr"/>
+        <Caret Line="52" Column="23" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="Console.lpr"/>
+        <Caret Line="24" Column="15" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="D:\IDE\lazarus\fpcsrc\packages\fcl-base\src\custapp.pp"/>
+        <Caret Line="30" Column="3" TopLine="34"/>
+      </Position>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>
