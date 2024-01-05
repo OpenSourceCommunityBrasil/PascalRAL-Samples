@@ -5,10 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.ListView.Types,
-  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.Memo.Types,
-  FMX.ScrollBox,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.Memo.Types, FMX.ScrollBox,
   FMX.Memo, FMX.ListView, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Edit,
   RALTypes,
   RALServer, RALIndyServer, RALCustomObjects, RALRequest, RALResponse;
