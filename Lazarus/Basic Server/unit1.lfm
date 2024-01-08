@@ -1,0 +1,76 @@
+object Form1: TForm1
+  Left = 275
+  Height = 240
+  Top = 250
+  Width = 320
+  Caption = 'Form1'
+  ClientHeight = 240
+  ClientWidth = 320
+  object ToggleBox1: TToggleBox
+    Left = 8
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Iniciar'
+    TabOrder = 0
+    OnChange = ToggleBox1Change
+  end
+  object RALSynopseServer1: TRALSynopseServer
+    Active = False
+    Authentication = RALServerBasicAuth1
+    BruteForceProtection.Enabled = True
+    BruteForceProtection.ExpirationMin = 30
+    BruteForceProtection.MaxTry = 3
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    Options = []
+    Port = 8000
+    Routes = <    
+      item
+        AllowedMethods = [amALL]
+        Callback = False
+        RouteDomain = '/'
+        RouteName = 'ping'
+        SkipAuthMethods = []
+        OnReply = RALSynopseServer1_pingReply
+      end    
+      item
+        AllowedMethods = [amALL]
+        Callback = False
+        RouteDomain = '/'
+        RouteName = 'file'
+        SkipAuthMethods = []
+        OnReply = RALSynopseServer1_fileReply
+      end>
+    ServerStatus.Strings = (
+      '<html><head><title>RALServer - 0.9.0 - alpha</title></head><body><h1>Server OnLine</h1><h4>Version: 0.9.0 - alpha</h4><h4>Engine: %ralengine%</h4></body></html>'
+    )
+    ShowServerStatus = True
+    CompressType = ctNone
+    CORSOptions.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    CORSOptions.AllowOrigin = '*'
+    CORSOptions.Enabled = False
+    CORSOptions.MaxAge = 86400
+    CriptoOptions.CriptType = crNone
+    PoolCount = 32
+    QueueSize = 1000
+    SSL.Enabled = False
+    Left = 232
+    Top = 120
+  end
+  object RALServerBasicAuth1: TRALServerBasicAuth
+    AuthDialog = True
+    UserName = 'admin'
+    Password = 'admin'
+    Left = 256
+    Top = 16
+  end
+end

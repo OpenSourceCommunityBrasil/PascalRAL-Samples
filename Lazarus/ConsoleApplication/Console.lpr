@@ -31,8 +31,6 @@ type
   { TRALApplication }
 
   procedure TRALApplication.Run;
-  var
-    ErrorMsg: string;
   begin
     FServer.CreateRoute('teste', @teste);
     FServer.Active := True;
