@@ -4,14 +4,15 @@ program Console;
 
 uses
  {$IFDEF UNIX}
-  cthreads,
-    {$ENDIF}
+    cthreads,
+  {$ENDIF}
   Classes,
   SysUtils,
   CustApp,
   RALfpHTTPServer,
   RALRequest,
-  RALResponse;
+  RALResponse,
+  RALMIMETypes;
 
 type
 
@@ -42,7 +43,7 @@ type
 
   procedure TRALApplication.teste(ARequest: TRALRequest; AResponse: TRALResponse);
   begin
-    AResponse.ResponseText := 'RALTeste';
+    AResponse.Answer(200, 'RALTeste', rctTEXTPLAIN);
   end;
 
   constructor TRALApplication.Create(AOwner: TComponent);

@@ -5,20 +5,21 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, RALSynopseServer, RALAuthentication, Forms, Controls,
-  Graphics, Dialogs, StdCtrls, RALRoutes, RALResponse, RALRequest;
+  Classes, SysUtils, RALSynopseServer, RALfpHTTPServer, RALAuthentication,
+  Forms, Controls, Graphics, Dialogs, StdCtrls, RALRoutes, RALResponse,
+  RALRequest;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    RALfpHttpServer1: TRALfpHttpServer;
     RALServerBasicAuth1: TRALServerBasicAuth;
-    RALSynopseServer1: TRALSynopseServer;
     ToggleBox1: TToggleBox;
-    procedure RALSynopseServer1_fileReply(ARequest: TRALRequest;
+    procedure RALfpHttpServer1_fileReply(ARequest: TRALRequest;
       AResponse: TRALResponse);
-    procedure RALSynopseServer1_pingReply(ARequest: TRALRequest;
+    procedure RALfpHttpServer1_pingReply(ARequest: TRALRequest;
       AResponse: TRALResponse);
     procedure ToggleBox1Change(Sender: TObject);
   private
@@ -36,7 +37,7 @@ implementation
 
 { TForm1 }
 
-procedure TForm1.RALSynopseServer1_pingReply(ARequest: TRALRequest;
+procedure TForm1.RALfpHttpServer1_pingReply(ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
   AResponse.Answer(200, 'pong');
@@ -44,10 +45,10 @@ end;
 
 procedure TForm1.ToggleBox1Change(Sender: TObject);
 begin
-  RALSynopseServer1.Active := ToggleBox1.Checked;
+  RALfpHttpServer1.Active := ToggleBox1.Checked;
 end;
 
-procedure TForm1.RALSynopseServer1_fileReply(ARequest: TRALRequest;
+procedure TForm1.RALfpHttpServer1_fileReply(ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
   AResponse.Answer(ExtractFilePath(ParamStr(0)) + '\Banner.png');

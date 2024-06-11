@@ -15,39 +15,11 @@ object Form1: TForm1
     TabOrder = 0
     OnChange = ToggleBox1Change
   end
-  object RALSynopseServer1: TRALSynopseServer
+  object RALfpHttpServer1: TRALfpHttpServer
     Active = False
     Authentication = RALServerBasicAuth1
-    BruteForceProtection.Enabled = True
-    BruteForceProtection.ExpirationMin = 30
-    BruteForceProtection.MaxTry = 3
-    IPConfig.IPv4Bind = '0.0.0.0'
-    IPConfig.IPv6Bind = '::'
-    IPConfig.IPv6Enabled = False
-    Options = []
-    Port = 8000
-    Routes = <    
-      item
-        AllowedMethods = [amALL]
-        Callback = False
-        RouteDomain = '/'
-        RouteName = 'ping'
-        SkipAuthMethods = []
-        OnReply = RALSynopseServer1_pingReply
-      end    
-      item
-        AllowedMethods = [amALL]
-        Callback = False
-        RouteDomain = '/'
-        RouteName = 'file'
-        SkipAuthMethods = []
-        OnReply = RALSynopseServer1_fileReply
-      end>
-    ServerStatus.Strings = (
-      '<html><head><title>RALServer - 0.9.0 - alpha</title></head><body><h1>Server OnLine</h1><h4>Version: 0.9.0 - alpha</h4><h4>Engine: %ralengine%</h4></body></html>'
-    )
-    ShowServerStatus = True
     CompressType = ctNone
+    CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
       'Content-Type'
       'Origin'
@@ -57,20 +29,51 @@ object Form1: TForm1
       'Accept-Encoding'
     )
     CORSOptions.AllowOrigin = '*'
-    CORSOptions.Enabled = False
     CORSOptions.MaxAge = 86400
     CriptoOptions.CriptType = crNone
-    PoolCount = 32
-    QueueSize = 1000
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    Port = 8000
+    Routes = <    
+      item
+        Route = '/'
+        AllowedMethods = [amALL]
+        AllowURIParams = False
+        Callback = False
+        Name = 'file'
+        SkipAuthMethods = []
+        OnReply = RALfpHttpServer1_fileReply
+      end    
+      item
+        Route = '/'
+        AllowedMethods = [amALL]
+        AllowURIParams = False
+        Callback = False
+        Name = 'ping'
+        SkipAuthMethods = []
+        OnReply = RALfpHttpServer1_pingReply
+      end>
+    Security.BruteForce.ExpirationTime = 1800000
+    Security.BruteForce.MaxTry = 3
+    Security.FloodTimeInterval = 30
+    Security.Options = []
+    ServerStatus.Strings = (
+      '<!DOCTYPE html><html lang="en-us"><head><title>RALServer - 0.9.6 - alpha</title></head><body><h1>Server OnLine</h1><h4>Version: 0.9.6 - alpha</h4><h4>Engine: %ralengine%</h4></body></html>'
+    )
+    ShowServerStatus = True
+    QueueSize = 15
     SSL.Enabled = False
-    Left = 232
-    Top = 120
+    SSL.SSLOptions.CipherList = 'DEFAULT'
+    SSL.SSLOptions.HostName = 'localhost'
+    Left = 52
+    Top = 84
   end
   object RALServerBasicAuth1: TRALServerBasicAuth
     AuthDialog = True
-    UserName = 'admin'
     Password = 'admin'
-    Left = 256
-    Top = 16
+    UserName = 'admin'
+    Left = 205
+    Top = 88
   end
 end
