@@ -1,4 +1,4 @@
-program BasicServer;
+program BasicServerVerbose;
 
 uses
   Vcl.Forms,

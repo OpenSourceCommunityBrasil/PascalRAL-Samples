@@ -13,13 +13,13 @@ uses
 
 type
   TForm1 = class(TForm)
-    RALIndyServer1: TRALIndyServer;
     Edit1: TEdit;
     Label1: TLabel;
     Switch1: TSwitch;
     lServerInfo: TLabel;
     ListView1: TListView;
     Memo1: TMemo;
+    RALIndyServer1: TRALIndyServer;
     procedure RALIndyServer1Routes_pingReply(ARequest: TRALRequest;
       AResponse: TRALResponse);
   private

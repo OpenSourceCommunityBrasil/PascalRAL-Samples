@@ -72,25 +72,8 @@ object fPrincipal: TfPrincipal
   end
   object Server: TRALIndyServer
     Active = False
-    BruteForceProtection.Enabled = True
-    BruteForceProtection.ExpirationMin = 30
-    BruteForceProtection.MaxTry = 3
-    IPConfig.IPv4Bind = '0.0.0.0'
-    IPConfig.IPv6Bind = '::'
-    IPConfig.IPv6Enabled = False
-    Options = []
-    Port = 8000
-    Routes = <>
-    ServerStatus.Strings = (
-      
-        '<html><head><title>RALServer - 0.2.0 - alpha</title></head><body' +
-        '><h1>Server OnLine</h1><h4>Version: 0.2.0 - alpha</h4><h4>Engine' +
-        ': $ralengine;</h4></body></html>')
-    SessionTimeout = 0
-    ShowServerStatus = True
     CompressType = ctNone
-    CORSOptions.Enabled = False
-    CORSOptions.AllowOrigin = '*'
+    CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
       'Content-Type'
       'Origin'
@@ -98,13 +81,29 @@ object fPrincipal: TfPrincipal
       'Authorization'
       'Content-Encoding'
       'Accept-Encoding')
+    CORSOptions.AllowOrigin = '*'
     CORSOptions.MaxAge = 86400
     CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    Port = 8000
+    Routes = <>
+    Security.BruteForce.ExpirationTime = 1800000
+    Security.BruteForce.MaxTry = 3
+    Security.FloodTimeInterval = 30
+    Security.Options = []
+    ServerStatus.Strings = (
+      
+        '<!DOCTYPE html><html lang="en-us"><head><title>RALServer - 0.9.7' +
+        ' - alpha</title></head><body><h1>Server OnLine</h1><h4>Version: ' +
+        '0.9.7 - alpha</h4><h4>Engine: %ralengine%</h4></body></html>')
+    ShowServerStatus = True
     SSL.Enabled = False
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    Left = 216
+    Left = 192
     Top = 16
   end
 end

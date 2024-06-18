@@ -22,8 +22,8 @@ type
     Label2: TLabel;
     ListView1: TListView;
     lServerPath: TLabel;
-    Server: TRALIndyServer;
     lePort: TLabeledEdit;
+    Server: TRALIndyServer;
     procedure Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
     procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);
@@ -126,7 +126,7 @@ begin
   // Simple way to have a list of available routes in runtime GUI
   ListView1.Clear;
   for I := 0 to pred(Server.Routes.Count) do
-    ListView1.Items.Add.Caption := TRALRoute(Server.Routes.Items[I]).RouteName;
+    ListView1.Items.Add.Caption := TRALRoute(Server.Routes.Items[I]).Route;
 
   Server.Active := true;
 end;

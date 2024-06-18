@@ -50,7 +50,7 @@ end;
 
 procedure TRALApplication.teste(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
-  AResponse.ResponseText := 'RALTeste';
+  AResponse.Answer(200, 'RALTeste');
 end;
 
 var

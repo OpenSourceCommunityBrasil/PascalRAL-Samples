@@ -41,22 +41,20 @@ object fPrincipal: TfPrincipal
   end
   object cliente: TRALIndyClient
     Authentication = basic
-    BaseURL = 'localhost:8000'
-    ConnectTimeout = 0
-    RequestTimeout = 0
-    UseSSL = False
-    UserAgent = 'RALClient 0.2.0 - alpha; Engine Indy 10.6.2.5366'
-    KeepAlive = True
+    ConnectTimeout = 30000
     CompressType = ctGZip
     CriptoOptions.CriptType = crNone
-    Left = 56
-    Top = 72
+    KeepAlive = True
+    RequestTimeout = 10000
+    UserAgent = 'RALClient 0.9.7 - alpha'
+    Left = 40
+    Top = 80
   end
   object basic: TRALClientBasicAuth
     AutoGetToken = True
-    UserName = 'testeuser'
-    Password = 'testepass'
+    UserName = 'admin'
+    Password = 'admin'
     Left = 112
-    Top = 72
+    Top = 80
   end
 end

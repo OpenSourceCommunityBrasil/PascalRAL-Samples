@@ -10,11 +10,11 @@ uses
 
 type
   TfPrincipal = class(TForm)
-    cliente: TRALIndyClient;
     Button1: TButton;
-    basic: TRALClientBasicAuth;
     Button2: TButton;
     Button3: TButton;
+    cliente: TRALIndyClient;
+    basic: TRALClientBasicAuth;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -35,21 +35,23 @@ implementation
 
 procedure TfPrincipal.Button1Click(Sender: TObject);
 begin
-  cliente.BaseURL := BASEURL + '\clientes';
-  cliente.AddHeader('nome', 'fernando_teste');
-  if cliente.Get = 200 then
+  cliente.BaseURL.Text := BASEURL + '/clientes';
+  cliente.Request.AddHeader('nome', 'fernando_teste');
+  cliente.Get;
+  if cliente.Response.StatusCode = 200 then
     ShowMessage(cliente.ResponseText)
   else
-    ShowMessage(IntToStr(cliente.ResponseCode) + ' ' + cliente.ResponseText);
+    ShowMessage(IntToStr(cliente.Response.StatusCode) + ' ' + cliente.ResponseText);
 end;
 
 procedure TfPrincipal.Button2Click(Sender: TObject);
 begin
-  cliente.BaseURL := BASEURL + '\ping';
-  if cliente.Get = 200 then
+  cliente.BaseURL.Text := BASEURL + '/ping';
+  cliente.Get;
+  if cliente.Response.StatusCode = 200 then
     ShowMessage(cliente.ResponseText)
   else
-    ShowMessage(IntToStr(cliente.ResponseCode) + ' ' + cliente.ResponseText);
+    ShowMessage(IntToStr(cliente.Response.StatusCode) + ' ' + cliente.ResponseText);
 end;
 
 procedure TfPrincipal.Button3Click(Sender: TObject);
@@ -58,18 +60,19 @@ var
 begin
   vAuth := cliente.Authentication;
   cliente.Authentication := nil;
-  cliente.BaseURL := BASEURL + '\test';
-  if cliente.Get = 200 then
+  cliente.BaseURL.Text := BASEURL + '/test';
+  cliente.Get;
+  if cliente.Response.StatusCode = 200 then
     ShowMessage(cliente.ResponseText)
   else
-    ShowMessage(IntToStr(cliente.ResponseCode) + ' ' + cliente.ResponseText);
+    ShowMessage(IntToStr(cliente.Response.StatusCode) + ' ' + cliente.ResponseText);
 
   cliente.Authentication := vAuth;
 end;
 
 procedure TfPrincipal.FormCreate(Sender: TObject);
 begin
-  BASEURL := cliente.BaseURL;
+  BASEURL := 'http://localhost:8000';
 end;
 
 end.
