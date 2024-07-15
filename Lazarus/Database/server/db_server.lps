@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="db_server.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="21"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uprincipal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <CursorPos X="27" Y="24"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="135"/>
+        <CursorPos Y="160"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\base\RALRoutes.pas"/>
+        <EditorIndex Value="8"/>
+        <CursorPos X="69" Y="17"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\base\RALParams.pas"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="255"/>
+        <CursorPos X="16" Y="273"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\Zeos\RALDBZeos.pas"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="186"/>
+        <CursorPos Y="197"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="20"/>
+        <CursorPos X="49" Y="126"/>
+        <UsageCount Value="11"/>
+        <Bookmarks Count="1">
+          <Item0 X="40" Y="562" ID="1"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBStorage.pas"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="259"/>
+        <CursorPos Y="275"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBStorageBIN.pas"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="468"/>
+        <CursorPos Y="489"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\utils\RALStream.pas"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="228"/>
+        <CursorPos X="29" Y="262"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="98" Column="25" TopLine="77"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="466" Column="3" TopLine="445"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="98" Column="26" TopLine="75"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="472" TopLine="445"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="105" Column="24" TopLine="82"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="609" Column="3" TopLine="600"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="98" Column="15" TopLine="86"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="472" TopLine="444"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="105" Column="15" TopLine="78"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="633" Column="25" TopLine="601"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="98" Column="29" TopLine="86"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="470" Column="25" TopLine="444"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="105" Column="15" TopLine="78"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Caret Line="262" Column="50" TopLine="242"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="156" Column="3" TopLine="153"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="30" Column="26" TopLine="15"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="155" Column="35" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="30" Column="15" TopLine="9"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="161" Column="3" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="30" Column="15" TopLine="9"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="157" Column="3" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="43" Column="43" TopLine="9"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="121" Column="3" TopLine="119"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="31" Column="6" TopLine="6"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Caret Line="269" Column="50" TopLine="242"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Caret Line="27" Column="15" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Caret Line="337" Column="57" TopLine="323"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Caret Line="26" Column="15" TopLine="5"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Caret Line="263" TopLine="230"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Caret Line="32" Column="15" TopLine="4"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Line Value="388"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Line Value="621"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Line Value="320"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\Zeos\RALDBZeos.pas"/>
+        <Line Value="197"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\RALDBModule.pas"/>
+        <Line Value="368"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>

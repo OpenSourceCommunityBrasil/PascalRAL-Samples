@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="db_client.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="9"/>
+        <CursorPos Y="23"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uprincipal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="9"/>
+        <CursorPos X="27" Y="17"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="383"/>
+        <CursorPos X="38" Y="124"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBStorageBIN.pas"/>
+        <EditorIndex Value="13"/>
+        <TopLine Value="468"/>
+        <CursorPos Y="499"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <EditorIndex Value="11"/>
+        <TopLine Value="137"/>
+        <CursorPos X="3" Y="139"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\utils\RALStream.pas"/>
+        <EditorIndex Value="12"/>
+        <TopLine Value="291"/>
+        <CursorPos X="24" Y="318"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBStorage.pas"/>
+        <EditorIndex Value="10"/>
+        <TopLine Value="272"/>
+        <CursorPos X="29" Y="314"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\fpcupdeluxe\laz32\fpcsrc\packages\fcl-db\src\base\bufdataset.pas"/>
+        <UnitName Value="BufDataset"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3540"/>
+        <CursorPos X="3" Y="3546"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\base\RALClient.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="637"/>
+        <CursorPos X="71" Y="652"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uprincipal.lfm"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="34"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBTypes.pas"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="88"/>
+        <CursorPos X="3" Y="46"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\fpcupdeluxe\laz32\fpcsrc\rtl\objpas\classes\classesh.inc"/>
+        <EditorIndex Value="8"/>
+        <TopLine Value="500"/>
+        <CursorPos X="3" Y="522"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\fpcupdeluxe\laz32\fpcsrc\rtl\objpas\classes\stringl.inc"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="1150"/>
+        <CursorPos X="3" Y="1156"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\fpcupdeluxe\laz32\fpcsrc\packages\fcl-db\src\base\db.pas"/>
+        <UnitName Value="DB"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="1317"/>
+        <CursorPos X="14" Y="1337"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="D:\fpcupdeluxe\laz32\fpcsrc\packages\fcl-db\src\base\dataset.inc"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="1768"/>
+        <CursorPos X="3" Y="1772"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="343" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="345" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="346" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="349" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="351" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="352" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="354" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="356" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="357" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="338" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="340" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="341" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="342" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="343" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="345" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="346" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="349" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="351" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="352" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="354" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="355" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="356" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="338" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="360" TopLine="328"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="292" Column="3" TopLine="286"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\RALDBSQLCache.pas"/>
+        <Caret Line="56" Column="14" TopLine="38"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="361" Column="23" TopLine="343"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="58" Column="16" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="395" Column="26" TopLine="388"/>
+      </Position>
+      <Position>
+        <Filename Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Caret Line="37" Column="15" TopLine="32"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Line Value="233"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Line Value="452"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Line Value="333"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\..\..\..\dev\src\database\sqldb\RALDBBufDataset.pas"/>
+        <Line Value="122"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>
