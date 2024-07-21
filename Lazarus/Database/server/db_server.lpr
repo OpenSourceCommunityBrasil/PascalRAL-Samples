@@ -10,7 +10,8 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, indyral, raldbpackage, raldbzeoslink, pascalral, uprincipal
+  Forms, indyral, raldbpackage, raldbzeoslink, raldbsqldblink, pascalral,
+  uprincipal
   { you can add units after this };
 
 {$R *.res}

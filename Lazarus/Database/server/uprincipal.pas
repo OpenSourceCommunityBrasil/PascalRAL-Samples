@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, RALIndyServer,
-  RALDBModule, RALDBStorageBIN, RALSwaggerModule, RALDBZeos;
+  RALDBModule, RALDBStorageBIN, RALDBBufDataset, RALSwaggerModule, BufDataset,
+  DB, RALDBZeos, RALParams;
 
 type
 

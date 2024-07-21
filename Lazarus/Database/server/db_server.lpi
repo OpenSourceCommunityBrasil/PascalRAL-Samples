@@ -26,6 +26,12 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+      <Item>
+        <PackageName Value="raldbsqldblink"/>
+      </Item>
+      <Item>
         <PackageName Value="PascalRAL"/>
       </Item>
       <Item>

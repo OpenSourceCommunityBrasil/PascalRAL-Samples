@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, DBGrids, StdCtrls,
-  RALDBBufDataset, RALDBStorageBIN, DB, SQLDB, RALIndyClient;
+  ZDataset, RALDBBufDataset, RALDBStorageBIN, RALDBZeosMemTable,
+  RALDBConnection, DB, SQLDB, RALIndyClient;
 
 type
 
@@ -15,13 +16,19 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
     dsmem: TDataSource;
     DBGrid1: TDBGrid;
     indy_cliente: TRALIndyClientMT;
+    conexao: TRALDBConnection;
+    zral_mem: TRALDBZMemTable;
     ral_mem: TRALDBBufDataset;
     storage_bin: TRALDBStorageBINLink;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
 
   public
@@ -54,6 +61,16 @@ begin
   ral_mem.ParamByName('codigo').AsInteger := 4;
   ral_mem.ParamByName('nome').AsString := 'TESTE';
   ral_mem.ExecSQL;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  ral_mem.Close;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+  ral_mem.ApplyUpdates;
 end;
 
 end.
