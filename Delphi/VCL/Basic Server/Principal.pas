@@ -68,9 +68,9 @@ begin
   AResponse.ResponseText := 'pong';
   case ARequest.Method of
     amGET, amDELETE:
-      AResponse.StatusCode := 200;
+      AResponse.StatusCode := HTTP_OK;
     amPOST, amPUT, amPATCH:
-      AResponse.StatusCode := 201;
+      AResponse.StatusCode := HTTP_Created;
   end;
 end;
 
@@ -81,8 +81,8 @@ begin
   Server.CreateRoute('clientes', Clientes);
   Server.CreateRoute('ping', ping);
 
-  // example of a complex route
-  Server.CreateRoute('this/is/a/very/long/route/example', multiroute);
+  // example of a complex route with some allowed methods.
+  Server.CreateRoute('this/is/a/very/long/route/example', multiroute).AllowedMethods := [amGET];
 end;
 
 procedure TfPrincipal.FormCreate(Sender: TObject);

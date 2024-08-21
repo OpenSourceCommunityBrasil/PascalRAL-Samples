@@ -87,6 +87,76 @@ object fPrincipal: TfPrincipal
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
+    ResponsePages = <
+      item
+        StatusCode = 400
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>400 - BadRequest</h1><p>The ser' +
+            'ver informs that it doesn'#39't like the input params</p></body></ht' +
+            'ml>')
+      end
+      item
+        StatusCode = 401
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>401 - Unauthorized</h1><p>The s' +
+            'erver informs that it doesn'#39't know you</p></body></html>')
+      end
+      item
+        StatusCode = 403
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>403 - Forbidden</h1><p>The serv' +
+            'er informs that it doesn'#39't want you to access</p></body></html>')
+      end
+      item
+        StatusCode = 404
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>404 - Not Found</h1><p>The serv' +
+            'er informs that the page you'#39're requesting doesn'#39't exist in this' +
+            ' reality</p></body></html>')
+      end
+      item
+        StatusCode = 415
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>415 - Unsuported Media Type</h1' +
+            '><p>The server informs that it doesn'#39't know what you'#39're asking</' +
+            'p></body></html>')
+      end
+      item
+        StatusCode = 500
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>500 - Internal Server Error</h1' +
+            '><p>The server made something that it shouldn'#39't</p></body></html' +
+            '>')
+      end
+      item
+        StatusCode = 501
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>501 - Not Implemented</h1><p>Th' +
+            'e server informs that it doesn'#39't exist</p></body></html>')
+      end
+      item
+        StatusCode = 503
+        Page.Strings = (
+          
+            '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8' +
+            ' - alpha</title></head><body><h1>503 - Service Unavailable</h1><' +
+            'p>The server informs that it doesn'#39't want to work now and you sh' +
+            'ould try later</p></body></html>')
+      end>
     Port = 8000
     Routes = <>
     Security.BruteForce.ExpirationTime = 1800000
