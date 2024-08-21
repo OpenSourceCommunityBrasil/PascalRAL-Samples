@@ -10,7 +10,7 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, unit1, synopseral, fphttpral, pascalral
+  Forms, unit1, fphttpral, pascalral
   { you can add units after this };
 
 {$R *.res}

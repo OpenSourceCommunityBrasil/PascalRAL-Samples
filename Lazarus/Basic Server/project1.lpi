@@ -32,9 +32,6 @@
         <PackageName Value="PascalRAL"/>
       </Item>
       <Item>
-        <PackageName Value="SynopseRAL"/>
-      </Item>
-      <Item>
         <PackageName Value="LCL"/>
       </Item>
     </RequiredPackages>
