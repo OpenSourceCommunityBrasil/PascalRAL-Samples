@@ -15,7 +15,7 @@ object Form1: TForm1
     TabOrder = 0
     OnChange = ToggleBox1Change
   end
-  object RALfpHttpServer1: TRALfpHttpServer
+  object server: TRALfpHttpServer
     Active = False
     Authentication = RALServerBasicAuth1
     CompressType = ctNone
@@ -34,46 +34,96 @@ object Form1: TForm1
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
+    ResponsePages = <    
+      item
+        StatusCode = 400
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>400 - BadRequest</h1><p>The server informs that it doesn''t like the input params</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 401
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>401 - Unauthorized</h1><p>The server informs that it doesn''t know you</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 403
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>403 - Forbidden</h1><p>The server informs that it doesn''t want you to access</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 404
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>404 - Not Found</h1><p>The server informs that the page you''re requesting doesn''t exist in this reality</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 415
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>415 - Unsuported Media Type</h1><p>The server informs that it doesn''t know what you''re asking</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 500
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>500 - Internal Server Error</h1><p>The server made something that it shouldn''t</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 501
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>501 - Not Implemented</h1><p>The server informs that it doesn''t exist</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 503
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>503 - Service Unavailable</h1><p>The server informs that it doesn''t want to work now and you should try later</p></body></html>'
+        )
+      end>
     Port = 8000
     Routes = <    
       item
-        Route = '/'
-        AllowedMethods = [amALL]
-        AllowURIParams = False
-        Callback = False
-        Name = 'file'
-        SkipAuthMethods = []
-        OnReply = RALfpHttpServer1_fileReply
-      end    
-      item
-        Route = '/'
+        InputParams = <>
+        Route = '/ping'
         AllowedMethods = [amALL]
         AllowURIParams = False
         Callback = False
         Name = 'ping'
         SkipAuthMethods = []
-        OnReply = RALfpHttpServer1_pingReply
+        URIParams = <>
+        OnReply = PingReply
+      end    
+      item
+        InputParams = <>
+        Route = '/file'
+        AllowedMethods = [amALL]
+        AllowURIParams = False
+        Callback = False
+        Name = 'file'
+        SkipAuthMethods = []
+        URIParams = <>
+        OnReply = FileReply
       end>
     Security.BruteForce.ExpirationTime = 1800000
     Security.BruteForce.MaxTry = 3
     Security.FloodTimeInterval = 30
     Security.Options = []
-    ServerStatus.Strings = (
-      '<!DOCTYPE html><html lang="en-us"><head><title>RALServer - 0.9.6 - alpha</title></head><body><h1>Server OnLine</h1><h4>Version: 0.9.6 - alpha</h4><h4>Engine: %ralengine%</h4></body></html>'
-    )
     ShowServerStatus = True
     QueueSize = 15
     SSL.Enabled = False
     SSL.SSLOptions.CipherList = 'DEFAULT'
     SSL.SSLOptions.HostName = 'localhost'
-    Left = 52
-    Top = 84
+    Left = 64
+    Top = 88
   end
   object RALServerBasicAuth1: TRALServerBasicAuth
     AuthDialog = True
     Password = 'admin'
     UserName = 'admin'
-    Left = 205
+    Left = 184
     Top = 88
   end
 end
