@@ -6,10 +6,12 @@ uses
   Winapi.Windows, Winapi.Messages,
   System.SysUtils, System.Variants, System.Classes,
 
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.WinXCtrls,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Vcl.WinXCtrls,
   Vcl.ComCtrls, Vcl.Mask, Vcl.ExtCtrls,
 
-  RALServer, RALRoutes, RALRequest, RALResponse, RALParams, RALIndyServer, RALTypes,
+  RALServer, RALRoutes, RALRequest, RALResponse, RALParams, RALIndyServer,
+  RALTypes,
   RALConsts, RALMIMETypes, RALCustomObjects
 
     ;
@@ -34,6 +36,7 @@ type
     procedure ServerResponse(ARequest: TRALRequest; AResponse: TRALResponse);
   private
     { Private declarations }
+    procedure FileReply(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure CreateRoutes;
     procedure SetupServer;
   public
@@ -80,9 +83,18 @@ begin
   Server.CreateRoute('test', test);
   Server.CreateRoute('clientes', Clientes);
   Server.CreateRoute('ping', ping);
+  Server.CreateRoute('file', FileReply);
 
   // example of a complex route with some allowed methods.
-  Server.CreateRoute('this/is/a/very/long/route/example', multiroute).AllowedMethods := [amGET];
+  Server.CreateRoute('this/is/a/very/long/route/example', multiroute)
+    .AllowedMethods := [amGET];
+end;
+
+procedure TfPrincipal.FileReply(ARequest: TRALRequest; AResponse: TRALResponse);
+begin
+  // example of answering a file based on input param: file=filename
+  AResponse.Answer(ExtractFileDir(ParamStr(0)) + '\' +
+    ARequest.ParamByName('file').AsString);
 end;
 
 procedure TfPrincipal.FormCreate(Sender: TObject);
@@ -90,7 +102,8 @@ begin
   //
 end;
 
-procedure TfPrincipal.multiroute(ARequest: TRALRequest; AResponse: TRALResponse);
+procedure TfPrincipal.multiroute(ARequest: TRALRequest;
+  AResponse: TRALResponse);
 begin
   AResponse.Answer(200, 'hello long route name', rctTEXTPLAIN);
 end;
@@ -103,12 +116,14 @@ begin
   AResponse.Answer(200, 'pong', rctTEXTPLAIN);
 end;
 
-procedure TfPrincipal.ServerRequest(ARequest: TRALRequest; AResponse: TRALResponse);
+procedure TfPrincipal.ServerRequest(ARequest: TRALRequest;
+  AResponse: TRALResponse);
 begin
   // Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
 end;
 
-procedure TfPrincipal.ServerResponse(ARequest: TRALRequest; AResponse: TRALResponse);
+procedure TfPrincipal.ServerResponse(ARequest: TRALRequest;
+  AResponse: TRALResponse);
 begin
   // Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
 end;
@@ -128,7 +143,8 @@ begin
   for I := 0 to pred(Server.Routes.Count) do
     ListView1.Items.Add.Caption := TRALRoute(Server.Routes.Items[I]).Route;
 
-  Server.Active := true;
+  // Server.Active := true;
+  Server.Start;
 end;
 
 procedure TfPrincipal.ToggleSwitch1Click(Sender: TObject);
@@ -140,7 +156,7 @@ begin
   end
   else
   begin
-    Server.Active := False;
+    Server.Stop;
     lServerPath.Caption := 'Offline';
   end;
 end;
