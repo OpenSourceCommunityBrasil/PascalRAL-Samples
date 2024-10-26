@@ -1,0 +1,132 @@
+object Form1: TForm1
+  Left = 379
+  Height = 269
+  Top = 250
+  Width = 254
+  Caption = 'Form1'
+  OnCreate = FormCreate
+  object storage_bin: TRALDBStorageBINLink
+    FieldCharCase = fcLower
+    Left = 24
+    Top = 136
+  end
+  object swagger: TRALSwaggerModule
+    Server = server
+    Domain = '/swagger'
+    AllowCORSVerbs = False
+    PostmanTag = False
+    ShowCustomNames = False
+    SystemVersion = '1.0'
+    Title = 'Server Database'
+    Left = 96
+    Top = 72
+  end
+  object sqldb: TRALDBSQLDBLink
+    Left = 96
+    Top = 136
+  end
+  object SQLite3Connection1: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    KeepConnection = False
+    Transaction = SQLTransaction1
+    CharSet = 'utf8'
+    AlwaysUseBigint = False
+    Left = 184
+    Top = 208
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = SQLite3Connection1
+    Left = 184
+    Top = 160
+  end
+  object dbmodule: TRALDBModule
+    Server = server
+    Domain = '/db'
+    DatabaseLink = sqldb
+    DatabaseType = dtFirebird
+    Hostname = 'localhost'
+    Port = 0
+    Left = 24
+    Top = 72
+  end
+  object server: TRALSaguiServer
+    Active = False
+    CompressType = ctNone
+    CookieLife = 30
+    CORSOptions.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    CORSOptions.AllowOrigin = '*'
+    CORSOptions.MaxAge = 86400
+    CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    ResponsePages = <    
+      item
+        StatusCode = 400
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>400 - BadRequest</h1><p>The server informs that it doesn''t like the input params</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 401
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>401 - Unauthorized</h1><p>The server informs that it doesn''t know you</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 403
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>403 - Forbidden</h1><p>The server informs that it doesn''t want you to access</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 404
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>404 - Not Found</h1><p>The server informs that the page you''re requesting doesn''t exist in this reality</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 415
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>415 - Unsuported Media Type</h1><p>The server informs that it doesn''t know what you''re asking</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 500
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>500 - Internal Server Error</h1><p>The server made something that it shouldn''t</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 501
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>501 - Not Implemented</h1><p>The server informs that it doesn''t exist</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 503
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>503 - Service Unavailable</h1><p>The server informs that it doesn''t want to work now and you should try later</p></body></html>'
+        )
+      end>
+    Port = 8000
+    Routes = <>
+    Security.BruteForce.ExpirationTime = 1800000
+    Security.BruteForce.MaxTry = 3
+    Security.FloodTimeInterval = 30
+    Security.Options = []
+    ShowServerStatus = True
+    SSL.Enabled = False
+    Left = 56
+    Top = 16
+  end
+end
