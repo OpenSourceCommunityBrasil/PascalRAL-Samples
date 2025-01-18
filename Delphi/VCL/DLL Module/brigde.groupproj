@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9AB4A91E-9AB5-4322-899A-7E6C1398214F}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="server_bridge\server_bridge.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="module_sample\module_sample.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="server_bridge">
+        <MSBuild Projects="server_bridge\server_bridge.dproj"/>
+    </Target>
+    <Target Name="server_bridge:Clean">
+        <MSBuild Projects="server_bridge\server_bridge.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="server_bridge:Make">
+        <MSBuild Projects="server_bridge\server_bridge.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="module_sample">
+        <MSBuild Projects="module_sample\module_sample.dproj"/>
+    </Target>
+    <Target Name="module_sample:Clean">
+        <MSBuild Projects="module_sample\module_sample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="module_sample:Make">
+        <MSBuild Projects="module_sample\module_sample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="server_bridge;module_sample"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="server_bridge:Clean;module_sample:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="server_bridge:Make;module_sample:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
