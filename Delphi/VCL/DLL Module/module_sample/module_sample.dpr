@@ -13,10 +13,10 @@ library module_sample;
 uses
   System.SysUtils,
   System.Classes,
+  VCL.Dialogs,
   RALServer,
   RALRequest,
-  RALResponse,
-  RALConsts;
+  RALResponse;
 
 {$R *.res}
 
@@ -31,7 +31,7 @@ type
 var
   ral_module : TModuleTeste;
 
-function start_module(server : TRALServer): Boolean; stdcall; export;
+function start_module(server : TRALServer): boolean; stdcall; export;
 begin
   if ral_module = nil then
     ral_module := TModuleTeste.Create(nil);
@@ -39,8 +39,30 @@ begin
   ral_module.Server := server;
 end;
 
+function desc_module: string; stdcall; export;
+begin
+  Result := 'Teste de Modulo';
+end;
+
+procedure config_module; stdcall; export;
+begin
+  ShowMessage('Sem configurações');
+end;
+
+procedure stop_module; stdcall; export;
+begin
+  if ral_module = nil then
+    Exit;
+
+  ral_module.Server := nil;
+  FreeAndNil(ral_module);
+end;
+
 exports
-  start_module index 1;
+  start_module index 1,
+  desc_module index 2,
+  config_module index 3,
+  stop_module index 4;
 
 { TModuleTeste }
 
@@ -52,7 +74,7 @@ end;
 
 procedure TModuleTeste.ping(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
-  AResponse.Answer(HTTP_OK, 'pong', 'text/plain');
+  AResponse.Answer(200, 'pong', 'text/plain');
   AResponse.ContentDispositionInline := True;
 end;
 
