@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, RALResponse,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Async, FireDAC.DApt,
-  RALTypes;
+  RALTypes, Themes;
 
 type
   Tfprincipal = class(TForm)
@@ -90,6 +90,8 @@ type
     procedure startServer;
     procedure novoUsuario;
     procedure proximoUsuario;
+    function drawCheckBox(canv : TCanvas; rct : TRect; sel : boolean = True) : boolean; overload;
+    function drawCheckBox(hwd : THandle; rct : TRect; sel : boolean = True) : boolean; overload;
   public
     { Public declarations }
   end;
@@ -102,7 +104,7 @@ implementation
 {$R *.dfm}
 
 uses
-  ulib_arquivos, uglobal_vars, udm, ulib_mensagens, ulib_objetos, udm_rest;
+  uglobal_vars, udm, udm_rest;
 
 var
   start_module: function(server : TRALServer): Boolean; stdcall;
@@ -149,7 +151,7 @@ begin
     q1.Open;
 
     if q1.Fields[0].AsInteger > 0 then begin
-      MsgAviso('Usuário já existe');
+      ShowMessage('Usuário já existe');
       bErro := True;
     end;
   finally
@@ -305,6 +307,43 @@ begin
 
   if (DataCol = 2) and (qUsuarios.Active) then
     drawCheckBox(dbgUsuarios.Canvas, Rect, qUsuariosATIVO.AsString = 'S');
+end;
+
+function Tfprincipal.drawCheckBox(hwd: THandle; rct: TRect;
+sel: boolean): boolean;
+var
+  det : TThemedElementDetails;
+  x,y : integer;
+begin
+  Result := ThemeServices.ThemesEnabled;
+  if ThemeServices.ThemesEnabled then begin
+    if sel then
+      det := ThemeServices.GetElementDetails(tbCheckBoxCheckedNormal)
+    else
+      det := ThemeServices.GetElementDetails(tbCheckBoxUncheckedNormal);
+    ThemeServices.DrawElement(hwd,det,rct);
+  end
+  else begin
+    Result := False;
+    x := Trunc(rct.Left + ((rct.Right-rct.Left) / 2) - 6.5);
+    y := Trunc(rct.Top + ((rct.Bottom-rct.Top) / 2) - 6.5);
+
+    rct.Left := x;
+    rct.Top := y;
+    rct.Right := x + 13;
+    rct.Bottom := y + 13;
+
+    if sel then
+      DrawFrameControl(hwd, rct, DFC_BUTTON, DFCS_BUTTONCHECK or DFCS_CHECKED)
+    else
+      DrawFrameControl(hwd, rct, DFC_BUTTON, DFCS_BUTTONCHECK);
+  end;
+end;
+
+function Tfprincipal.drawCheckBox(canv: TCanvas; rct: TRect;
+  sel: boolean): boolean;
+begin
+  Result := drawCheckBox(canv.Handle,rct,sel);
 end;
 
 procedure Tfprincipal.DBGrid2DblClick(Sender: TObject);

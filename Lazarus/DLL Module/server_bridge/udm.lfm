@@ -1,0 +1,16 @@
+object dm: Tdm
+  OnCreate = DataModuleCreate
+  OldCreateOrder = False
+  Height = 414
+  HorizontalOffset = 349
+  VerticalOffset = 250
+  Width = 481
+  object conexao: TZConnection
+    ControlsCodePage = cCP_UTF8
+    DisableSavepoints = False
+    Port = 0
+    Protocol = 'sqlite'
+    Left = 40
+    Top = 16
+  end
+end

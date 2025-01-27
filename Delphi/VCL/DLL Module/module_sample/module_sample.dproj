@@ -55,8 +55,8 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_DcuOutput>D:\dcu\lucedata_bridge\module_sample</DCC_DcuOutput>
-        <DCC_ExeOutput>D:\atualizacao\lucedata_bridge</DCC_ExeOutput>
+        <DCC_DcuOutput>../compiled/module_sample/</DCC_DcuOutput>
+        <DCC_ExeOutput>../bin/</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>

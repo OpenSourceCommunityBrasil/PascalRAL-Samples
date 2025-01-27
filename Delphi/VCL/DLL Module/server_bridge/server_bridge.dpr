@@ -13,6 +13,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := False;
   Application.ShowMainForm := False;
+  Application.Title := 'Server Bridge';
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(Tfprincipal, fprincipal);
   Application.CreateForm(Tdm_rest, dm_rest);

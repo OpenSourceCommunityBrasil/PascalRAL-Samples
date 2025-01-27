@@ -1,0 +1,637 @@
+object fprincipal: Tfprincipal
+  Left = 349
+  Height = 224
+  Top = 250
+  Width = 586
+  BorderStyle = bsDialog
+  Caption = 'Bridge'
+  ClientHeight = 224
+  ClientWidth = 586
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  object Panel2: TPanel
+    Left = 0
+    Height = 224
+    Top = 0
+    Width = 47
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 224
+    ClientWidth = 47
+    Color = 16744448
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 0
+    object Image1: TImage
+      Left = 7
+      Height = 32
+      Top = 7
+      Width = 32
+      Picture.Data = {
+        1754506F727461626C654E6574776F726B477261706869630A09000089504E47
+        0D0A1A0A0000000D4948445200000020000000200806000000737A7AF4000000
+        1974455874536F6674776172650041646F626520496D616765526561647971C9
+        653C000008AC4944415478DAAD970D5093F71DC7BFCF6B9227892090F0A2022A
+        A8880A8254ADD7A9B5EB6EB5B86EB5375BCF76EEDC5D777BF16A6BBBCEAE753B
+        AB763BDD61CF2B6EADF3BAB9EABA595D9DAD2FB5D6D75A2D0C44103104104802
+        42024908499EE7C97ECF1350D66A0B6DB9FBDD2326FEBF9FDFF7F7F27F6430F2
+        1FF1E4931961296D0C2C661650238884FA211862C87BFE8A813E8F8CE4306604
+        DF652FACC95F2E08CC5363F3126726E7E502BD7EC48201C4FA0208FAFD68BC1E
+        AA9463EA1F67BD7C6D377D5FFD460056CEB69B5716F101299532B652C67204FD
+        C110384185A5DF0DC3A851686CE52026D961B5B060D428FA437D908C2C361F74
+        59769EF606BF0A00FBF1EA8255263EF63396C18CB4E90948C99B4419F7201608
+        420DFA110CF8E16B6D8248005C4A366C793900B9A00E7C1EA0EFB67BC81D46AD
+        0EC9ECF6920DCED76FE7CA9D00A49A670A8249F993913E350135E57FA64C5908
+        162B3D2D70B4F2B09023A2A08091C3E8EF0BC2606260EA7341B45A214A120493
+        0189D34BE06EF2A2B7A501939FAB35D3B97DC30548AE5B3FFF46E6FD73214DB9
+        0B5D4777C377FE005851248004F06939B04F99A83BA2F4F642A66730D0079F9B
+        1C319B61B098619DF503180B1E043C756878772726ADF93485CEED1A2E80BDE6
+        99224F428203308CC6A882C514F752FD3D24EAC0A5DF6F813181056FB140B468
+        199BC01B0D183DE7DB40523E60CD85DA741A4AFD7E70D11ED43BA298FA52532A
+        9DDB317C80674B3C49B65628B28A982C535708304C9887D1B31F86BFFA08BC67
+        FF01965521489471A20DD6B98FC138610E94DAFD509B3FA26A2B6079119C68C0
+        D5DA2E4C7EB171E400B68C0E280AFD168BD1812A54398A1875B990F92D980BBF
+        0B4B5A22C09BA8B221280D8749F82418120547EB80E32904F0020F47452B72D6
+        8F14606D892775BC8F4435FD980E1123082D3395FE52838972E918FFF876C847
+        9E20100B85A88B322C478E71600882E57938CFD5A37C5A0A4C6071FCCDAB9653
+        077DC16100147BC6E4F641735F17D7203008436E283262E13EA43F4200173752
+        E6461217756122D09F2C47108208E7894AFCEB411B949E18426E1F5846A98ECA
+        CCF60D2B9DAFDF11E0CAD3059E8C690AA251668870EC160C39A14442485DFC3B
+        28756F90E060F624CE0C3AA00118D078E43476DD930A898E9A909544101C3A3A
+        9BF1ECD25AF31D015AD64CF4A4164B88C89CDE0771ED2100144AB41FB67B5743
+        751E88D79DA5BA1300C368E2AC0EA495C571E03DEC5A60C7DCEC459899BD106E
+        8F0B1F55EEC0530F55A4DC09C0B669ED4F0F7F3FE9E2CC6C3BED7B83014A8CA3
+        DA33F155A6C6FB412580A4BB7F0CD5738A32176FD65D07D100A839DDED2EF827
+        95409A713F9CCD95A86A7C1FFD720F2D2F2F5E58D6943A148059F0F49F32C74D
+        2E6AB2252590A356F86511D33A0E6151C73664DA7B21584D90C1913843400411
+        8D2061D652C077591F53F09CDEFD918E4EB43ADB10295C047EE67CD4351CC7B5
+        B6D3944004022F90313C7ABADD58F7C3461D805DBCF9D02A5630BEA4A86AC6E2
+        3985C8CB4E869796A6B79FCE8E02ED7EAD2BFF82C537CA9199EC8531D90C991C
+        516405D6A2072853172030E86F6CC2A51A1FB21E7A14EE716371D579128EF633
+        104994D72682CAA335264F93D1E96EB90920956E3911CCCF4EC5B8AC29F8CFE9
+        B3B0D02E371B25486609816E174659E8C2315A11500D98E23A80FBDCDB312ED1
+        472046B276017C551568B91E414DCE2FF09AAB04BB5779B0F7D4CF295B735C98
+        4439AD37E866631846DF0DAE6627D62D8B03242F7FEDD48D65F373916D4FC407
+        D51E9C6FF4431405188D22F2ED123962473739D21D023AC9150F4D71FAE51DF8
+        8EFB55729C4168C18BB4091F412818C6CB7B2E61D3D24B3876F955CA5C8A8F22
+        89B29AB8161C03819AB3F95A03F5401CC05EBAE5434F7AC61818791577659B30
+        3D6B343A4256B491F57B8F9E81D56CA1FBDD044932C26434432437325345D044
+        6162828AEB1D01D4B4461151381C3C538B6D4F9CC739C71E72C0A48FA526CC32
+        030E5073F2228FC69ABA5B00DFDBFAA1272B2B0B91A8025951C1D38E9F6CE730
+        372711D5D78338D510A07F6C2047E88AB548989F2B22CF26A3A64DC1155AAE0A
+        35254F9989B474F69FB884571E3F8AEAB62374CE2D002D38BD07340001572AAA
+        FF1F20272797B61E6D371A3195369D4C4F6A4A4C18ADA2708C1129B60C183919
+        7C2C885AB7827A4FFC408ED3B2A33FD3C102CDFCDBC7AAB061C53F71ED4605D9
+        2EEA996BA25A703C0B392AA3B3BD337AE158EB1FDE7CC5B5550758B2F5B8273F
+        6F9AFEA1264E03464F0A351E11DAFB08FBB16E491EFE76D14F4274181BAFAB26
+        1EAF310190037BDEAFC4FA153BD1D6EB2451919C89AFE43E7F10ED2D1DE18FDF
+        6BDFB6AFBCF35DD2A5D1417B1C60CB714FC18C2272204A82EAC0DE8F6F3C2D14
+        82E8A7917BF2EE341CB91AA02662E34DC5DC0A0DC0201AF1D7839FE0373FDA06
+        6FA8873236A0DB4DAF664E77B8E26457D9BE728F267C83A29B823A0CE18126FC
+        C053523C9BF67E54DF70B181DD3F189A0B6102585E9C84B3CDE19BB60F0A3303
+        25D07A60D7814FF0DC8ADFA2D1E185ABC51BAE39EB2BDBB7C3FD39610CBC1FDE
+        7460DEDC7B1089680E2871178638A0F54584A274AA05552E592FC167B3E7C866
+        A381C11BFB2E625EDA9270D5B958D93B5F203CF43A4E9EF393CD6B0AE62F593B
+        764CB620D27B9F1C23089A06FDDAD5763E4144E9CD68618E0487578DD75F13D6
+        4BA16D36201496515BDF143EF6CEDEB2EAB75EF852E1A100124506457AE1A3BF
+        2A9DBEF0E15F66664D34248C4A8CBBA1DFFD044020B3C7897005A0DBAD8D9D26
+        DCD1E547555D43F8C2E1B7CBAAF76E1EB6F05000BAB6A0FD97CA4A41AB052933
+        1F7BBE74C2EC07568F1F3FD1906A4BD3C7314A8E146408F0D3400874EF343477
+        A2B2B63E7CEDECA1B2FFBEB569C4C2B77B23FA1C48D1F25F976616DFB77AECD8
+        2C437A7A26A6A4F1F8F44A0B2E5F75849B2F1E23E18D5F59F876007704295EBE
+        6E497AE1C235DA55DA7CE1F0D68ABF6FFCF7D715FE2280DB81240FC06040B4EB
+        EB0A0F07E0B320A681DF43DF84F0E0CFFF0000D7003576A54B92000000004945
+        4E44AE426082
+      }
+    end
+  end
+  object pgPrincipal: TPageControl
+    Left = 50
+    Height = 218
+    Top = 3
+    Width = 533
+    ActivePage = TabSheet1
+    Align = alClient
+    BorderSpacing.Around = 3
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Servidor'
+      ClientHeight = 190
+      ClientWidth = 525
+      object Label1: TLabel
+        Left = 16
+        Height = 15
+        Top = 13
+        Width = 31
+        Caption = 'Porta:'
+      end
+      object bIniciarServer: TSpeedButton
+        Left = 204
+        Height = 41
+        Top = 128
+        Width = 121
+        Caption = 'Iniciar'
+        Images = imgList
+        ImageIndex = 0
+        OnClick = bIniciarServerClick
+      end
+      object Label2: TLabel
+        Left = 16
+        Height = 15
+        Top = 39
+        Width = 73
+        Caption = 'Autenticação:'
+      end
+      object eServerPorta: TEdit
+        Left = 89
+        Height = 23
+        Top = 10
+        Width = 72
+        Alignment = taRightJustify
+        NumbersOnly = True
+        TabOrder = 0
+        TextHint = '8000'
+        OnChange = eServerPortaChange
+      end
+      object rbAuthJWT: TRadioButton
+        Left = 94
+        Height = 19
+        Top = 39
+        Width = 40
+        Caption = 'JWT'
+        Checked = True
+        TabOrder = 1
+        TabStop = True
+        OnClick = eServerPortaChange
+      end
+      object rbAuthBasic: TRadioButton
+        Left = 156
+        Height = 19
+        Top = 39
+        Width = 45
+        Caption = 'Basic'
+        TabOrder = 2
+        OnClick = eServerPortaChange
+      end
+      object rbAuthNenhuma: TRadioButton
+        Left = 221
+        Height = 19
+        Top = 39
+        Width = 71
+        Caption = 'Nenhuma'
+        TabOrder = 3
+        OnClick = eServerPortaChange
+      end
+      object ckSwagger: TCheckBox
+        Left = 16
+        Height = 19
+        Top = 65
+        Width = 117
+        Caption = 'Adicionar Swagger'
+        TabOrder = 4
+        OnClick = eServerPortaChange
+      end
+      object ckAutoStart: TCheckBox
+        Left = 16
+        Height = 19
+        Top = 86
+        Width = 149
+        Caption = 'Iniciar Automaticamente'
+        TabOrder = 5
+        OnClick = eServerPortaChange
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Usuários'
+      ClientHeight = 190
+      ClientWidth = 525
+      ImageIndex = 1
+      object Panel1: TPanel
+        Left = 0
+        Height = 34
+        Top = 0
+        Width = 525
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 34
+        ClientWidth = 525
+        TabOrder = 0
+        object Label3: TLabel
+          Left = 8
+          Height = 15
+          Top = 9
+          Width = 43
+          Caption = 'Usuário:'
+        end
+        object Label4: TLabel
+          Left = 224
+          Height = 15
+          Top = 9
+          Width = 35
+          Caption = 'Senha:'
+        end
+        object bGravarUsuario: TSpeedButton
+          Left = 423
+          Height = 23
+          Top = 5
+          Width = 90
+          Caption = 'Gravar'
+          Images = imgList
+          ImageIndex = 2
+          OnClick = bGravarUsuarioClick
+        end
+        object eUserUsuario: TEdit
+          Left = 54
+          Height = 23
+          Top = 5
+          Width = 155
+          CharCase = ecUppercase
+          TabOrder = 0
+        end
+        object ePassUsuario: TEdit
+          Left = 262
+          Height = 23
+          Top = 5
+          Width = 155
+          EchoMode = emPassword
+          PasswordChar = '*'
+          TabOrder = 1
+        end
+      end
+      object dbgUsuarios: TDBGrid
+        Left = 0
+        Height = 156
+        Top = 34
+        Width = 525
+        Align = alClient
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'Código'
+            Width = 71
+            FieldName = 'CODIGO'
+          end        
+          item
+            Title.Caption = 'Usuário'
+            Width = 339
+            FieldName = 'USUARIO'
+          end        
+          item
+            Title.Caption = 'Ativo'
+            Width = 41
+            FieldName = 'ATIVO'
+          end>
+        DataSource = dsUsuarios
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        OnCellClick = dbgUsuariosCellClick
+        OnDrawColumnCell = dbgUsuariosDrawColumnCell
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Módulos'
+      ClientHeight = 190
+      ClientWidth = 525
+      ImageIndex = 2
+      object DBGrid2: TDBGrid
+        Left = 0
+        Height = 190
+        Top = 0
+        Width = 525
+        Align = alClient
+        Color = clWindow
+        Columns = <        
+          item
+            Title.Caption = 'Descrição'
+            Width = 312
+            FieldName = 'mod_name'
+          end        
+          item
+            Title.Caption = 'Arquivo'
+            Width = 149
+            FieldName = 'mod_file'
+          end>
+        DataSource = dsModulos
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        OnDblClick = DBGrid2DblClick
+      end
+    end
+  end
+  object imgList: TImageList
+    Left = 88
+    Top = 144
+    Bitmap = {
+      4C7A050000001000000010000000770900000000000078DAED98795C55651AC7
+      AF088882988086582EA52CC215810459444048731B0D150597D046230535C70C
+      B5DC3E5A4E6999E4C22A668D8E8ED3342AA353612ECC580395CAE2E542885C59
+      64BB17B8FBBDBF9EE770342041E7EF99F7F3F97DCEFBBECFEFFB6EE73CE71E00
+      200189CB947479D0E45419261DBA8DD083A2A81E764486A8F4524CCD94B71BA9
+      40E4D0810F3DF0D3BBABAFDD47B11EC8579B70A5C5841B5A204F6940188D2B5D
+      B93FB1273E24A5F0C6FBB2169CAED361D2F7CD88CA6FC63F9B0D48BC588DE003
+      3FDE268B7D4F7C30CD71BAD1801D656D9851A0C48E9FD538754F8B40DA479F81
+      CE524987D2950F4D93FBCE3853852F885F51D28A989BB48E0603969F5540BAF1
+      D41E427AF5C4071EB8B12BF15A3DD26BF4585AD48AF8E256BC78F61E7CF69760
+      FC2732041C9221E8482942D3E508CB2C43573E20A5E8C62E791BF628B4784DA6
+      1674A1D9887FA84C38AB32E2A4D284534A23224F5662C247DFE7FE86A7B133C9
+      B34DA1C3FA0A1DD6946B9028D720A94C8375D45EFBB316619F5760FCDE7F5FA0
+      E53FDF959F9026C7D4D35588A2F1277D76075FD3BDDB5AA5C5A6BB7AACBDDD86
+      88CF2A30767BCE11629FEBE6FCFD58235FFD7055048DF1759B19DBAB0D78B354
+      8D001ADB6D4D6632C55D7ABA7F5C7C0E165F8CF9A60E27DB80CDE55AF8D379B9
+      BD91BD9942037B3AFF877C6A297616B7604F951E2F10EB1838E725EA76907429
+      8FE2FD32CB637DD3CAB032AF11FE59E5709C18338DBAAD248F288FE27D534BAE
+      FA6694C3FB7071AD781ED6926ECA23F9CC72F8A4972AA92A953CA674B37F9E73
+      9CE4094AD773E3E21572396EDCA4AB889A5780C8B9F9984CE22BB7B99FE35DC7
+      E8C02EF00EBD824FB29B70E682167FB9A079286E733FC7D9D79517D8499771E8
+      782336EF55E2F93005464728E01AD17EE536F7739C7D0FC6605E3AF172DC581A
+      F7C8E7CDD8BABF059E53AA316E460D7C67FE2A6E733FC7D9C77EE698779FF02D
+      B24E29B1F3402BC64DAF85FF9C3A4C88AE436007719BFB39CE3EF633C7BC6B40
+      2E0A8A00BF590D089EDB80D098EEC571F6E5FD60865B40AEC0F335F58401C1F3
+      9A1016DB8488B8EEC5F190F94DD897A1A7F9DB798FC05CEC3E68C0E458255E5C
+      ACC49425DD8BE393E39478FB231DC604B6F3638272B17EB71ED35E69C58C652D
+      8F15FB92B6EBE119D4CE7B06E762D99B46CC5EA126B53D81D458BAC108AFE076
+      5E3AF112A257AA10B35A8F79ABB498F7BAA65BCDA7784CA21E7356A8C01CF3CF
+      49F76D1947CFC4FC84162C5E6744DC1A3D629374BF11F7739C7DEC674E7CFE1C
+      464AF7267B875EC6C2D56AC46F0096FEC18CA5EB4DBF8ADADCCF71F6B19FB90E
+      CFBF38C6152C5DA743C2DB40C2960EA236F773FC01DB357FB88FD7E41572099E
+      C1DFD0F97610B5B99FE31DDF655DF3578CF9F52087AEF99BB3C3794BCE76279C
+      7B6700CE6DB125F57D8C6C052F33EDEC20A03E1FC6EA2B78D222788961F6FC36
+      0798EA7F826CB7448829152550092A46F3DD223455164259554CA23AB5B9B097
+      196659E6DA3CAC0B6FE793933761D3A64D38969D8DACAC2CA8EBCBB171E34664
+      533B33EBA8E0594B5E66047EBB238C77BF425ABC254C461D4C6D3530B756C3A0
+      52C0483288D22BEF42A7A43EBD06A9E46586D9F3DB9CA0957F818AC3CFC060D0
+      22F9ADCD3876F4188CEA3AAA27E3D3EC4F71342B1BFAD65A64641C854EA716BC
+      CC30CB5297FC0915E96E30F0D9185A60D435C1A06DA4B99A0519748DD0691BA0
+      D729A1379B5191E62630024FF7A1F5D651DCC9F687AA3C07461AC30013C9285E
+      3B0A8287BDCC307B9EEE41CB8FA9509C88C2DDCFC35049B1CA4C6FDCC99092BC
+      4449853E8EB187BDCC302BF00529B877660E14A7A6E3DEF5E39DEEB5996412AF
+      1C539C9E2E789969E707A3E53FFB50F3652CAAA99FD75F5FC1F75B46CF820C0D
+      1585A82BBB89DAF24261FDEC612F33CCB294DFEF416DCE32547F1943E7443BD5
+      A8F0EED6644C8B0C8799EA8D774BD050791B5A8D81D818C1CBCC03BEE5BB77D1
+      F05522EEE7C443DBA611D63D2D2A1C291FBCD7FE4CD654A0B9BA029A568DE061
+      2F33CC520E409DFF3E54796FA3F9DB75D06B0C023363EA541C3EF0B150D734D5
+      41DD741F3AB55EF0B09719660FAD763AC857BE977FDF648DE21F6EA0A4E03A56
+      AF5C11BD3048127DFB8702147E7705B7BEBB8A228AB187BD0F584AE321DDE4BA
+      8DA89EDE07437AF844F07470F557D17509CBC15DA88FB51D32FA4AFF67DD6B1E
+      F379616DD1DBEAEAC8C818F47719566DE73CAC9AEBD676FD4B8706BC88A10153
+      20E9D56B4D4FFCF0B068AC2994E18D5BF5482AA8C7CA4B32ACBDA1C21B851558
+      7EE126AC6DED2E8B5E0BD27C92A3A839FC7782EBCCDF57EDA7B3FF90F4C70E4A
+      21ED6C05FAD80F3821F28BDC5CECF9459AC2F278F629AE274A4684FC6B4AAE1C
+      917F9323FCCFB731E7421556E5ABB0BE4C85159715B0B2B5BBCAB08BA35DDD86
+      B8102C9AE283D8286FAC9D1788B9615EC679913E8605D383307F6A1016478723
+      C8770C7ADBF4BFD6BB6FFFE374FD2BFD3991C07CCC2477A0F208BDD448B70E00
+      05B4E2225AE58F7B81ABDB806BA4DA2338B36526AF2BACEB41C5458C51A33193
+      C6C800CA680CF941D227E2B55D353559889FE60FEB5196672D9DFBD03EAD663D
+      FC607475C6C9AD2F2363E36CA4BD390BFB56F9E1E3A489D8F7BA9FA09DCB0230
+      2CC40923CEF7875B993546DFB4C1E077F8BCAC680F9259A262492F93F23C46EF
+      8197E707907A7D0C0FF75DB0F37186D4D417DEF4B939A651022FAD047EB0C0D0
+      B4011838C0B5D30FD8407BF7D498972E62F8D0282CFC5D2EBC3CE231E29C9DC0
+      BACA24702B279549E0AE90509F159E0A1D62EEF4E3673FEAC4F4D00C8C1C3A19
+      B3A28E63D8D820627AC3A3496445B9CA251847630E7ACBAAD3FC96167D4F242E
+      AE42F4B493488A57C0D32796F66B0D4F6DFBBC9D790B38BE6ADB897776F43911
+      EEBF87FB1016B81B52B72534873DEDB797B06637E2DC4A25184B737BD4F583D3
+      082F4347DEDEF6D99CE5B30B1011F03E1216C9F15AAC0CC35D22F14CC600DAAF
+      0DC982E6ED8D31F76DE1183E0C3E9E2BBA7E00A4BA8F785935C17B83CA6BF422
+      41E3A5492A97C113340E61434D8337F4333B2D7FCAECE422D58F755DDCD2CF66
+      D09DFFE7FFFF4AFEFB123FFCAC44322845CCD927CEFFA71DA5C466917249E749
+      89BC9627CA7F4BCB17C8CBFF37AA2515908A485AD22ECAFF513DE7BFEB2B144F
+      17D9AF4897C435E49114B0B69ED863FEBB3C3D43F41788EC037D43AA2325F498
+      FF1EA3E2C5FD168BE374E62D7A2D784CFE2FA6FA6BE27EF3448E5549BA4EFBF7
+      7982FC0F27EF7BA47BE29A59F9E86B33F9BFC8FFF11A9B3E11260B8B04B365EF
+      38B3C300EF87F9FF0BE324213D
+    }
+  end
+  object swagger: TRALSwaggerModule
+    Domain = '/swagger'
+    AllowCORSVerbs = False
+    PostmanTag = False
+    ShowCustomNames = False
+    Left = 168
+    Top = 83
+  end
+  object jwt: TRALServerJWTAuth
+    Algorithm = tjaHSHA256
+    AuthRoute.Description.Strings = (
+      'Get a JWT Token'
+    )
+    AuthRoute.InputParams = <>
+    AuthRoute.Route = '/gettoken'
+    ExpirationSecs = 1800
+    JSONKey = 'token'
+    OnValidate = jwtValidate
+    OnGetToken = jwtGetToken
+    Left = 258
+    Top = 64
+  end
+  object basic: TRALServerBasicAuth
+    AuthDialog = True
+    OnValidate = basicValidate
+    Left = 306
+    Top = 112
+  end
+  object pooler: TRALSynopseServer
+    Active = False
+    CompressType = ctNone
+    CookieLife = 30
+    CORSOptions.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    CORSOptions.AllowOrigin = '*'
+    CORSOptions.MaxAge = 86400
+    CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    ResponsePages = <    
+      item
+        StatusCode = 400
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>400 - BadRequest</h1><p>The server informs that it doesn''t like the input params</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 401
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>401 - Unauthorized</h1><p>The server informs that it doesn''t know you</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 403
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>403 - Forbidden</h1><p>The server informs that it doesn''t want you to access</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 404
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>404 - Not Found</h1><p>The server informs that the page you''re requesting doesn''t exist in this reality</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 415
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>415 - Unsuported Media Type</h1><p>The server informs that it doesn''t know what you''re asking</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 500
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>500 - Internal Server Error</h1><p>The server made something that it shouldn''t</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 501
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>501 - Not Implemented</h1><p>The server informs that it doesn''t exist</p></body></html>'
+        )
+      end    
+      item
+        StatusCode = 503
+        Page.Strings = (
+          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.10-4 alpha</title></head><body><h1>503 - Service Unavailable</h1><p>The server informs that it doesn''t want to work now and you should try later</p></body></html>'
+        )
+      end>
+    Port = 8000
+    Routes = <>
+    Security.BruteForce.ExpirationTime = 1800000
+    Security.BruteForce.MaxTry = 3
+    Security.FloodTimeInterval = 30
+    Security.Options = []
+    ShowServerStatus = True
+    PoolCount = 32
+    QueueSize = 1000
+    SSL.Enabled = False
+    Left = 362
+    Top = 104
+  end
+  object iconTray: TTrayIcon
+    PopUpMenu = memPop
+    Visible = True
+    OnDblClick = iconTrayDblClick
+    Left = 144
+    Top = 152
+  end
+  object memPop: TPopupMenu
+    Left = 200
+    Top = 152
+    object Abrir1: TMenuItem
+      Caption = 'Abrir'
+      OnClick = Abrir1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Encerrar1: TMenuItem
+      Caption = 'Encerrar'
+      OnClick = Encerrar1Click
+    end
+  end
+  object memModulos: TZMemTable
+    ControlsCodePage = cDynamic
+    Left = 496
+    Top = 39
+    object memModulosmod_handle: TLargeintField
+      FieldKind = fkData
+      FieldName = 'mod_handle'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object memModulosmod_name: TStringField
+      FieldKind = fkData
+      FieldName = 'mod_name'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object memModulosmod_file: TStringField
+      FieldKind = fkData
+      FieldName = 'mod_file'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+  end
+  object qUsuarios: TZQuery
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select codigo, usuario, senha, ativo from usuarios'
+      'order by usuario'
+    )
+    Params = <>
+    Left = 496
+    Top = 144
+    object qUsuarioscodigo: TLongintField
+      FieldKind = fkData
+      FieldName = 'codigo'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qUsuariosusuario: TStringField
+      FieldKind = fkData
+      FieldName = 'usuario'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qUsuariossenha: TStringField
+      FieldKind = fkData
+      FieldName = 'senha'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object qUsuariosativo: TStringField
+      FieldKind = fkData
+      FieldName = 'ativo'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
+  end
+  object dsUsuarios: TDataSource
+    DataSet = qUsuarios
+    Left = 416
+    Top = 144
+  end
+  object dsModulos: TDataSource
+    DataSet = memModulos
+    Left = 424
+    Top = 39
+  end
+end
