@@ -22,10 +22,10 @@ type
     Memo2: TMemo;
     Label1: TLabel;
     Label2: TLabel;
-    ListView1: TListView;
     lServerPath: TLabel;
     lePort: TLabeledEdit;
     Server: TRALIndyServer;
+    Memo1: TMemo;
     procedure Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
     procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);
@@ -65,8 +65,9 @@ end;
 
 procedure TfPrincipal.test(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
-  // This is one way to answer, where you can set individually the data on the parameters
-  // or you can use AResponse.Answer(statuscode, text, contenttype) to do the same thing
+  // This is one verbose way to answer, where you can set individually the data
+  // on the parameters, or you can use AResponse.Answer(statuscode, text, contenttype)
+  // to do the same thing
   AResponse.ContentType := 'text/plain';
   AResponse.ResponseText := 'pong';
   case ARequest.Method of
@@ -105,7 +106,7 @@ end;
 procedure TfPrincipal.multiroute(ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
-  AResponse.Answer(200, 'hello long route name', rctTEXTPLAIN);
+  AResponse.Answer(HTTP_OK, 'hello long route name', rctTEXTPLAIN);
 end;
 
 procedure TfPrincipal.ping(ARequest: TRALRequest; AResponse: TRALResponse);
@@ -119,12 +120,20 @@ end;
 procedure TfPrincipal.ServerRequest(ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
+  // Don't do the below in a multithread environment with multiple requests/sec!
+  // Instead you would want to send a copy of the Request object to a thread which
+  // which will write on the memo, assuring no threadlocking or access violations
+
   // Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
 end;
 
 procedure TfPrincipal.ServerResponse(ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
+  // Don't do the below in a multithread environment with multiple requests/sec!
+  // Instead you would want to send a copy of the Request object to a thread which
+  // which will write on the memo, assuring no threadlocking or access violations
+
   // Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
 end;
 
@@ -133,15 +142,13 @@ var
   I: Integer;
 begin
   // setting the events here via code to allow quick update of the examples
-  Server.Port := StrToIntDef(lePort.Text, 0);
+  Server.Port := StrToIntDef(lePort.Text, 8000);
   Server.OnRequest := ServerRequest;
   Server.OnResponse := ServerResponse;
   CreateRoutes;
 
   // Simple way to have a list of available routes in runtime GUI
-  ListView1.Clear;
-  for I := 0 to pred(Server.Routes.Count) do
-    ListView1.Items.Add.Caption := TRALRoute(Server.Routes.Items[I]).Route;
+  Memo1.Lines.Text := Server.Routes.AsString;
 
   // Server.Active := true;
   Server.Start;

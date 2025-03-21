@@ -6,19 +6,22 @@ uses
   Winapi.Windows, Winapi.Messages,
   System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RALClient, Vcl.StdCtrls,
-  RALTypes, RALIndyClient, RALAuthentication, RALCustomObjects;
+  RALTypes, RALIndyClient, RALAuthentication, RALCustomObjects, RALRequest,
+  RALResponse;
 
 type
   TfPrincipal = class(TForm)
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    cliente: TRALIndyClient;
+    cliente: TRALClient;
     basic: TRALClientBasicAuth;
+    Button4: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
     BASEURL: string;
@@ -34,40 +37,75 @@ implementation
 {$R *.dfm}
 
 procedure TfPrincipal.Button1Click(Sender: TObject);
+var
+  Response: TRALResponse;
+  // this is needed by the client to provide the answer object
 begin
-  cliente.BaseURL.Text := BASEURL + '/clientes';
+  cliente.BASEURL.Text := BASEURL;
   cliente.Request.AddHeader('nome', 'fernando_teste');
-  cliente.Get;
-  if cliente.Response.StatusCode = 200 then
-    ShowMessage(cliente.ResponseText)
-  else
-    ShowMessage(IntToStr(cliente.Response.StatusCode) + ' ' + cliente.ResponseText);
+  cliente.Get('/clientes', Response);
+  try
+    if Response.StatusCode = 200 then
+      ShowMessage(Response.ResponseText)
+    else
+      ShowMessage(IntToStr(Response.StatusCode) + ' ' + Response.ResponseText);
+  finally
+    // RALClient will create an instance of RALResponse, but won't hook into it,
+    // so we need to dispose it ourselves.
+    Response.Free;
+  end;
 end;
 
 procedure TfPrincipal.Button2Click(Sender: TObject);
+var
+  Response: TRALResponse;
 begin
-  cliente.BaseURL.Text := BASEURL + '/ping';
-  cliente.Get;
-  if cliente.Response.StatusCode = 200 then
-    ShowMessage(cliente.ResponseText)
-  else
-    ShowMessage(IntToStr(cliente.Response.StatusCode) + ' ' + cliente.ResponseText);
+  cliente.BASEURL.Text := BASEURL;
+  cliente.Get('/ping', Response);
+  try
+    if Response.StatusCode = 200 then
+      ShowMessage(Response.ResponseText)
+    else
+      ShowMessage(IntToStr(Response.StatusCode) + ' ' + Response.ResponseText);
+  finally
+    Response.Free;
+  end;
 end;
 
 procedure TfPrincipal.Button3Click(Sender: TObject);
 var
-  vAuth : TRALAuthClient;
+  Response: TRALResponse;
 begin
-  vAuth := cliente.Authentication;
-  cliente.Authentication := nil;
-  cliente.BaseURL.Text := BASEURL + '/test';
-  cliente.Get;
-  if cliente.Response.StatusCode = 200 then
-    ShowMessage(cliente.ResponseText)
-  else
-    ShowMessage(IntToStr(cliente.Response.StatusCode) + ' ' + cliente.ResponseText);
+  cliente.BASEURL.Text := BASEURL;
+  cliente.Get('/test', Response);
+  try
+    if Response.StatusCode = 200 then
+      ShowMessage(Response.ResponseText)
+    else
+      ShowMessage(IntToStr(Response.StatusCode) + ' ' + Response.ResponseText);
+  finally
+    Response.Free;
+  end;
+end;
 
-  cliente.Authentication := vAuth;
+procedure TfPrincipal.Button4Click(Sender: TObject);
+var
+  Response: TRALResponse;
+begin
+  // we'll force an error here
+  cliente.BASEURL.Text := BASEURL + '/test';
+
+  // this would translate into: http://localhost:8000/test/test which doesn't exist
+  // in the server, therefore it should answer a 404 error page
+  cliente.Get('/test', Response);
+  try
+    if Response.StatusCode = 200 then
+      ShowMessage(Response.ResponseText)
+    else
+      ShowMessage(IntToStr(Response.StatusCode) + ' ' + Response.ResponseText);
+  finally
+    Response.Free;
+  end;
 end;
 
 procedure TfPrincipal.FormCreate(Sender: TObject);

@@ -39,14 +39,24 @@ object fPrincipal: TfPrincipal
     TabOrder = 2
     OnClick = Button3Click
   end
-  object cliente: TRALIndyClient
+  object Button4: TButton
+    Left = 251
+    Top = 16
+    Width = 75
+    Height = 25
+    Caption = 'Error'
+    TabOrder = 3
+    OnClick = Button4Click
+  end
+  object cliente: TRALClient
     Authentication = basic
     ConnectTimeout = 30000
     CompressType = ctGZip
     CriptoOptions.CriptType = crNone
+    EngineType = 'Indy'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.9.7 - alpha'
+    UserAgent = 'RALClient 0.11.0-3 alpha; Engine Indy 10.6.2.0'
     Left = 40
     Top = 80
   end

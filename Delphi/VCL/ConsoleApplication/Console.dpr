@@ -42,7 +42,7 @@ procedure TRALApplication.Run;
 begin
   inherited;
   FServer.CreateRoute('teste', teste);
-  FServer.Active := True;
+  FServer.Start;
   Writeln('server running on port', fserver.Port);
   writeln('press any key to end application...');
   Readln;

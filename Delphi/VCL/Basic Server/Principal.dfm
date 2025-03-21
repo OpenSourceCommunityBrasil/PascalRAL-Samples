@@ -10,9 +10,7 @@ object fPrincipal: TfPrincipal
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = True
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 8
@@ -52,15 +50,6 @@ object fPrincipal: TfPrincipal
       'Memo2')
     TabOrder = 1
   end
-  object ListView1: TListView
-    Left = 8
-    Top = 72
-    Width = 105
-    Height = 130
-    Columns = <>
-    TabOrder = 2
-    ViewStyle = vsList
-  end
   object lePort: TLabeledEdit
     Left = 8
     Top = 18
@@ -69,7 +58,17 @@ object fPrincipal: TfPrincipal
     EditLabel.Width = 20
     EditLabel.Height = 13
     EditLabel.Caption = 'Port'
+    TabOrder = 2
+    Text = ''
+  end
+  object Memo1: TMemo
+    Left = 8
+    Top = 72
+    Width = 105
+    Height = 130
+    ReadOnly = True
     TabOrder = 3
+    WordWrap = False
   end
   object Server: TRALIndyServer
     Active = False
