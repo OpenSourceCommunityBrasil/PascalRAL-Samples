@@ -14,6 +14,7 @@ object RALForm1: TRALForm1
   TextHeight = 13
   object server: TRALIndyServer
     Active = False
+    Authentication = RALServerJWTAuth1
     CompressType = ctGZip
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -124,31 +125,37 @@ object RALForm1: TRALForm1
     Left = 32
     Top = 24
   end
-  object RALDBStorageBINLink1: TRALDBStorageBINLink
+  object RALDBStorageBINLink1: TRALStorageBINLink
     FieldCharCase = fcNone
     Left = 64
     Top = 88
   end
-  object RALDBModule1: TRALDBModule
-    Server = server
-    Domain = '/db'
-    DatabaseLink = RALDBFireDACLink1
-    DatabaseType = dtSQLite
-    Port = 0
-    StorageOutPut = RALDBStorageJSONLink1
-    Left = 120
-    Top = 24
-  end
-  object RALDBFireDACLink1: TRALDBFireDACLink
-    Left = 240
-    Top = 24
-  end
-  object RALDBStorageJSONLink1: TRALDBStorageJSONLink
+  object RALDBStorageJSONLink1: TRALStorageJSONLink
     FieldCharCase = fcNone
     FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss:zzz'
     FormatOptions.DateTimeFormat = dtfISO8601
     JSONType = jtDBWare
     Left = 224
-    Top = 88
+    Top = 16
+  end
+  object RALServerJWTAuth1: TRALServerJWTAuth
+    Algorithm = tjaHSHA256
+    AuthRoute.Description.Strings = (
+      'Get a JWT Token')
+    AuthRoute.InputParams = <>
+    AuthRoute.Route = '/gettoken'
+    ExpirationSecs = 1800
+    JSONKey = 'token'
+    Left = 232
+    Top = 96
+  end
+  object RALDBModule1: TRALDBModule
+    Server = server
+    Domain = '/db'
+    DatabaseLink = 'FireDAC'
+    DatabaseType = dtSQLite
+    Port = 0
+    Left = 104
+    Top = 24
   end
 end

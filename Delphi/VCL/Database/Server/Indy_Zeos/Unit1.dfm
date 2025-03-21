@@ -129,7 +129,7 @@ object RALForm1: TRALForm1
     Top = 24
   end
   object RALDBStorageBINLink1: TRALDBStorageBINLink
-    FieldCharCase = fcNone
+    FieldCharCase = fcLower
     Left = 120
     Top = 88
   end
@@ -139,7 +139,6 @@ object RALForm1: TRALForm1
     DatabaseLink = RALDBZeosLink1
     DatabaseType = dtSQLite
     Port = 0
-    StorageOutPut = RALDBStorageBINLink1
     Left = 120
     Top = 24
   end

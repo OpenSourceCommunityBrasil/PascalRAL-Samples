@@ -11,6 +11,13 @@ object Form1: TForm1
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
+  object Label1: TLabel
+    Left = 183
+    Top = 280
+    Width = 34
+    Height = 15
+    Caption = 'Label1'
+  end
   object DBGrid1: TDBGrid
     Left = 8
     Top = 8
@@ -26,7 +33,7 @@ object Form1: TForm1
   end
   object Button1: TButton
     Left = 8
-    Top = 246
+    Top = 276
     Width = 75
     Height = 25
     Caption = 'Open'
@@ -35,24 +42,33 @@ object Form1: TForm1
   end
   object Button2: TButton
     Left = 89
-    Top = 246
+    Top = 276
     Width = 88
     Height = 25
     Caption = 'Apply Updates'
     TabOrder = 2
     OnClick = Button2Click
   end
-  object RALIndyClientMT1: TRALIndyClientMT
+  object DBNavigator1: TDBNavigator
+    Left = 8
+    Top = 245
+    Width = 300
+    Height = 25
+    DataSource = DataSource1
+    VisibleButtons = [nbInsert, nbDelete, nbEdit, nbPost]
+    TabOrder = 3
+  end
+  object RALClient: TRALClient
+    Authentication = RALClientJWTAuth1
     BaseURL.Strings = (
       'localhost:8000')
     ConnectTimeout = 30000
     CompressType = ctNone
     CriptoOptions.CriptType = crNone
+    EngineType = 'Indy'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.9.8 - alpha; Engine Indy 10.6.2.0'
-    ExecBehavior = ebMultiThread
-    RequestLifeCicle = False
+    UserAgent = 'RALClient 0.10.0-4 alpha; Engine Indy 10.6.2.0'
     Left = 552
     Top = 64
   end
@@ -81,14 +97,21 @@ object Form1: TForm1
     Top = 120
   end
   object RALDBConnection1: TRALDBConnection
-    Client = RALIndyClientMT1
+    Client = RALClient
     ModuleRoute = '/db'
     Left = 552
     Top = 176
   end
-  object RALDBStorageBINLink1: TRALDBStorageBINLink
+  object RALDBStorageBINLink1: TRALStorageBINLink
     FieldCharCase = fcNone
     Left = 552
     Top = 232
+  end
+  object RALClientJWTAuth1: TRALClientJWTAuth
+    AutoGetToken = True
+    JSONKey = 'token'
+    Route = '/gettoken'
+    Left = 416
+    Top = 80
   end
 end

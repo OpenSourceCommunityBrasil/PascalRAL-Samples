@@ -11,9 +11,16 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   TextHeight = 13
+  object Label1: TLabel
+    Left = 183
+    Top = 243
+    Width = 31
+    Height = 13
+    Caption = 'Label1'
+  end
   object DBGrid1: TDBGrid
     Left = 8
-    Top = 24
+    Top = 8
     Width = 320
     Height = 193
     DataSource = DataSource1
@@ -26,7 +33,7 @@ object Form1: TForm1
   end
   object Button1: TButton
     Left = 8
-    Top = 255
+    Top = 238
     Width = 75
     Height = 25
     Caption = 'Open'
@@ -35,7 +42,7 @@ object Form1: TForm1
   end
   object Button2: TButton
     Left = 89
-    Top = 255
+    Top = 238
     Width = 88
     Height = 25
     Caption = 'Apply Updates'
@@ -44,34 +51,34 @@ object Form1: TForm1
   end
   object DBNavigator1: TDBNavigator
     Left = 8
-    Top = 223
+    Top = 207
     Width = 300
     Height = 25
     DataSource = DataSource1
     VisibleButtons = [nbInsert, nbDelete, nbEdit, nbPost]
     TabOrder = 3
   end
-  object RALIndyClientMT1: TRALIndyClientMT
+  object RALClient: TRALClient
+    Authentication = RALClientJWTAuth1
     BaseURL.Strings = (
       'localhost:8000')
     ConnectTimeout = 30000
-    CompressType = ctGZip
+    CompressType = ctNone
     CriptoOptions.CriptType = crNone
+    EngineType = 'Indy'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.9.8 - alpha; Engine Indy 10.6.2.5311'
-    ExecBehavior = ebMultiThread
-    RequestLifeCicle = False
+    UserAgent = 'RALClient 0.11.0-3 alpha; Engine Indy 10.6.2.0'
     Left = 376
     Top = 56
   end
   object RALDBConnection1: TRALDBConnection
-    Client = RALIndyClientMT1
+    Client = RALClient
     ModuleRoute = '/db'
     Left = 376
     Top = 112
   end
-  object RALDBStorageBINLink1: TRALDBStorageBINLink
+  object RALDBStorageBINLink1: TRALStorageBINLink
     FieldCharCase = fcNone
     Left = 376
     Top = 280
@@ -80,7 +87,7 @@ object Form1: TForm1
     DataSet = RALDBZMemTable1
     Left = 376
   end
-  object RALDBStorageJSONLink1: TRALDBStorageJSONLink
+  object RALDBStorageJSONLink1: TRALStorageJSONLink
     FieldCharCase = fcNone
     FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss:zzz'
     FormatOptions.DateTimeFormat = dtfISO8601
@@ -101,5 +108,12 @@ object Form1: TForm1
     UpdateTable = 'clientes'
     Left = 376
     Top = 168
+  end
+  object RALClientJWTAuth1: TRALClientJWTAuth
+    AutoGetToken = True
+    JSONKey = 'token'
+    Route = '/gettoken'
+    Left = 240
+    Top = 288
   end
 end
