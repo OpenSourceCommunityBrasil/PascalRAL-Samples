@@ -7,6 +7,7 @@ object Form1: TForm1
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   DesignerMasterStyle = 0
   object Edit1: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -30,6 +31,7 @@ object Form1: TForm1
     Position.X = 136.000000000000000000
     Position.Y = 19.000000000000000000
     TabOrder = 3
+    OnSwitch = Switch1Switch
   end
   object lServerInfo: TLabel
     Position.X = 222.000000000000000000
@@ -38,29 +40,36 @@ object Form1: TForm1
     Text = 'serverinfo'
     TabOrder = 4
   end
-  object ListView1: TListView
-    ItemAppearanceClassName = 'TCustomizeItemObjects'
-    ItemEditAppearanceClassName = 'TCustomizeItemObjects'
-    HeaderAppearanceClassName = 'TListHeaderObjects'
-    FooterAppearanceClassName = 'TListHeaderObjects'
-    Position.X = 8.000000000000000000
-    Position.Y = 80.000000000000000000
-    Size.Width = 100.000000000000000000
-    Size.Height = 145.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 5
-  end
   object Memo1: TMemo
     Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
     DataDetectorTypes = []
     Position.X = 116.000000000000000000
-    Position.Y = 80.000000000000000000
+    Position.Y = 72.000000000000000000
     Size.Width = 285.000000000000000000
-    Size.Height = 145.000000000000000000
+    Size.Height = 147.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 6
+    TabOrder = 5
     Viewport.Width = 281.000000000000000000
-    Viewport.Height = 141.000000000000000000
+    Viewport.Height = 143.000000000000000000
+  end
+  object Label2: TLabel
+    Position.X = 8.000000000000000000
+    Position.Y = 55.000000000000000000
+    Text = 'Routes'
+    TabOrder = 7
+  end
+  object Memo2: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    ReadOnly = True
+    Position.X = 8.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 147.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+    Viewport.Width = 96.000000000000000000
+    Viewport.Height = 143.000000000000000000
   end
   object RALIndyServer1: TRALIndyServer
     Active = False
@@ -79,15 +88,18 @@ object Form1: TForm1
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
+    ResponsePages = <>
     Port = 8000
     Routes = <
       item
-        Route = '/'
+        InputParams = <>
+        Route = '/ping'
         AllowedMethods = [amALL]
         AllowURIParams = False
         Callback = False
         Name = 'ping'
         SkipAuthMethods = []
+        URIParams = <>
         OnReply = RALIndyServer1Routes_pingReply
       end>
     Security.BruteForce.ExpirationTime = 1800000
