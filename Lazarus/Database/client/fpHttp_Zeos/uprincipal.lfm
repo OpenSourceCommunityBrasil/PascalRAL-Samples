@@ -1,15 +1,14 @@
 object Form1: TForm1
   Left = 379
-  Height = 357
+  Height = 431
   Top = 250
   Width = 543
   Caption = 'Form1'
-  ClientHeight = 357
+  ClientHeight = 431
   ClientWidth = 543
-  LCLVersion = '3.7.0.0'
   object DBGrid1: TDBGrid
     Left = 8
-    Height = 296
+    Height = 224
     Top = 8
     Width = 528
     Color = clWindow
@@ -21,7 +20,7 @@ object Form1: TForm1
   object Button4: TButton
     Left = 88
     Height = 25
-    Top = 328
+    Top = 256
     Width = 104
     Caption = 'ApplyUpdates'
     TabOrder = 1
@@ -30,7 +29,7 @@ object Form1: TForm1
   object DBNavigator1: TDBNavigator
     Left = 8
     Height = 25
-    Top = 304
+    Top = 232
     Width = 529
     BevelOuter = bvNone
     ChildSizing.EnlargeHorizontal = crsScaleChilds
@@ -50,13 +49,38 @@ object Form1: TForm1
   object Button5: TButton
     Left = 8
     Height = 25
-    Top = 328
+    Top = 256
     Width = 75
     Caption = 'Open'
     TabOrder = 3
     OnClick = Button5Click
   end
-  object storage_bin: TRALDBStorageBINLink
+  object Label1: TLabel
+    Left = 200
+    Height = 15
+    Top = 261
+    Width = 34
+    Caption = 'Label1'
+  end
+  object DBMemo1: TDBMemo
+    Left = 8
+    Height = 90
+    Top = 296
+    Width = 150
+    DataField = 'codigo'
+    DataSource = dsmem
+    TabOrder = 4
+  end
+  object DBMemo2: TDBMemo
+    Left = 168
+    Height = 90
+    Top = 296
+    Width = 150
+    DataField = 'nome'
+    DataSource = dsmem
+    TabOrder = 5
+  end
+  object storage_bin: TRALStorageBINLink
     FieldCharCase = fcLower
     Left = 352
     Top = 136
@@ -80,25 +104,34 @@ object Form1: TForm1
     SQL.Strings = (
       'select * from clientes'
     )
-    Storage = rsfAuto
+    Storage = storage_bin
     UpdateMode = upWhereAll
     UpdateTable = 'CLIENTES'
-    Left = 416
+    Left = 456
     Top = 80
   end
-  object cliente: TRALfpHttpClientMT
+  object cliente: TRALClient
+    Authentication = RALClientJWTAuth1
     BaseURL.Strings = (
       'http://localhost:8000'
     )
     ConnectTimeout = 30000
-    CompressType = ctGZip
+    CompressType = ctNone
     CriptoOptions.CriptType = crNone
+    EngineType = 'mORMot2'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.9.8 - alpha; Engine fpHTTP'
-    ExecBehavior = ebMultiThread
-    RequestLifeCicle = False
+    UserAgent = 'RALClient 0.11.0-6 alpha; Engine mORMot2 lts-2.3.8878'
     Left = 352
+    Top = 24
+  end
+  object RALClientJWTAuth1: TRALClientJWTAuth
+    AutoGetToken = True
+    JSONKey = 'token'
+    Payload.Expiration = 45746.1536689815
+    Route = '/gettoken'
+    Token = 'eyAidHlwIiA6ICJKV1QiLCAiYWxnIiA6ICJIUzI1NiIgfQ.eyAiZXhwIiA6IDE3NDMzMDYwNzcgfQ.aL_tRQxy6cgXwyCNYAgbkEy3uhnFtRTKiVu3VxzjaQY'
+    Left = 272
     Top = 24
   end
 end

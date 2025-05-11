@@ -96,10 +96,19 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="fphttpral"/>
+        <PackageName Value="SynopseRAL"/>
       </Item>
       <Item>
-        <PackageName Value="raldbzeoslink"/>
+        <PackageName Value="IndyRAL"/>
+      </Item>
+      <Item>
+        <PackageName Value="pascalraldsgn"/>
+      </Item>
+      <Item>
+        <PackageName Value="PascalRAL"/>
+      </Item>
+      <Item>
+        <PackageName Value="fphttpral"/>
       </Item>
       <Item>
         <PackageName Value="zcomponentdesign"/>

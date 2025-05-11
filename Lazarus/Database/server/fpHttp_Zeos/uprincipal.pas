@@ -6,19 +6,21 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, DB, ZConnection,
-  RALfpHTTPServer, RALIndyServer, RALDBModule, RALDBStorageBIN, RALDBBufDataset,
-  RALSwaggerModule, RALDBZeos, RALParams;
+  RALfpHTTPServer, RALIndyServer, RALSynopseServer, RALDBModule, RALDBSQLDB,
+  RALDBZeos, RALStorageBIN, RALStorageJSON, RALConsts, RALSwaggerModule,
+  RALAuthentication, RALTypes;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
-    dbmodule: TRALDBModule;
-    dbzeos: TRALDBZeosLink;
-    server: TRALIndyServer;
+    RALDBModule1: TRALDBModule;
+    RALServerJWTAuth1: TRALServerJWTAuth;
+    JSON: TRALStorageJSONLink;
+    server: TRALSynopseServer;
     swagger: TRALSwaggerModule;
-    storage_bin: TRALDBStorageBINLink;
+    Bin: TRALStorageBINLink;
     ZConnection1: TZConnection;
     procedure FormCreate(Sender: TObject);
     procedure CreateDefaultDB;
@@ -41,7 +43,7 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   DBFILE := ExtractFileDir(ParamStr(0)) + '\banco.db';
-  dbmodule.Database := DBFILE;
+  RALDBModule1.Database := DBFILE;
   ZConnection1.Database := DBFILE;
   CreateDefaultDB;
   server.Start;

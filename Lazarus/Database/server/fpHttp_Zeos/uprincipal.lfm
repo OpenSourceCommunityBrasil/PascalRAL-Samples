@@ -3,26 +3,12 @@ object Form1: TForm1
   Height = 269
   Top = 250
   Width = 254
-  Caption = 'Form1'
+  Caption = 'RALDatabaseServer'
   OnCreate = FormCreate
-  object dbmodule: TRALDBModule
-    Server = server
-    Domain = '/db'
-    DatabaseLink = dbzeos
-    DatabaseType = dtSQLite
-    Hostname = 'localhost'
-    Port = 3052
-    Left = 32
-    Top = 72
-  end
-  object dbzeos: TRALDBZeosLink
-    Left = 96
-    Top = 134
-  end
-  object storage_bin: TRALDBStorageBINLink
+  object Bin: TRALStorageBINLink
     FieldCharCase = fcLower
-    Left = 32
-    Top = 134
+    Left = 112
+    Top = 136
   end
   object swagger: TRALSwaggerModule
     Server = server
@@ -32,20 +18,48 @@ object Form1: TForm1
     ShowCustomNames = False
     SystemVersion = '1.0'
     Title = 'Server Database'
-    Left = 96
-    Top = 72
+    Left = 24
+    Top = 64
   end
   object ZConnection1: TZConnection
     ControlsCodePage = cCP_UTF8
+    RawCharacterTransliterateOptions.Encoding = encUTF8
+    ClientCodepage = 'UTF-8'
+    Properties.Strings = (
+      'codepage=UTF-8'
+      'RawStringEncoding=DB_CP'
+    )
     DisableSavepoints = False
     HostName = 'localhost'
     Port = 0
     Protocol = 'sqlite'
-    Left = 192
-    Top = 216
+    Left = 112
+    Top = 64
   end
-  object server: TRALIndyServer
+  object RALDBModule1: TRALDBModule
+    Server = server
+    Domain = '/db'
+    DatabaseLink = 'Zeos'
+    DatabaseType = dtSQLite
+    Port = 0
+    Left = 112
+    Top = 8
+  end
+  object RALServerJWTAuth1: TRALServerJWTAuth
+    Algorithm = tjaHSHA256
+    AuthRoute.Description.Strings = (
+      'Get a JWT Token'
+    )
+    AuthRoute.InputParams = <>
+    AuthRoute.Route = '/gettoken'
+    ExpirationSecs = 1800
+    JSONKey = 'token'
+    Left = 112
+    Top = 208
+  end
+  object server: TRALSynopseServer
     Active = False
+    Authentication = RALServerJWTAuth1
     CompressType = ctNone
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -62,55 +76,7 @@ object Form1: TForm1
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
-    ResponsePages = <    
-      item
-        StatusCode = 400
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>400 - BadRequest</h1><p>The server informs that it doesn''t like the input params</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 401
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>401 - Unauthorized</h1><p>The server informs that it doesn''t know you</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 403
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>403 - Forbidden</h1><p>The server informs that it doesn''t want you to access</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 404
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>404 - Not Found</h1><p>The server informs that the page you''re requesting doesn''t exist in this reality</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 415
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>415 - Unsuported Media Type</h1><p>The server informs that it doesn''t know what you''re asking</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 500
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>500 - Internal Server Error</h1><p>The server made something that it shouldn''t</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 501
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>501 - Not Implemented</h1><p>The server informs that it doesn''t exist</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 503
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>503 - Service Unavailable</h1><p>The server informs that it doesn''t want to work now and you should try later</p></body></html>'
-        )
-      end>
+    ResponsePages = <>
     Port = 8000
     Routes = <>
     Security.BruteForce.ExpirationTime = 1800000
@@ -118,11 +84,18 @@ object Form1: TForm1
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
+    PoolCount = 32
+    QueueSize = 1000
     SSL.Enabled = False
-    SSL.SSLOptions.Mode = sslmUnassigned
-    SSL.SSLOptions.VerifyMode = []
-    SSL.SSLOptions.VerifyDepth = 0
-    Left = 64
-    Top = 16
+    Left = 24
+    Top = 8
+  end
+  object JSON: TRALStorageJSONLink
+    FieldCharCase = fcLower
+    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss.zzz'
+    FormatOptions.DateTimeFormat = dtfISO8601
+    JSONType = jtDBWare
+    Left = 32
+    Top = 136
   end
 end
