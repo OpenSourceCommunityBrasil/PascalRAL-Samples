@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'RALClient DataBase FireDAC Example'
   ClientHeight = 309
   ClientWidth = 624
   Color = clBtnFace
@@ -68,7 +68,7 @@ object Form1: TForm1
     EngineType = 'Indy'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.10.0-4 alpha; Engine Indy 10.6.2.0'
+    UserAgent = 'RALClient 0.11.0-6 alpha; Engine Indy 10.6.2.0'
     Left = 552
     Top = 64
   end
@@ -78,6 +78,7 @@ object Form1: TForm1
     Top = 8
   end
   object RALDBFDMemTable1: TRALDBFDMemTable
+    FieldOptions.BlobDisplayValue = dvFullText
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -90,7 +91,7 @@ object Form1: TForm1
     Params = <>
     SQL.Strings = (
       'select * from clientes')
-    Storage = RALDBStorageBINLink1
+    Storage = StorageBIN
     UpdateMode = upWhereAll
     UpdateTable = 'clientes'
     Left = 552
@@ -102,7 +103,7 @@ object Form1: TForm1
     Left = 552
     Top = 176
   end
-  object RALDBStorageBINLink1: TRALStorageBINLink
+  object StorageBIN: TRALStorageBINLink
     FieldCharCase = fcNone
     Left = 552
     Top = 232
@@ -112,6 +113,6 @@ object Form1: TForm1
     JSONKey = 'token'
     Route = '/gettoken'
     Left = 416
-    Top = 80
+    Top = 248
   end
 end

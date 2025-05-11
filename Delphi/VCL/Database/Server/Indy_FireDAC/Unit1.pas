@@ -4,20 +4,28 @@ unit Unit1;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  RALCustomObjects, RALServer, RALConsts, RALIndyServer, RALRequest, RALResponse,
-  RALMimeTypes, RALDBModule, RALDBBase,
-  RALDBFireDAC, FireDAC.Comp.Client, RALAuthentication, RALToken,
-  RALTypes, RALStorageJSON, RALStorage, RALStorageBIN, RALDBZeos;
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  FireDAC.Comp.Client,
+
+  // Server and API Units
+  RALServer, RALIndyServer, RALRequest, RALResponse, RALAuthentication, RALToken,
+  RALCustomObjects,
+
+  // DBWare units
+  RALDBModule, RALDBFireDAC, RALStorageJSON, RALStorage, RALStorageBIN,
+
+  // General use units
+  RALConsts, RALMimeTypes, RALTypes;
 
 type
   TRALForm1 = class(TForm)
     server: TRALIndyServer;
-    RALDBStorageBINLink1: TRALStorageBINLink;
-    RALDBStorageJSONLink1: TRALStorageJSONLink;
-    RALServerJWTAuth1: TRALServerJWTAuth;
-    RALDBModule1: TRALDBModule;
+    JWTAuth: TRALServerJWTAuth;
+    DBModule: TRALDBModule;
+    StorageBIN: TRALStorageBINLink;
+    StorageJSON: TRALStorageJSONLink;
     procedure FormCreate(Sender: TObject);
     procedure serverRoutes_pingReply(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure RALServerJWTAuth1GetToken(ARequest: TRALRequest;
@@ -41,7 +49,7 @@ procedure TRALForm1.FormCreate(Sender: TObject);
 begin
   DBFILE := ExtractFileDir(ParamStr(0)) + '\banco.db';
   StartDB;
-  RALDBModule1.Database := DBFILE;
+  DBModule.Database := DBFILE;
   server.Start;
 end;
 

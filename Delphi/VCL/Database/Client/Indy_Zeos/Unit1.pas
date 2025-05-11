@@ -10,10 +10,11 @@ uses
   Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons, Vcl.DBCtrls,
 
   RALStorage, RALStorageBIN, RALDBConnection, RALDBZeosMemTable, RALCustomObjects,
-  RALClient, RALIndyClient, RALStorageJSON, RALTypes, RALRequest, RALResponse,
+  RALClient, RALStorageJSON, RALTypes, RALRequest, RALResponse, RALIndyClient,
   RALAuthentication,
 
-  ZMemTable, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  ZMemTable, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  ZAbstractConnection, ZConnection;
 
 type
   TCustomDBGrid = class(TDBGrid)
@@ -23,21 +24,25 @@ type
   end;
 
   TForm1 = class(TForm)
-    RALClient: TRALClient;
     RALDBConnection1: TRALDBConnection;
-    RALDBStorageBINLink1: TRALStorageBINLink;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
-    RALDBStorageJSONLink1: TRALStorageJSONLink;
     Button1: TButton;
     Button2: TButton;
     DBNavigator1: TDBNavigator;
     RALDBZMemTable1: TRALDBZMemTable;
     RALClientJWTAuth1: TRALClientJWTAuth;
     Label1: TLabel;
+    DBMemo1: TDBMemo;
+    DBMemo2: TDBMemo;
+    RALStorageBINLink1: TRALStorageBINLink;
+    RALClient1: TRALClient;
+    ZQuery1: TZQuery;
+    ZConnection1: TZConnection;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure RALDBZMemTable1AfterOpen(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,6 +72,11 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
   RALDBZMemTable1.ApplyUpdates;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  RALClient1.EngineType := 'Indy';
 end;
 
 procedure TForm1.RALDBZMemTable1AfterOpen(DataSet: TDataSet);

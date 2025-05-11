@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'RALClient DataBase Zeos Example'
   ClientHeight = 363
   ClientWidth = 447
   Color = clBtnFace
@@ -10,6 +10,7 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 13
   object Label1: TLabel
     Left = 183
@@ -58,62 +59,89 @@ object Form1: TForm1
     VisibleButtons = [nbInsert, nbDelete, nbEdit, nbPost]
     TabOrder = 3
   end
-  object RALClient: TRALClient
+  object DBMemo1: TDBMemo
+    Left = 8
+    Top = 266
+    Width = 185
+    Height = 89
+    DataField = 'codigo'
+    DataSource = DataSource1
+    TabOrder = 4
+  end
+  object DBMemo2: TDBMemo
+    Left = 199
+    Top = 266
+    Width = 185
+    Height = 89
+    DataField = 'nome'
+    DataSource = DataSource1
+    TabOrder = 5
+  end
+  object RALDBConnection1: TRALDBConnection
+    Client = RALClient1
+    Left = 376
+    Top = 112
+  end
+  object DataSource1: TDataSource
+    DataSet = RALDBZMemTable1
+    Left = 376
+  end
+  object RALDBZMemTable1: TRALDBZMemTable
+    AfterOpen = RALDBZMemTable1AfterOpen
+    ControlsCodePage = cGET_ACP
+    Options = [doCalcDefaults, doCheckRequired]
+    RALConnection = RALDBConnection1
+    ParamCheck = True
+    Params = <>
+    SQL.Strings = (
+      'select * from clientes')
+    Storage = RALStorageBINLink1
+    UpdateMode = upWhereAll
+    Left = 376
+    Top = 168
+  end
+  object RALClientJWTAuth1: TRALClientJWTAuth
+    AutoGetToken = True
+    Route = '/gettoken/'
+    Left = 368
+    Top = 232
+  end
+  object RALStorageBINLink1: TRALStorageBINLink
+    FieldCharCase = fcLower
+    Left = 336
+    Top = 304
+  end
+  object RALClient1: TRALClient
     Authentication = RALClientJWTAuth1
-    BaseURL.Strings = (
-      'localhost:8000')
     ConnectTimeout = 30000
     CompressType = ctNone
     CriptoOptions.CriptType = crNone
     EngineType = 'Indy'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.11.0-3 alpha; Engine Indy 10.6.2.0'
+    UserAgent = 'RALClient 0.11.0-9 alpha; Engine Indy 10.6.2.0'
     Left = 376
-    Top = 56
+    Top = 64
   end
-  object RALDBConnection1: TRALDBConnection
-    Client = RALClient
-    ModuleRoute = '/db'
-    Left = 376
-    Top = 112
-  end
-  object RALDBStorageBINLink1: TRALStorageBINLink
-    FieldCharCase = fcNone
-    Left = 376
-    Top = 280
-  end
-  object DataSource1: TDataSource
-    DataSet = RALDBZMemTable1
-    Left = 376
-  end
-  object RALDBStorageJSONLink1: TRALStorageJSONLink
-    FieldCharCase = fcNone
-    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss:zzz'
-    FormatOptions.DateTimeFormat = dtfISO8601
-    JSONType = jtDBWare
-    Left = 376
+  object ZQuery1: TZQuery
+    Params = <>
+    Left = 224
     Top = 224
   end
-  object RALDBZMemTable1: TRALDBZMemTable
-    AfterOpen = RALDBZMemTable1AfterOpen
-    ControlsCodePage = cDynamic
-    RALConnection = RALDBConnection1
-    ParamCheck = True
-    Params = <>
-    SQL.Strings = (
-      'select * from clientes')
-    Storage = RALDBStorageBINLink1
-    UpdateMode = upWhereAll
-    UpdateTable = 'clientes'
-    Left = 376
-    Top = 168
-  end
-  object RALClientJWTAuth1: TRALClientJWTAuth
-    AutoGetToken = True
-    JSONKey = 'token'
-    Route = '/gettoken'
-    Left = 240
-    Top = 288
+  object ZConnection1: TZConnection
+    ControlsCodePage = cCP_UTF16
+    ClientCodepage = 'No Protocol selected!'
+    Catalog = ''
+    Properties.Strings = (
+      'codepage=No Protocol selected!')
+    DisableSavepoints = False
+    HostName = ''
+    Port = 0
+    Database = ''
+    User = ''
+    Password = ''
+    Protocol = 'sqlite'
+    Left = 296
+    Top = 224
   end
 end

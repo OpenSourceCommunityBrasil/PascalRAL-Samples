@@ -15,7 +15,8 @@ uses
   RALStorage, RALStorageBIN, RALDBConnection, RALDBFiredacMemTable, RALCustomObjects,
   RALClient, RALIndyClient, RALAuthentication,
 
-  RALRequest, RALResponse, Vcl.ExtCtrls, Vcl.Buttons, Vcl.DBCtrls  ;
+  RALRequest, RALResponse, Vcl.ExtCtrls, Vcl.Buttons, Vcl.DBCtrls,
+  RALnetHTTPClient, RALSynopseClient  ;
 
 type
   TForm1 = class(TForm)
@@ -24,7 +25,7 @@ type
     DataSource1: TDataSource;
     RALDBFDMemTable1: TRALDBFDMemTable;
     RALDBConnection1: TRALDBConnection;
-    RALDBStorageBINLink1: TRALStorageBINLink;
+    StorageBIN: TRALStorageBINLink;
     Button1: TButton;
     Button2: TButton;
     Label1: TLabel;

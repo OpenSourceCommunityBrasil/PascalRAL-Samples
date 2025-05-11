@@ -1,4 +1,4 @@
-program Project1;
+program DataBaseZeosClient;
 
 uses
   Vcl.Forms,

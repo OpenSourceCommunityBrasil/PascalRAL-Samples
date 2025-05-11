@@ -1,4 +1,4 @@
-program Project1;
+program DatabaseFireDACClient;
 
 uses
   Vcl.Forms,

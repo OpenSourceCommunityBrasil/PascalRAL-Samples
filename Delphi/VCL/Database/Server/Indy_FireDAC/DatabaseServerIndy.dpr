@@ -1,5 +1,5 @@
 // by PascalRAL - StandAlone App: 10/09/2024 19:41:40
-program Project1;
+program DatabaseServerIndy;
 
 uses
   Forms,
