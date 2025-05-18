@@ -3,13 +3,13 @@
         <ProjectGuid>{958FC23C-48D7-4E41-92E3-6D6F6D61AEEF}</ProjectGuid>
         <ProjectVersion>20.3</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>BasicServerVerbose.dpr</MainSource>
+        <MainSource>BasicServerIndy.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
-        <ProjectName Condition="'$(ProjectName)'==''">BasicServerVerbose</ProjectName>
+        <ProjectName Condition="'$(ProjectName)'==''">BasicServerIndy</ProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -70,7 +70,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>BasicServerVerbose</SanitizedProjectName>
+        <SanitizedProjectName>BasicServerIndy</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DBXDb2Driver;vclactnband;vclFireDAC;tethering;UDPSuperComponents;FireDACADSDriver;lucedata_xe10;FireDACMSSQLDriver;vcltouch;ACBr_NFe;ACBr_NFeDanfeFR;vcldb;RESTDWSelfSigned;svn;ACBr_NFeDanfeESCPOS;atcheckcombobox;IcsVclD103Run;vclib;frxTee26;ACBr_SATExtratoFR;FireDACDBXDriver;PascalScript_Core_D26;ACBr_NFSeDanfseFR;vclx;unidac260;RESTBackendComponents;uSynEdit_R2022;EmbeddedWebBrowser_XE;VCLRESTComponents;RvHtmlD10_1;fsTee26;vclie;bindengine;CloudService;FireDACMySQLDriver;ACBr_SATECFVirtual;frx26;DataSnapClient;bindcompdbx;fsFD26;ACBr_TCP;DBXSybaseASEDriver;IndyIPServer;ACBr_CTe;IndySystem;dsnapcon;ACBr_synapse;VirtualTreesR;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;RESTDWShellServices;ACBr_MDFe;emshosting;TWPP4DelphiCollection;DBXOdbcDriver;FireDACTDataDriver;FMXTee;SVGPackage;KGrid_DXER;soaprtl;DbxCommonDriver;crcontrols260;RESTDWSocketIcs;RESTDWSocketIndy;xmlrtl;soapmidas;DataSnapNativeClient;fmxobj;rtl;emsserverresource;DbxClientDriver;DBXSybaseASADriver;CEF4DelphiFMXRTL;appanalytics;IndyIPClient;bindcompvcl;TeeUI;RVDBPkgD10_1;ACBr_NFSeXDANFSeFR;VclSmp;FireDACODBCDriver;DataSnapIndy10ServerTransport;ACBr_Boleto;DataSnapProviderClient;FireDACMongoDBDriver;ACBr_MDFeDamdfeFR;ACBr_NFSe;NiceGridD7;RESTComponents;DataSnapServerMidas;ZComponent;DBXInterBaseDriver;RtmRxDB240;ZCore;emsclientfiredac;ACBr_SATWS;DataSnapFireDAC;svnui;dacfmx260;frxFD26;DBXMSSQLDriver;DatasnapConnectorsFreePascal;kbmMemRunDX10Std;RESTDWZEOSDriver;bindcompfmx;DBXOracleDriver;inetdb;ACBr_Diversos;FmxTeeUI;emsedge;AbbreviaVCLD;FireDACIBDriver;fmx;fmxdae;QRWRunDXE10_3_w64;SVGImagePackageR;ACBr_CTeDacteFR;mozzila_comp;vquery260;RESTDWFireDACDriver;dacvcl260;fs26;dbexpress;IndyCore;frxIntIO26;ZParseSql;llPDFLibD2009Now;dsnap;DataSnapCommon;emsclient;RVPkgD10_1;FireDACCommon;uniGUI26Chart;uniGUI26m;Ribbon;ACBr_NFSeX;CEF4DelphiVCLRTL;DataSnapConnectors;soapserver;ACBr_SAT;FireDACOracleDriver;DBXMySQLDriver;DBXFirebirdDriver;RvSpell;FireDACCommonODBC;FireDACCommonDriver;frxIntIOIndy26;inet;PCSCConnectorD2007;IndyIPCommon;multi_listview;vcl;ACBr_SATExtratoESCPOS;frxDB26;FireDACDb2Driver;FMXSVGImage;ACBr_Integrador;madExcept_;uniGUI26VCL;fsDB26;madBasic_;ZDbc;TeeDB;FireDAC;unidacvcl260;ACBr_Comum;frxe26;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;media_player;ibxpress;Tee;DataSnapServer;ibxbindings;dac260;vclwinx;FireDACDSDriver;ACBr_OpenSSL;madDisAsm_;IndyRAL;CustomIPTransport;vcldsnap;bindcomp;ZPlain;ACBr_Serial;DBXInformixDriver;IcsCommonD103Run;SynEdit_R;dbxcds;RtmRxCtl240;adortl;ACBr_NFCeECFVirtual;ACBr_BoletoFR;unidacfmx260;dsnapxml;RESTDWCore;dbrtl;inetdbxpress;IndyProtocols;frxHTML26;filesearch;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -145,12 +145,24 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">BasicServerVerbose.dpr</Source>
+                    <Source Name="MainSource">BasicServerIndy.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="5">
                 <DeployFile LocalName="Win32\Debug\server.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="Win64\Debug\BasicServer.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="Win64\Debug\BasicServerIndy.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>BasicServerIndy.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\BasicServerIndy.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>BasicServerIndy.rsm</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win64\Release\BasicServerVerbose.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">

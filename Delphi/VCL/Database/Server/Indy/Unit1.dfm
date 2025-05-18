@@ -2,7 +2,7 @@ object RALForm1: TRALForm1
   Left = 0
   Top = 0
   Caption = 'RAL - StandAlone Application'
-  ClientHeight = 176
+  ClientHeight = 149
   ClientWidth = 312
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,6 +14,7 @@ object RALForm1: TRALForm1
   TextHeight = 13
   object server: TRALIndyServer
     Active = False
+    Authentication = JWTAuth
     CompressType = ctGZip
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -103,11 +104,11 @@ object RALForm1: TRALForm1
     Routes = <
       item
         InputParams = <>
-        Route = '/ping'
+        Route = '/'
         AllowedMethods = [amGET]
         AllowURIParams = False
         Callback = False
-        Name = 'ping'
+        Name = 'ralroute0'
         SkipAuthMethods = []
         URIParams = <>
         OnReply = serverRoutes_pingReply
@@ -121,25 +122,40 @@ object RALForm1: TRALForm1
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    Left = 32
+    Left = 40
     Top = 24
   end
-  object RALDBZeosLink1: TRALDBZeosLink
-    Left = 224
-    Top = 24
-  end
-  object RALDBStorageBINLink1: TRALDBStorageBINLink
-    FieldCharCase = fcLower
-    Left = 120
+  object JWTAuth: TRALServerJWTAuth
+    Algorithm = tjaHSHA256
+    AuthRoute.Description.Strings = (
+      'Get a JWT Token')
+    AuthRoute.InputParams = <>
+    AuthRoute.Route = '/'
+    ExpirationSecs = 1800
+    JSONKey = 'token'
+    Left = 40
     Top = 88
   end
-  object RALDBModule1: TRALDBModule
+  object DBModule: TRALDBModule
     Server = server
-    Domain = '/db'
-    DatabaseLink = RALDBZeosLink1
+    Domain = '/'
+    DatabaseLink = 'FireDAC'
     DatabaseType = dtSQLite
     Port = 0
-    Left = 120
+    Left = 128
     Top = 24
+  end
+  object StorageBIN: TRALStorageBINLink
+    FieldCharCase = fcNone
+    Left = 240
+    Top = 16
+  end
+  object StorageJSON: TRALStorageJSONLink
+    FieldCharCase = fcNone
+    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss.zzz'
+    FormatOptions.DateTimeFormat = dtfISO8601
+    JSONType = jtDBWare
+    Left = 240
+    Top = 72
   end
 end

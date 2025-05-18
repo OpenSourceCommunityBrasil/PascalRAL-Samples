@@ -1,9 +1,9 @@
-object RALForm1: TRALForm1
+object fPrincipal: TfPrincipal
   Left = 0
   Top = 0
-  Caption = 'RAL - StandAlone Application'
-  ClientHeight = 149
-  ClientWidth = 312
+  Caption = 'RAL Basic Server'
+  ClientHeight = 203
+  ClientWidth = 403
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,10 +12,67 @@ object RALForm1: TRALForm1
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 13
-  object server: TRALIndyServer
+  object Label1: TLabel
+    Left = 8
+    Top = 53
+    Width = 34
+    Height = 13
+    Caption = 'Routes'
+  end
+  object Label2: TLabel
+    Left = 119
+    Top = 53
+    Width = 17
+    Height = 13
+    Caption = 'Log'
+  end
+  object lServerPath: TLabel
+    Left = 286
+    Top = 34
+    Width = 54
+    Height = 13
+    Caption = 'ServerPath'
+  end
+  object ToggleSwitch1: TToggleSwitch
+    Left = 323
+    Top = 8
+    Width = 72
+    Height = 20
+    TabOrder = 0
+    OnClick = ToggleSwitch1Click
+  end
+  object Memo2: TMemo
+    Left = 119
+    Top = 72
+    Width = 282
+    Height = 130
+    Lines.Strings = (
+      'Memo2')
+    TabOrder = 1
+  end
+  object lePort: TLabeledEdit
+    Left = 8
+    Top = 18
+    Width = 89
+    Height = 21
+    EditLabel.Width = 20
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Port'
+    TabOrder = 2
+    Text = ''
+  end
+  object Memo1: TMemo
+    Left = 8
+    Top = 72
+    Width = 105
+    Height = 130
+    ReadOnly = True
+    TabOrder = 3
+    WordWrap = False
+  end
+  object Server: TRALIndyServer
     Active = False
-    Authentication = JWTAuth
-    CompressType = ctGZip
+    CompressType = ctNone
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
       'Content-Type'
@@ -98,57 +155,22 @@ object RALForm1: TRALForm1
             'ould try later</p></body></html>')
       end>
     Port = 8000
-    Routes = <
-      item
-        InputParams = <>
-        Route = '/'
-        AllowedMethods = [amGET]
-        AllowURIParams = False
-        Callback = False
-        SkipAuthMethods = []
-        URIParams = <>
-        OnReply = serverRoutes_pingReply
-      end>
+    Routes = <>
     Security.BruteForce.ExpirationTime = 1800000
     Security.BruteForce.MaxTry = 3
     Security.FloodTimeInterval = 30
     Security.Options = []
+    ServerStatus.Strings = (
+      
+        '<!DOCTYPE html><html lang="en-us"><head><title>RALServer - 0.9.7' +
+        ' - alpha</title></head><body><h1>Server OnLine</h1><h4>Version: ' +
+        '0.9.7 - alpha</h4><h4>Engine: %ralengine%</h4></body></html>')
     ShowServerStatus = True
     SSL.Enabled = False
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
     SSL.SSLOptions.VerifyDepth = 0
-    Left = 40
-    Top = 24
-  end
-  object JWTAuth: TRALServerJWTAuth
-    Algorithm = tjaHSHA256
-    AuthRoute.Description.Strings = (
-      'Get a JWT Token')
-    AuthRoute.InputParams = <>
-    AuthRoute.Route = '/'
-    ExpirationSecs = 1800
-    Left = 40
-    Top = 88
-  end
-  object DBModule: TRALDBModule
-    Server = server
-    Domain = '/'
-    DatabaseType = dtSQLite
-    Port = 0
-    Left = 128
-    Top = 24
-  end
-  object StorageBIN: TRALStorageBINLink
-    FieldCharCase = fcNone
-    Left = 240
-    Top = 16
-  end
-  object StorageJSON: TRALStorageJSONLink
-    FieldCharCase = fcNone
-    FormatOptions.DateTimeFormat = dtfISO8601
-    JSONType = jtDBWare
-    Left = 240
-    Top = 72
+    Left = 192
+    Top = 8
   end
 end

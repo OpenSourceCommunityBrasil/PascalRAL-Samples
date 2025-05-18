@@ -12,7 +12,7 @@ uses
 
   RALServer, RALRoutes, RALRequest, RALResponse, RALParams, RALIndyServer,
   RALTypes,
-  RALConsts, RALMIMETypes, RALCustomObjects
+  RALConsts, RALMIMETypes, RALCustomObjects, RALSynopseServer
 
     ;
 
@@ -24,8 +24,8 @@ type
     Label2: TLabel;
     lServerPath: TLabel;
     lePort: TLabeledEdit;
-    Server: TRALIndyServer;
     Memo1: TMemo;
+    Server: TRALSynopseServer;
     procedure Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
     procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);
@@ -121,7 +121,7 @@ procedure TfPrincipal.ServerRequest(ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
   // Don't do the below in a multithread environment with multiple requests/sec!
-  // Instead you would want to send a copy of the Request object to a thread which
+  // Instead you would want to send a copy of the Request object to a thread
   // which will write on the memo, assuring no threadlocking or access violations
 
   // Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
@@ -131,7 +131,7 @@ procedure TfPrincipal.ServerResponse(ARequest: TRALRequest;
   AResponse: TRALResponse);
 begin
   // Don't do the below in a multithread environment with multiple requests/sec!
-  // Instead you would want to send a copy of the Request object to a thread which
+  // Instead you would want to send a copy of the Request object to a thread
   // which will write on the memo, assuring no threadlocking or access violations
 
   // Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
@@ -148,6 +148,7 @@ begin
   CreateRoutes;
 
   // Simple way to have a list of available routes in runtime GUI
+  Memo1.Lines.Clear;
   Memo1.Lines.Text := Server.Routes.AsString;
 
   // Server.Active := true;
@@ -166,6 +167,11 @@ begin
     Server.Stop;
     lServerPath.Caption := 'Offline';
   end;
+
+  if Server.Active then
+    ToggleSwitch1.State := tssOn
+  else
+    ToggleSwitch1.State := tssOff;
 end;
 
 end.

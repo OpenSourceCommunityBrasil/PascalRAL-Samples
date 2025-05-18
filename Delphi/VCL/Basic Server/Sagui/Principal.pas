@@ -1,0 +1,177 @@
+unit Principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Variants, System.Classes,
+
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Vcl.WinXCtrls,
+  Vcl.ComCtrls, Vcl.Mask, Vcl.ExtCtrls,
+
+  RALServer, RALRoutes, RALRequest, RALResponse, RALParams, RALIndyServer,
+  RALTypes,
+  RALConsts, RALMIMETypes, RALCustomObjects, RALSaguiServer
+
+    ;
+
+type
+  TfPrincipal = class(TForm)
+    ToggleSwitch1: TToggleSwitch;
+    Memo2: TMemo;
+    Label1: TLabel;
+    Label2: TLabel;
+    lServerPath: TLabel;
+    lePort: TLabeledEdit;
+    Memo1: TMemo;
+    Server: TRALSaguiServer;
+    procedure Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure ToggleSwitch1Click(Sender: TObject);
+    procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure test(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure multiroute(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure FormCreate(Sender: TObject);
+    procedure ServerRequest(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure ServerResponse(ARequest: TRALRequest; AResponse: TRALResponse);
+  private
+    { Private declarations }
+    procedure FileReply(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure CreateRoutes;
+    procedure SetupServer;
+  public
+    { Public declarations }
+  end;
+
+var
+  fPrincipal: TfPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfPrincipal.Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
+var
+  nome: string;
+  vParam: TRALParam;
+begin
+  nome := 'erro';
+  vParam := ARequest.ParamByName('nome');
+  if vParam <> nil then
+    nome := vParam.AsString;
+
+  AResponse.ResponseText := nome;
+end;
+
+procedure TfPrincipal.test(ARequest: TRALRequest; AResponse: TRALResponse);
+begin
+  // This is one verbose way to answer, where you can set individually the data
+  // on the parameters, or you can use AResponse.Answer(statuscode, text, contenttype)
+  // to do the same thing
+  AResponse.ContentType := 'text/plain';
+  AResponse.ResponseText := 'pong';
+  case ARequest.Method of
+    amGET, amDELETE:
+      AResponse.StatusCode := HTTP_OK;
+    amPOST, amPUT, amPATCH:
+      AResponse.StatusCode := HTTP_Created;
+  end;
+end;
+
+procedure TfPrincipal.CreateRoutes;
+begin
+  // short way of creating routes
+  Server.CreateRoute('test', test);
+  Server.CreateRoute('clientes', Clientes);
+  Server.CreateRoute('ping', ping);
+  Server.CreateRoute('file', FileReply);
+
+  // example of a complex route with some allowed methods.
+  Server.CreateRoute('this/is/a/very/long/route/example', multiroute)
+    .AllowedMethods := [amGET];
+end;
+
+procedure TfPrincipal.FileReply(ARequest: TRALRequest; AResponse: TRALResponse);
+begin
+  // example of answering a file based on input param: file=filename
+  AResponse.Answer(ExtractFileDir(ParamStr(0)) + '\' +
+    ARequest.ParamByName('file').AsString);
+end;
+
+procedure TfPrincipal.FormCreate(Sender: TObject);
+begin
+  //
+end;
+
+procedure TfPrincipal.multiroute(ARequest: TRALRequest;
+  AResponse: TRALResponse);
+begin
+  AResponse.Answer(HTTP_OK, 'hello long route name', rctTEXTPLAIN);
+end;
+
+procedure TfPrincipal.ping(ARequest: TRALRequest; AResponse: TRALResponse);
+begin
+  // No http verb is checked here, so it'll answer the same to any incomming
+  // This is a simple GET, POST, PUT, PATCH, DELETE request against /ping endpoint
+  // which results in a plain 'pong' response
+  AResponse.Answer(200, 'pong', rctTEXTPLAIN);
+end;
+
+procedure TfPrincipal.ServerRequest(ARequest: TRALRequest;
+  AResponse: TRALResponse);
+begin
+  // Don't do the below in a multithread environment with multiple requests/sec!
+  // Instead you would want to send a copy of the Request object to a thread
+  // which will write on the memo, assuring no threadlocking or access violations
+
+  // Memo2.Lines.Append('REQUEST: ' + ARequest.Query);
+end;
+
+procedure TfPrincipal.ServerResponse(ARequest: TRALRequest;
+  AResponse: TRALResponse);
+begin
+  // Don't do the below in a multithread environment with multiple requests/sec!
+  // Instead you would want to send a copy of the Request object to a thread
+  // which will write on the memo, assuring no threadlocking or access violations
+
+  // Memo2.Lines.Append('RESPONSE: ' + AResponse.ResponseText);
+end;
+
+procedure TfPrincipal.SetupServer;
+var
+  I: Integer;
+begin
+  // setting the events here via code to allow quick update of the examples
+  Server.Port := StrToIntDef(lePort.Text, 8000);
+  Server.OnRequest := ServerRequest;
+  Server.OnResponse := ServerResponse;
+  CreateRoutes;
+
+  // Simple way to have a list of available routes in runtime GUI
+  Memo1.Lines.Clear;
+  Memo1.Lines.Text := Server.Routes.AsString;
+
+  // Server.Active := true;
+  Server.Start;
+end;
+
+procedure TfPrincipal.ToggleSwitch1Click(Sender: TObject);
+begin
+  if ToggleSwitch1.State = tssOn then
+  begin
+    SetupServer;
+    lServerPath.Caption := 'http://localhost:' + Server.Port.ToString
+  end
+  else
+  begin
+    Server.Stop;
+    lServerPath.Caption := 'Offline';
+  end;
+
+  if Server.Active then
+    ToggleSwitch1.State := tssOn
+  else
+    ToggleSwitch1.State := tssOff;
+end;
+
+end.
