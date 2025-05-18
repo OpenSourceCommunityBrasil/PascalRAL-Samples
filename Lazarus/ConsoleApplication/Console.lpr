@@ -34,7 +34,7 @@ type
   procedure TRALApplication.Run;
   begin
     FServer.CreateRoute('teste', @teste);
-    FServer.Active := True;
+    FServer.Start;
     writeln('server active on port', FServer.Port);
     writeln('press any key to terminate app...');
     ReadLn;
@@ -43,7 +43,7 @@ type
 
   procedure TRALApplication.teste(ARequest: TRALRequest; AResponse: TRALResponse);
   begin
-    AResponse.Answer(200, 'RALTeste', rctTEXTPLAIN);
+    AResponse.Answer(HTTP_OK, 'RALTeste', rctTEXTPLAIN);
   end;
 
   constructor TRALApplication.Create(AOwner: TComponent);

@@ -7,10 +7,10 @@ object fprincipal: Tfprincipal
   Caption = 'Bridge'
   ClientHeight = 224
   ClientWidth = 586
+  Position = poScreenCenter
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  Position = poScreenCenter
   object Panel2: TPanel
     Left = 0
     Height = 224
@@ -160,7 +160,7 @@ object fprincipal: Tfprincipal
         Left = 94
         Height = 19
         Top = 39
-        Width = 40
+        Width = 39
         Caption = 'JWT'
         Checked = True
         TabOrder = 1
@@ -416,8 +416,8 @@ object fprincipal: Tfprincipal
     AllowCORSVerbs = False
     PostmanTag = False
     ShowCustomNames = False
-    Left = 168
-    Top = 83
+    Left = 240
+    Top = 96
   end
   object jwt: TRALServerJWTAuth
     Algorithm = tjaHSHA256
@@ -430,8 +430,8 @@ object fprincipal: Tfprincipal
     JSONKey = 'token'
     OnValidate = jwtValidate
     OnGetToken = jwtGetToken
-    Left = 258
-    Top = 64
+    Left = 344
+    Top = 168
   end
   object basic: TRALServerBasicAuth
     AuthDialog = True
@@ -439,7 +439,7 @@ object fprincipal: Tfprincipal
     Left = 306
     Top = 112
   end
-  object pooler: TRALSynopseServer
+  object server: TRALSynopseServer
     Active = False
     CompressType = ctNone
     CookieLife = 30
@@ -543,8 +543,8 @@ object fprincipal: Tfprincipal
   end
   object memModulos: TZMemTable
     ControlsCodePage = cDynamic
-    Left = 496
-    Top = 39
+    Left = 512
+    Top = 88
     object memModulosmod_handle: TLargeintField
       FieldKind = fkData
       FieldName = 'mod_handle'
@@ -632,6 +632,6 @@ object fprincipal: Tfprincipal
   object dsModulos: TDataSource
     DataSet = memModulos
     Left = 424
-    Top = 39
+    Top = 80
   end
 end

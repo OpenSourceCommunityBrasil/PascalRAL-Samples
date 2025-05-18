@@ -17,9 +17,15 @@ uses
 {$R *.res}
 
 begin
+  {$ifopt D+}
+  SetHeapTraceOutput('server_bridge.trc');
+    {$if declared(UseHeapTrace)}
+    GlobalSkipIfNoLeaks := True; // supported as of debugger version 3.2.0
+    {$endIf}
+  {$ENDIF}
   RequireDerivedFormResource:=True;
-  Application.Title:='Server Bridge';
-  Application.Scaled:=True;
+  Application.Title := 'Server Bridge';
+  Application.Scaled := True;
   Application.Initialize;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(Tfprincipal, fprincipal);

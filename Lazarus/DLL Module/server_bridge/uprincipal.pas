@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF MSWINDOWS}
-    Windows,
+  Windows,
   {$ENDIF}
   {$IFDEF FPC}
     DynLibs,
@@ -50,7 +50,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     pgPrincipal: TPageControl;
-    pooler: TRALSynopseServer;
+    server: TRALSynopseServer;
     qUsuariosativo: TStringField;
     qUsuarioscodigo: TLongintField;
     qUsuariossenha: TStringField;
@@ -72,11 +72,11 @@ type
     procedure DBGrid2DblClick(Sender: TObject);
     procedure dbgUsuariosCellClick(Column: TColumn);
     procedure dbgUsuariosDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+      DataCol: integer; Column: TColumn; State: TGridDrawState);
     procedure Encerrar1Click(Sender: TObject);
     procedure eServerPortaChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure iconTrayDblClick(Sender: TObject);
     procedure jwtGetToken(ARequest: TRALRequest; AResponse: TRALResponse;
@@ -84,19 +84,19 @@ type
     procedure jwtValidate(ARequest: TRALRequest; AResponse: TRALResponse;
       AParams: TRALJWTParams; var AResult: boolean);
   private
-    FCanClose : boolean;
-    FCodUsuario : integer;
-    FProcessando : boolean;
+    FCanClose: boolean;
+    FCodUsuario: integer;
+    FProcessando: boolean;
     procedure carregaSubModules;
     procedure startServer;
     procedure novoUsuario;
     procedure proximoUsuario;
     procedure criarMemTable;
 
-    function drawCheckBox(canv : TCanvas; rct : TRect; sel : boolean = True) : boolean; overload;
-    function drawCheckBox(hwd : THandle; rct : TRect; sel : boolean = True) : boolean; overload;
+    function drawCheckBox(canv: TCanvas; rct: TRect; sel: boolean = True): boolean; overload;
+    function drawCheckBox(hwd: THandle; rct: TRect; sel: boolean = True): boolean; overload;
     procedure setIconTray(AIndex: integer);
-public
+  public
 
   end;
 
@@ -111,23 +111,25 @@ uses
   uglobal_vars, udm, udm_rest;
 
 var
-  start_module: function(server : TRALServer): Boolean; cdecl;
-  desc_module : function : string; cdecl;
-  config_module : procedure; cdecl;
+  start_module: function(server: TRALServer): boolean; cdecl;
+  desc_module: function: string; cdecl;
+  config_module: procedure; cdecl;
 
-{ Tfprincipal }
+  { Tfprincipal }
 
 procedure Tfprincipal.bIniciarServerClick(Sender: TObject);
 begin
-  if bIniciarServer.Tag = 0 then begin
+  if bIniciarServer.Tag = 0 then
+  begin
     startServer;
     bIniciarServer.Tag := 1;
     bIniciarServer.ImageIndex := 1;
     setIconTray(3);
     bIniciarServer.Caption := 'Parar';
   end
-  else begin
-    pooler.Stop;
+  else
+  begin
+    server.Stop;
     setIconTray(4);
     bIniciarServer.Tag := 0;
     bIniciarServer.ImageIndex := 0;
@@ -144,10 +146,11 @@ end;
 
 procedure Tfprincipal.dbgUsuariosCellClick(Column: TColumn);
 var
-  q1 : TZQuery;
-  ativo : string;
+  q1: TZQuery;
+  ativo: string;
 begin
-  if Column.Index = 2 then begin
+  if Column.Index = 2 then
+  begin
 
     if qUsuariosATIVO.AsString = 'S' then
       ativo := 'N'
@@ -176,8 +179,8 @@ begin
   end;
 end;
 
-procedure Tfprincipal.dbgUsuariosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure Tfprincipal.dbgUsuariosDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: integer; Column: TColumn; State: TGridDrawState);
 begin
   dbgUsuarios.Canvas.Brush.Color := clWhite;
   dbgUsuarios.Canvas.Brush.Style := bsSolid;
@@ -215,20 +218,21 @@ begin
 
   salvarConfiguracoes;
 
-  if pooler.Active then
+  if server.Active then
     startServer;
 end;
 
 procedure Tfprincipal.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction := caNone;
-  if FCanClose then begin
+  if FCanClose then
+  begin
     CloseAction := caFree;
     Application.Terminate;
   end;
 end;
 
-procedure Tfprincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure Tfprincipal.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   CanClose := FCanClose;
   Self.Hide;
@@ -275,10 +279,10 @@ begin
   Self.Show;
 end;
 
-procedure Tfprincipal.jwtGetToken(ARequest: TRALRequest;
-  AResponse: TRALResponse; AParams: TRALJWTParams; var AResult: boolean);
+procedure Tfprincipal.jwtGetToken(ARequest: TRALRequest; AResponse: TRALResponse;
+  AParams: TRALJWTParams; var AResult: boolean);
 var
-  dm_rest : Tdm_rest;
+  dm_rest: Tdm_rest;
 begin
   dm_rest := Tdm_rest.Create(nil);
   try
@@ -288,10 +292,10 @@ begin
   end;
 end;
 
-procedure Tfprincipal.jwtValidate(ARequest: TRALRequest;
-  AResponse: TRALResponse; AParams: TRALJWTParams; var AResult: boolean);
+procedure Tfprincipal.jwtValidate(ARequest: TRALRequest; AResponse: TRALResponse;
+  AParams: TRALJWTParams; var AResult: boolean);
 var
-  dm_rest : Tdm_rest;
+  dm_rest: Tdm_rest;
 begin
   dm_rest := Tdm_rest.Create(nil);
   try
@@ -306,10 +310,10 @@ begin
   Self.Show;
 end;
 
-procedure Tfprincipal.basicValidate(ARequest: TRALRequest;
-  AResponse: TRALResponse; var AResult: boolean);
+procedure Tfprincipal.basicValidate(ARequest: TRALRequest; AResponse: TRALResponse;
+  var AResult: boolean);
 var
-  dm_rest : Tdm_rest;
+  dm_rest: Tdm_rest;
 begin
   dm_rest := Tdm_rest.Create(nil);
   try
@@ -321,8 +325,8 @@ end;
 
 procedure Tfprincipal.bGravarUsuarioClick(Sender: TObject);
 var
-  q1 : TZQuery;
-  bErro : boolean;
+  q1: TZQuery;
+  bErro: boolean;
 begin
   bErro := False;
 
@@ -333,14 +337,16 @@ begin
     q1.SQL.Clear;
     q1.SQL.Add('select count(*) from usuarios');
     q1.SQL.Add('where usuario = :usuario');
-    if FCodUsuario = -1 then begin
+    if FCodUsuario = -1 then
+    begin
       q1.SQL.Add('  and codigo <> :codigo');
       q1.ParamByName('codigo').AsInteger := FCodUsuario;
     end;
     q1.ParamByName('usuario').AsString := eUserUsuario.Text;
     q1.Open;
 
-    if q1.Fields[0].AsInteger > 0 then begin
+    if q1.Fields[0].AsInteger > 0 then
+    begin
       ShowMessage('Usuário já existe');
       bErro := True;
     end;
@@ -356,12 +362,14 @@ begin
     q1.Connection := dm.conexao;
     q1.Close;
     q1.SQL.Clear;
-    if FCodUsuario = -1 then begin
+    if FCodUsuario = -1 then
+    begin
       proximoUsuario;
       q1.SQL.Add('insert into usuarios(codigo, usuario, senha)');
       q1.SQL.Add('values(:codigo, :usuario, :senha)');
     end
-    else begin
+    else
+    begin
       q1.SQL.Add('update usuarios');
       q1.SQL.Add('set usuario = :usuario,');
       q1.SQL.Add('    senha = :senha');
@@ -384,28 +392,30 @@ end;
 procedure Tfprincipal.carregaSubModules;
 var
   F: TSearchRec;
-  Ret : Integer;
+  Ret: integer;
 
-  procedure carregaBiblioteca(ADLL : string);
+  procedure carregaBiblioteca(ADLL: string);
   var
-    vDLL : THandle;
-    vDesc : string;
+    vDLL: THandle;
+    vDesc: string;
   begin
     vDLL := SafeLoadLibrary(ADLL);
 
-    if vDLL <> NilHandle then begin
+    if vDLL <> NilHandle then
+    begin
       try
         Pointer(start_module) := GetProcAddress(vDLL, 'start_module');
         if Assigned(start_module) then
-          start_module(pooler);
+          start_module(server);
 
         vDesc := '';
         Pointer(desc_module) := GetProcAddress(vDLL, 'desc_module');
-        if Assigned(desc_module) then begin
+        if Assigned(desc_module) then
+        begin
           vDesc := desc_module();
 
           memModulos.Append;
-          memModulosmod_handle.AsInteger := vDLL;
+          memModulosmod_handle.AsLargeInt := vDLL;
           memModulosmod_file.AsString := ExtractFileName(ADLL);
           memModulosmod_name.AsString := vDesc;
           memModulos.Post;
@@ -439,21 +449,21 @@ end;
 
 procedure Tfprincipal.startServer;
 begin
-  pooler.Stop;
+  server.Stop;
 
-  pooler.Port := StrToIntDef(eServerPorta.Text, 8000);
+  server.Port := StrToIntDef(eServerPorta.Text, 8000);
 
   swagger.Server := nil;
   if gb_modswager then
-    swagger.Server := pooler;
+    swagger.Server := server;
 
   case gb_authtype of
-    1 : pooler.Authentication := jwt;
-    2 : pooler.Authentication := basic;
-    3 : pooler.Authentication := nil;
+    1: server.Authentication := jwt;
+    2: server.Authentication := basic;
+    3: server.Authentication := nil;
   end;
 
-  pooler.Start;
+  server.Start;
 end;
 
 procedure Tfprincipal.novoUsuario;
@@ -465,7 +475,7 @@ end;
 
 procedure Tfprincipal.proximoUsuario;
 var
-  q1 : TZQuery;
+  q1: TZQuery;
 begin
   q1 := TZQuery.Create(nil);
   try
@@ -490,26 +500,28 @@ end;
 
 function Tfprincipal.drawCheckBox(canv: TCanvas; rct: TRect; sel: boolean): boolean;
 begin
-  Result := drawCheckBox(canv.Handle,rct,sel);
+  Result := drawCheckBox(canv.Handle, rct, sel);
 end;
 
 function Tfprincipal.drawCheckBox(hwd: THandle; rct: TRect; sel: boolean): boolean;
 var
-  det : TThemedElementDetails;
-  x,y : integer;
+  det: TThemedElementDetails;
+  x, y: integer;
 begin
   Result := ThemeServices.ThemesEnabled;
-  if ThemeServices.ThemesEnabled then begin
+  if ThemeServices.ThemesEnabled then
+  begin
     if sel then
       det := ThemeServices.GetElementDetails(tbCheckBoxCheckedNormal)
     else
       det := ThemeServices.GetElementDetails(tbCheckBoxUncheckedNormal);
-    ThemeServices.DrawElement(hwd,det,rct);
+    ThemeServices.DrawElement(hwd, det, rct);
   end
-  else begin
+  else
+  begin
     Result := False;
-    x := Trunc(rct.Left + ((rct.Right-rct.Left) / 2) - 6.5);
-    y := Trunc(rct.Top + ((rct.Bottom-rct.Top) / 2) - 6.5);
+    x := Trunc(rct.Left + ((rct.Right - rct.Left) / 2) - 6.5);
+    y := Trunc(rct.Top + ((rct.Bottom - rct.Top) / 2) - 6.5);
 
     rct.Left := x;
     rct.Top := y;
@@ -525,11 +537,11 @@ end;
 
 procedure Tfprincipal.setIconTray(AIndex: integer);
 var
-  vIco : TIcon;
+  vIco: TIcon;
 begin
   vIco := TIcon.Create;
   try
-    imgList.GetIcon(AIndex, vIco);
+    ImgList.GetIcon(AIndex, vIco);
     iconTray.Icon.Assign(vIco);
   finally
     FreeAndNil(vIco);
@@ -537,4 +549,3 @@ begin
 end;
 
 end.
-

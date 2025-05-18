@@ -1,0 +1,57 @@
+object Form1: TForm1
+  Left = 275
+  Height = 240
+  Top = 250
+  Width = 320
+  Caption = 'Form1'
+  ClientHeight = 240
+  ClientWidth = 320
+  OnCreate = FormCreate
+  object ToggleBox1: TToggleBox
+    Left = 8
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Iniciar'
+    TabOrder = 0
+    OnChange = ToggleBox1Change
+  end
+  object RALServerBasicAuth1: TRALServerBasicAuth
+    AuthDialog = True
+    Password = 'admin'
+    UserName = 'admin'
+    Left = 184
+    Top = 88
+  end
+  object server: TRALSaguiServer
+    Active = False
+    Authentication = RALServerBasicAuth1
+    CompressType = ctNone
+    CookieLife = 30
+    CORSOptions.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    CORSOptions.AllowOrigin = '*'
+    CORSOptions.MaxAge = 86400
+    CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    ResponsePages = <>
+    Port = 8000
+    Routes = <>
+    Security.BruteForce.ExpirationTime = 1800000
+    Security.BruteForce.MaxTry = 3
+    Security.FloodTimeInterval = 30
+    Security.Options = []
+    ShowServerStatus = True
+    SSL.Enabled = False
+    Left = 64
+    Top = 88
+  end
+end
