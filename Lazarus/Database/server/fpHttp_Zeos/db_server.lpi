@@ -25,12 +25,6 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="SynopseRAL"/>
-      </Item>
-      <Item>
-        <PackageName Value="IndyRAL"/>
-      </Item>
-      <Item>
         <PackageName Value="raldbzeoslink"/>
       </Item>
       <Item>

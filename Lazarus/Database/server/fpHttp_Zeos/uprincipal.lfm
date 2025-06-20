@@ -11,7 +11,7 @@ object Form1: TForm1
     Top = 136
   end
   object swagger: TRALSwaggerModule
-    Server = server
+    Server = Server
     Domain = '/swagger'
     AllowCORSVerbs = False
     PostmanTag = False
@@ -37,7 +37,7 @@ object Form1: TForm1
     Top = 64
   end
   object RALDBModule1: TRALDBModule
-    Server = server
+    Server = Server
     Domain = '/db'
     DatabaseLink = 'Zeos'
     DatabaseType = dtSQLite
@@ -57,7 +57,15 @@ object Form1: TForm1
     Left = 112
     Top = 208
   end
-  object server: TRALSynopseServer
+  object JSON: TRALStorageJSONLink
+    FieldCharCase = fcLower
+    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss.zzz'
+    FormatOptions.DateTimeFormat = dtfISO8601
+    JSONType = jtDBWare
+    Left = 32
+    Top = 136
+  end
+  object Server: TRALfpHttpServer
     Active = False
     Authentication = RALServerJWTAuth1
     CompressType = ctNone
@@ -84,18 +92,11 @@ object Form1: TForm1
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
-    PoolCount = 32
-    QueueSize = 1000
+    QueueSize = 65535
     SSL.Enabled = False
+    SSL.SSLOptions.CipherList = 'DEFAULT'
+    SSL.SSLOptions.HostName = 'localhost'
     Left = 24
     Top = 8
-  end
-  object JSON: TRALStorageJSONLink
-    FieldCharCase = fcLower
-    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss.zzz'
-    FormatOptions.DateTimeFormat = dtfISO8601
-    JSONType = jtDBWare
-    Left = 32
-    Top = 136
   end
 end

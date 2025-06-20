@@ -6,9 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, DB, ZConnection,
-  RALfpHTTPServer, RALIndyServer, RALSynopseServer, RALDBModule, RALDBSQLDB,
-  RALDBZeos, RALStorageBIN, RALStorageJSON, RALConsts, RALSwaggerModule,
-  RALAuthentication, RALTypes;
+  RALfpHTTPServer, RALDBModule, RALDBZeos, RALStorageBIN, RALStorageJSON,
+  RALConsts, RALSwaggerModule, RALAuthentication, RALTypes;
 
 type
 
@@ -16,9 +15,9 @@ type
 
   TForm1 = class(TForm)
     RALDBModule1: TRALDBModule;
+    Server: TRALfpHttpServer;
     RALServerJWTAuth1: TRALServerJWTAuth;
     JSON: TRALStorageJSONLink;
-    server: TRALSynopseServer;
     swagger: TRALSwaggerModule;
     Bin: TRALStorageBINLink;
     ZConnection1: TZConnection;
