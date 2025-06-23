@@ -115,6 +115,12 @@ begin
   // This is a simple GET, POST, PUT, PATCH, DELETE request against /ping endpoint
   // which results in a plain 'pong' response
   AResponse.Answer(200, 'pong', rctTEXTPLAIN);
+
+{ The above is the same as the following code:
+  AResponse.StatusCode := 200;
+  AResponse.ResponseText := 'pong';
+  AResponse.ContentType := rctTEXTPLAIN;
+}
 end;
 
 procedure TfPrincipal.ServerRequest(ARequest: TRALRequest;
@@ -138,8 +144,6 @@ begin
 end;
 
 procedure TfPrincipal.SetupServer;
-var
-  I: Integer;
 begin
   // setting the events here via code to allow quick update of the examples
   Server.Port := StrToIntDef(lePort.Text, 8000);

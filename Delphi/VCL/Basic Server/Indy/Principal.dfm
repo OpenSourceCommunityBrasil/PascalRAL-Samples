@@ -81,8 +81,11 @@ object fPrincipal: TfPrincipal
       'Authorization'
       'Content-Encoding'
       'Accept-Encoding')
+    CORSOptions.AllowOrigin = '*'
     CORSOptions.MaxAge = 86400
     CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
     ResponsePages = <
       item
@@ -166,6 +169,8 @@ object fPrincipal: TfPrincipal
         ' - alpha</title></head><body><h1>Server OnLine</h1><h4>Version: ' +
         '0.9.7 - alpha</h4><h4>Engine: %ralengine%</h4></body></html>')
     ShowServerStatus = True
+    ListenQueue = -1
+    MaxConnections = -1
     SSL.Enabled = False
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
