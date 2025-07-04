@@ -1,0 +1,285 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 416
+  ClientWidth = 343
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object FlowLayout1: TFlowLayout
+    Align = Top
+    Padding.Top = 5.000000000000000000
+    Padding.Bottom = 5.000000000000000000
+    Size.Width = 343.000000000000000000
+    Size.Height = 329.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Justify = Center
+    JustifyLastLine = Center
+    FlowDirection = LeftToRight
+    HorizontalGap = 5.000000000000000000
+    VerticalGap = 5.000000000000000000
+    object Edit1: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 8
+      Position.X = 39.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 130.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object Edit2: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 9
+      Position.X = 174.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 130.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object FlowLayoutBreak1: TFlowLayoutBreak
+      ChangesRules = False
+      Justify = Left
+      JustifyLastLine = Left
+      FlowDirection = LeftToRight
+    end
+    object Button1: TButton
+      Position.X = 32.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 141.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 16
+      Text = 'HMACSHA_224'
+      TextSettings.Trimming = None
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Position.X = 178.000000000000000000
+      Position.Y = 42.000000000000000000
+      Size.Width = 133.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 15
+      Text = 'HMACSHA_256'
+      TextSettings.Trimming = None
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Position.X = 25.000000000000000000
+      Position.Y = 72.000000000000000000
+      Size.Width = 149.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 14
+      Text = 'HMACSHA_384'
+      TextSettings.Trimming = None
+      OnClick = Button3Click
+    end
+    object Button4: TButton
+      Position.X = 179.000000000000000000
+      Position.Y = 72.000000000000000000
+      Size.Width = 139.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 13
+      Text = 'HMACSHA_512'
+      TextSettings.Trimming = None
+      OnClick = Button4Click
+    end
+    object Button5: TButton
+      Position.X = 85.000000000000000000
+      Position.Y = 102.000000000000000000
+      Size.Width = 173.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 12
+      Text = 'HMACSHA_512_224'
+      TextSettings.Trimming = None
+      OnClick = Button5Click
+    end
+    object Button6: TButton
+      Position.X = 83.000000000000000000
+      Position.Y = 132.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 11
+      Text = 'HMACSHA_512_256'
+      TextSettings.Trimming = None
+      OnClick = Button6Click
+    end
+    object FlowLayoutBreak2: TFlowLayoutBreak
+      ChangesRules = False
+      Justify = Left
+      JustifyLastLine = Left
+      FlowDirection = LeftToRight
+    end
+    object Label1: TLabel
+      AutoSize = True
+      Position.X = 143.000000000000000000
+      Position.Y = 162.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Encript'
+      TabOrder = 18
+    end
+    object FlowLayoutBreak4: TFlowLayoutBreak
+      ChangesRules = False
+      Justify = Left
+      JustifyLastLine = Left
+      FlowDirection = LeftToRight
+    end
+    object Button7: TButton
+      Position.X = 57.000000000000000000
+      Position.Y = 189.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'AES128'
+      TextSettings.Trimming = None
+      OnClick = Button7Click
+    end
+    object Button8: TButton
+      Position.X = 135.000000000000000000
+      Position.Y = 189.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'AES192'
+      TextSettings.Trimming = None
+      OnClick = Button8Click
+    end
+    object Button9: TButton
+      Position.X = 213.000000000000000000
+      Position.Y = 189.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'AES256'
+      TextSettings.Trimming = None
+      OnClick = Button9Click
+    end
+    object FlowLayoutBreak3: TFlowLayoutBreak
+      ChangesRules = False
+      Justify = Left
+      JustifyLastLine = Left
+      FlowDirection = LeftToRight
+    end
+    object Label2: TLabel
+      AutoSize = True
+      Position.X = 142.000000000000000000
+      Position.Y = 219.000000000000000000
+      Size.Width = 59.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Decript'
+      TabOrder = 17
+    end
+    object FlowLayoutBreak5: TFlowLayoutBreak
+      ChangesRules = False
+      Justify = Left
+      JustifyLastLine = Left
+      FlowDirection = LeftToRight
+    end
+    object Button10: TButton
+      Position.X = 52.000000000000000000
+      Position.Y = 246.000000000000000000
+      Size.Width = 75.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = 'AES128'
+      TextSettings.Trimming = None
+      OnClick = Button10Click
+    end
+    object Button11: TButton
+      Position.X = 132.000000000000000000
+      Position.Y = 246.000000000000000000
+      Size.Width = 77.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'AES192'
+      TextSettings.Trimming = None
+      OnClick = Button11Click
+    end
+    object Button12: TButton
+      Position.X = 214.000000000000000000
+      Position.Y = 246.000000000000000000
+      Size.Width = 77.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'AES256'
+      TextSettings.Trimming = None
+      OnClick = Button12Click
+    end
+    object FlowLayoutBreak6: TFlowLayoutBreak
+      ChangesRules = False
+      Justify = Left
+      JustifyLastLine = Left
+      FlowDirection = LeftToRight
+    end
+    object Label3: TLabel
+      AutoSize = True
+      Position.X = 141.000000000000000000
+      Position.Y = 276.000000000000000000
+      Size.Width = 61.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.WordWrap = False
+      Text = 'Base64'
+      TabOrder = 19
+    end
+    object FlowLayoutBreak7: TFlowLayoutBreak
+      ChangesRules = False
+      Justify = Left
+      JustifyLastLine = Left
+      FlowDirection = LeftToRight
+    end
+    object Button13: TButton
+      Position.X = 96.000000000000000000
+      Position.Y = 303.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Encode'
+      TextSettings.Trimming = None
+      OnClick = Button13Click
+    end
+    object Button14: TButton
+      Position.X = 174.000000000000000000
+      Position.Y = 303.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Decode'
+      TextSettings.Trimming = None
+      OnClick = Button14Click
+    end
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    TextSettings.WordWrap = True
+    Align = Top
+    Position.Y = 329.000000000000000000
+    Size.Width = 343.000000000000000000
+    Size.Height = 72.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 335.000000000000000000
+    Viewport.Height = 64.000000000000000000
+  end
+end
