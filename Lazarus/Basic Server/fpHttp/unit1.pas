@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, RALfpHTTPServer, RALAuthentication,
   Forms, Controls, Graphics, Dialogs, StdCtrls, RALResponse,
-  RALRequest, RALRoutes, RALConsts, RALTypes;
+  RALRequest, RALConsts, RALTypes;
 
 type
 

@@ -25,7 +25,7 @@ object RALForm1: TRALForm1
   end
   object DBModule: TRALDBModule
     Server = Server
-    Domain = '/'
+    Domain = '/db'
     DatabaseLink = 'FireDAC'
     DatabaseType = dtSQLite
     Port = 0
@@ -47,7 +47,6 @@ object RALForm1: TRALForm1
   end
   object Server: TRALSaguiServer
     Active = False
-    Authentication = JWTAuth
     CompressType = ctNone
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -57,8 +56,11 @@ object RALForm1: TRALForm1
       'Authorization'
       'Content-Encoding'
       'Accept-Encoding')
+    CORSOptions.AllowOrigin = '*'
     CORSOptions.MaxAge = 86400
     CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
     ResponsePages = <>
     Port = 8000
@@ -68,6 +70,8 @@ object RALForm1: TRALForm1
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
+    ConnectionLimit = -4
+    PoolCount = -1
     SSL.Enabled = False
     Left = 40
     Top = 16

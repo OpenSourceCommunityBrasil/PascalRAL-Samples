@@ -14,7 +14,6 @@ object RALForm1: TRALForm1
   TextHeight = 13
   object server: TRALIndyServer
     Active = False
-    Authentication = JWTAuth
     CompressType = ctGZip
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -118,6 +117,8 @@ object RALForm1: TRALForm1
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
+    ListenQueue = -1
+    MaxConnections = -1
     SSL.Enabled = False
     SSL.SSLOptions.Mode = sslmUnassigned
     SSL.SSLOptions.VerifyMode = []
@@ -138,7 +139,7 @@ object RALForm1: TRALForm1
   end
   object DBModule: TRALDBModule
     Server = server
-    Domain = '/'
+    Domain = '/db'
     DatabaseLink = 'FireDAC'
     DatabaseType = dtSQLite
     Port = 0

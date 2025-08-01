@@ -6,6 +6,7 @@ object Form1: TForm1
   Caption = 'Form1'
   ClientHeight = 240
   ClientWidth = 320
+  LCLVersion = '4.3.0.0'
   OnCreate = FormCreate
   object ToggleBox1: TToggleBox
     Left = 8
@@ -50,6 +51,8 @@ object Form1: TForm1
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
+    ConnectionLimit = -4
+    PoolCount = -1
     SSL.Enabled = False
     Left = 64
     Top = 88

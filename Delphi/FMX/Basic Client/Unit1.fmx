@@ -1,0 +1,52 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 241
+  ClientWidth = 418
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Edit1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 0
+    Text = 'https://receitaws.com.br/v1/cnpj/27865757008855'
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 313.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Button1: TButton
+    Position.X = 329.000000000000000000
+    Position.Y = 8.000000000000000000
+    TabOrder = 1
+    Text = 'Button1'
+    TextSettings.Trimming = None
+    OnClick = Button1Click
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 8.000000000000000000
+    Position.Y = 38.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 195.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Viewport.Width = 397.000000000000000000
+    Viewport.Height = 191.000000000000000000
+  end
+  object RALClient1: TRALClient
+    ConnectTimeout = 30000
+    CompressType = ctGZip
+    CriptoOptions.CriptType = crNone
+    EngineType = 'Indy'
+    KeepAlive = True
+    RequestTimeout = 10000
+    UserAgent = 'RALClient 0.11.0-18 alpha; Engine Indy 10.6.2.0'
+    Left = 336
+    Top = 80
+  end
+end

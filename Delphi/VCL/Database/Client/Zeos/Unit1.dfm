@@ -102,7 +102,8 @@ object Form1: TForm1
   end
   object RALClientJWTAuth1: TRALClientJWTAuth
     AutoGetToken = True
-    Route = '/gettoken/'
+    JSONKey = 'testeJWT'
+    Route = '/gettoken'
     Left = 368
     Top = 232
   end
@@ -123,25 +124,12 @@ object Form1: TForm1
     Left = 376
     Top = 64
   end
-  object ZQuery1: TZQuery
-    Params = <>
-    Left = 224
-    Top = 224
-  end
-  object ZConnection1: TZConnection
-    ControlsCodePage = cCP_UTF16
-    ClientCodepage = 'No Protocol selected!'
-    Catalog = ''
-    Properties.Strings = (
-      'codepage=No Protocol selected!')
-    DisableSavepoints = False
-    HostName = ''
-    Port = 0
-    Database = ''
-    User = ''
-    Password = ''
-    Protocol = 'sqlite'
-    Left = 296
-    Top = 224
+  object RALStorageJSONLink1: TRALStorageJSONLink
+    FieldCharCase = fcNone
+    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss.zzz'
+    FormatOptions.DateTimeFormat = dtfISO8601
+    JSONType = jtDBWare
+    Left = 200
+    Top = 304
   end
 end

@@ -12,6 +12,22 @@ object RALForm1: TRALForm1
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 13
+  object lInfo: TLabel
+    Left = 8
+    Top = 8
+    Width = 292
+    Height = 57
+    Caption = 
+      'Remember to chage DBModule Database link between FireDAC and Zeo' +
+      's to test native binary traffic'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    WordWrap = True
+  end
   object JWTAuth: TRALServerJWTAuth
     Algorithm = tjaHSHA256
     AuthRoute.Description.Strings = (
@@ -19,33 +35,35 @@ object RALForm1: TRALForm1
     AuthRoute.InputParams = <>
     AuthRoute.Route = '/'
     ExpirationSecs = 1800
-    Left = 40
+    JSONKey = 'testeJWT'
+    SignSecretKey = 'testeJWT'
+    Left = 128
     Top = 88
   end
   object DBModule: TRALDBModule
     Server = server
-    Domain = '/'
+    Domain = '/db'
     DatabaseLink = 'FireDAC'
     DatabaseType = dtSQLite
     Port = 0
-    Left = 128
-    Top = 24
+    Left = 64
+    Top = 88
   end
   object StorageBIN: TRALStorageBINLink
     FieldCharCase = fcNone
-    Left = 240
-    Top = 16
+    Left = 256
+    Top = 48
   end
   object StorageJSON: TRALStorageJSONLink
     FieldCharCase = fcNone
+    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss.zzz'
     FormatOptions.DateTimeFormat = dtfISO8601
     JSONType = jtDBWare
-    Left = 240
-    Top = 72
+    Left = 256
+    Top = 96
   end
   object server: TRALSynopseServer
     Active = False
-    Authentication = JWTAuth
     CompressType = ctNone
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -55,8 +73,11 @@ object RALForm1: TRALForm1
       'Authorization'
       'Content-Encoding'
       'Accept-Encoding')
+    CORSOptions.AllowOrigin = '*'
     CORSOptions.MaxAge = 86400
     CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
     ResponsePages = <>
     Port = 8000
@@ -69,7 +90,7 @@ object RALForm1: TRALForm1
     PoolCount = 32
     QueueSize = 1000
     SSL.Enabled = False
-    Left = 40
-    Top = 24
+    Left = 8
+    Top = 88
   end
 end

@@ -59,16 +59,15 @@ object Form1: TForm1
     TabOrder = 3
   end
   object RALClient: TRALClient
-    Authentication = RALClientJWTAuth1
     BaseURL.Strings = (
       'localhost:8000')
     ConnectTimeout = 30000
     CompressType = ctNone
     CriptoOptions.CriptType = crNone
-    EngineType = 'Indy'
+    EngineType = 'mORMot2'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.11.0-6 alpha; Engine Indy 10.6.2.0'
+    UserAgent = 'RALClient 0.11.0-11 alpha; Engine mORMot2 lts-2.3.8878'
     Left = 552
     Top = 64
   end
@@ -91,7 +90,7 @@ object Form1: TForm1
     Params = <>
     SQL.Strings = (
       'select * from clientes')
-    Storage = StorageBIN
+    Storage = RALStorageBINLink1
     UpdateMode = upWhereAll
     UpdateTable = 'clientes'
     Left = 552
@@ -103,16 +102,24 @@ object Form1: TForm1
     Left = 552
     Top = 176
   end
-  object StorageBIN: TRALStorageBINLink
-    FieldCharCase = fcNone
-    Left = 552
-    Top = 232
-  end
   object RALClientJWTAuth1: TRALClientJWTAuth
     AutoGetToken = True
     JSONKey = 'token'
     Route = '/gettoken'
     Left = 416
     Top = 248
+  end
+  object RALStorageJSONLink1: TRALStorageJSONLink
+    FieldCharCase = fcNone
+    FormatOptions.CustomDateTimeFormat = 'dd/mm/yyyy hh:nn:ss.zzz'
+    FormatOptions.DateTimeFormat = dtfISO8601
+    JSONType = jtDBWare
+    Left = 552
+    Top = 248
+  end
+  object RALStorageBINLink1: TRALStorageBINLink
+    FieldCharCase = fcNone
+    Left = 288
+    Top = 256
   end
 end

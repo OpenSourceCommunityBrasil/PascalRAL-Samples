@@ -17,6 +17,7 @@ type
     cliente: TRALClient;
     basic: TRALClientBasicAuth;
     Button4: TButton;
+    lInfo: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -111,6 +112,7 @@ end;
 procedure TfPrincipal.FormCreate(Sender: TObject);
 begin
   BASEURL := 'http://localhost:8000';
+  lInfo.Visible := false;
 end;
 
 end.

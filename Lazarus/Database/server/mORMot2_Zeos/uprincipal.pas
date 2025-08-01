@@ -5,10 +5,9 @@ unit uprincipal;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, DB,
-  ZConnection,
-  RALSynopseServer, RALDBModule, RALDBStorageBIN, RALDBBufDataset, RALSwaggerModule,
-  RALDBZeos, RALParams;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZConnection,
+  RALSynopseServer, RALDBModule, RALDBZeos, RALStorageBIN,
+  RALSwaggerModule, raldbzeoslink;
 
 type
 
@@ -16,10 +15,9 @@ type
 
   TForm1 = class(TForm)
     dbmodule: TRALDBModule;
-    dbzeos: TRALDBZeosLink;
     server: TRALSynopseServer;
     swagger: TRALSwaggerModule;
-    storage_bin: TRALDBStorageBINLink;
+    storage_bin: TRALStorageBINLink;
     ZConnection1: TZConnection;
     procedure FormCreate(Sender: TObject);
     procedure CreateDefaultDB;
@@ -55,7 +53,7 @@ begin
   ZConnection1.Connect;
   ZConnection1.ExecuteDirect('PRAGMA table_info("clientes")', rows);
   if rows = 0 then
-    ZConnection1.ExecuteDirect('CREATE TABLE clientes (codigo varchar, nome varchar)');
+    ZConnection1.ExecuteDirect('CREATE TABLE clientes (codigo varchar(2000), nome varchar(2000))');
   ZConnection1.Disconnect;
 end;
 

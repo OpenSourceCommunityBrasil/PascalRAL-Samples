@@ -4,6 +4,7 @@ object Form1: TForm1
   Top = 250
   Width = 254
   Caption = 'RALDatabaseServer'
+  LCLVersion = '4.3.0.0'
   OnCreate = FormCreate
   object Bin: TRALStorageBINLink
     FieldCharCase = fcLower

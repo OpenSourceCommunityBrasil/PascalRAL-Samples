@@ -37,8 +37,7 @@ type
     DBMemo2: TDBMemo;
     RALStorageBINLink1: TRALStorageBINLink;
     RALClient1: TRALClient;
-    ZQuery1: TZQuery;
-    ZConnection1: TZConnection;
+    RALStorageJSONLink1: TRALStorageJSONLink;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure RALDBZMemTable1AfterOpen(DataSet: TDataSet);

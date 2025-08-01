@@ -16,7 +16,8 @@ uses
   RALClient, RALIndyClient, RALAuthentication,
 
   RALRequest, RALResponse, Vcl.ExtCtrls, Vcl.Buttons, Vcl.DBCtrls,
-  RALnetHTTPClient, RALSynopseClient  ;
+  RALnetHTTPClient, RALSynopseClient, RALStorageJSON;
+
 
 type
   TForm1 = class(TForm)
@@ -25,12 +26,13 @@ type
     DataSource1: TDataSource;
     RALDBFDMemTable1: TRALDBFDMemTable;
     RALDBConnection1: TRALDBConnection;
-    StorageBIN: TRALStorageBINLink;
     Button1: TButton;
     Button2: TButton;
     Label1: TLabel;
     RALClientJWTAuth1: TRALClientJWTAuth;
     DBNavigator1: TDBNavigator;
+    RALStorageJSONLink1: TRALStorageJSONLink;
+    RALStorageBINLink1: TRALStorageBINLink;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
   private

@@ -12,6 +12,25 @@ object fPrincipal: TfPrincipal
   Font.Style = []
   OnCreate = FormCreate
   TextHeight = 13
+  object lInfo: TLabel
+    Left = 23
+    Top = 72
+    Width = 333
+    Height = 114
+    Caption = 
+      'This example works alongside the Basic Server Sample. It'#39's advis' +
+      'ed to run both of them to know how things work.'#13#10#13#10'There'#39's a FMX' +
+      ' Basic Client Sample which works indepedantly of our server samp' +
+      'le.'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Font.Quality = fqClearType
+    ParentFont = False
+    WordWrap = True
+  end
   object Button1: TButton
     Left = 8
     Top = 16
@@ -57,14 +76,14 @@ object fPrincipal: TfPrincipal
     KeepAlive = True
     RequestTimeout = 10000
     UserAgent = 'RALClient 0.11.0-3 alpha; Engine Indy 10.6.2.0'
-    Left = 40
-    Top = 80
+    Left = 24
+    Top = 240
   end
   object basic: TRALClientBasicAuth
     AutoGetToken = True
     UserName = 'admin'
     Password = 'admin'
-    Left = 112
-    Top = 80
+    Left = 80
+    Top = 240
   end
 end

@@ -50,12 +50,19 @@ begin
 end;
 
 procedure TRALApplication.Run;
-var
-  vRoute: TRALRoute;
 begin
   inherited;
   // this will allow any URI ammount in the route
-  FServer.CreateRoute('/uri', AnyUriReply).AllowURIParams:= true;
+  FServer.CreateRoute('/uri', AnyUriReply).AllowURIParams := true;
+
+  // The above one line statement is the same as the commented code below:
+  {
+   var
+     Route: TRALRoute;
+
+   Route := FServer.CreateRoute('/uri', AnyUriReply);
+   Route.AllowURIParams := true;
+  }
 
   // this will allow only pre-determined URI params in the route
   FServer.CreateRoute('/uri/:id1/:id2/:id3', UriReply);

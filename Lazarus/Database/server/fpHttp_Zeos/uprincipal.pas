@@ -5,9 +5,9 @@ unit uprincipal;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, DB, ZConnection,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZConnection,
   RALfpHTTPServer, RALDBModule, RALDBZeos, RALStorageBIN, RALStorageJSON,
-  RALConsts, RALSwaggerModule, RALAuthentication, RALTypes;
+  RALSwaggerModule, RALAuthentication, RALTypes;
 
 type
 
@@ -55,7 +55,7 @@ begin
   ZConnection1.Connect;
   ZConnection1.ExecuteDirect('PRAGMA table_info("clientes")', rows);
   if rows = 0 then
-    ZConnection1.ExecuteDirect('CREATE TABLE clientes (codigo varchar, nome varchar)');
+    ZConnection1.ExecuteDirect('CREATE TABLE clientes (codigo varchar(2000), nome varchar(2000))');
   ZConnection1.Disconnect;
 end;
 

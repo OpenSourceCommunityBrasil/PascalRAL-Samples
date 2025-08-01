@@ -17,7 +17,7 @@ uses
   RALDBModule, RALDBFireDAC,
 
   // General use units
-  RALConsts, RALMimeTypes, RALTypes;
+  RALConsts, RALMimeTypes, RALTypes, Vcl.StdCtrls;
 
 type
   TRALForm1 = class(TForm)
@@ -26,6 +26,7 @@ type
     StorageBIN: TRALStorageBINLink;
     StorageJSON: TRALStorageJSONLink;
     server: TRALSynopseServer;
+    lInfo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure serverRoutes_pingReply(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure RALServerJWTAuth1GetToken(ARequest: TRALRequest;
@@ -47,6 +48,7 @@ implementation
 
 procedure TRALForm1.FormCreate(Sender: TObject);
 begin
+  lInfo.Visible := false;
   DBFILE := ExtractFileDir(ParamStr(0)) + '\banco.db';
   StartDB;
   DBModule.Database := DBFILE;
