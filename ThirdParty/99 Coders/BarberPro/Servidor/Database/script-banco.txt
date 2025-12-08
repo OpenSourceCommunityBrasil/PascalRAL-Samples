@@ -1,0 +1,55 @@
+create table usuario(
+    id_usuario  integer primary key autoincrement,
+    nome varchar(100),
+    email varchar(100),
+    senha varchar(100)
+);
+	
+	
+create table servico(
+    id_servico  integer primary key autoincrement,
+    descricao varchar(100),
+    url_icone varchar(2000)
+);
+	
+create table prestador(
+    id_prestador  integer primary key autoincrement,
+    nome varchar(100)
+);
+
+
+create table servico_prestador(
+    id_serv_prestador  integer primary key autoincrement,
+    id_servico integer,
+    id_prestador integer,
+    preco decimal(9, 2),
+    
+    foreign key (id_servico) REFERENCES servico(id_servico),
+    foreign key (id_prestador) REFERENCES prestador(id_prestador)
+);	
+	
+	
+create table reserva(
+    id_reserva  integer primary key autoincrement,
+    id_usuario integer,
+    id_servico integer,
+    id_prestador integer,
+    dt_reserva date,
+    hora_reserva varchar(5),
+    
+    foreign key (id_usuario) REFERENCES usuario(id_usuario),
+    foreign key (id_servico) REFERENCES servico(id_servico),
+    foreign key (id_prestador) REFERENCES prestador(id_prestador)
+);	
+	
+
+create table horario(
+    id_horario  integer primary key autoincrement,
+    id_prestador integer,
+    id_servico integer,    
+    horario varchar(5),
+    
+    foreign key (id_prestador) REFERENCES prestador(id_prestador),
+    foreign key (id_servico) REFERENCES servico(id_servico)
+);	
+
