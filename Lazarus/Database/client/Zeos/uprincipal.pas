@@ -27,6 +27,7 @@ type
     Label1: TLabel;
     RALClientBasicAuth1: TRALClientBasicAuth;
     RALClientJWTAuth1: TRALClientJWTAuth;
+    RALStorageBINLink1: TRALStorageBINLink;
     RALStorageJSONLink1: TRALStorageJSONLink;
     zral_mem: TRALDBZMemTable;
     procedure Button4Click(Sender: TObject);

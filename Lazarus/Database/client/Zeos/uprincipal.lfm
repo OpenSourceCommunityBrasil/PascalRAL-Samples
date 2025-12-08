@@ -92,14 +92,12 @@ object Form1: TForm1
     Top = 80
   end
   object cliente: TRALClient
-    Authentication = RALClientJWTAuth1
     BaseURL.Strings = (
       'http://localhost:8000'
     )
     ConnectTimeout = 30000
     CompressType = ctNone
-    CriptoOptions.CriptType = crAES256
-    CriptoOptions.Key = 'testep2p'
+    CriptoOptions.CriptType = crNone
     EngineType = 'mORMot2'
     KeepAlive = True
     RequestTimeout = 10000
@@ -112,7 +110,7 @@ object Form1: TForm1
     RALConnection = conexao
     ParamCheck = True
     Params = <>
-    Storage = RALStorageJSONLink1
+    Storage = RALStorageBINLink1
     UpdateMode = upWhereAll
     UpdateTable = 'clientes'
     Left = 456
@@ -136,8 +134,13 @@ object Form1: TForm1
   object RALClientJWTAuth1: TRALClientJWTAuth
     AutoGetToken = True
     JSONKey = 'testejwt'
-    Route = '/gettoken/'
+    Route = '/gettoken'
     Left = 357
     Top = 366
+  end
+  object RALStorageBINLink1: TRALStorageBINLink
+    FieldCharCase = fcNone
+    Left = 472
+    Top = 264
   end
 end
