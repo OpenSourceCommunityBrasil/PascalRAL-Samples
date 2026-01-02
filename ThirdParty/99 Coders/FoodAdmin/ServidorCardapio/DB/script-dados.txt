@@ -1,0 +1,43 @@
+insert into produto_categoria(categoria, ordem)
+values('Promoção', 1);
+
+insert into produto_categoria(categoria, ordem)
+values('Destaques', 2);
+
+insert into produto_categoria(categoria, ordem)
+values('Bebidas', 3);
+
+
+
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Spicy Burguer', 'Hamburguer de 250g, queijo, tomate, alface e cebola', 
+       24.90, 'https://jornadajs-food.s3.amazonaws.com/spicy.png', 1, 1);
+	   
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Sanduba', 'Sanduiche natural, alface, tomate, pão integral e orégano', 
+       22.00, 'https://jornadajs-food.s3.amazonaws.com/sanduba.png', 1, 2);
+
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Super Burguer', 'Hamburguer de 300g, molho, queijo, tomate, alface e cebola', 
+       29.90, 'https://jornadajs-food.s3.amazonaws.com/super.png', 1, 3);
+
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Mega', 'Hamburguer de 300g, maionese, tomate, alface, queijo e cebola', 
+       34.90, 'https://jornadajs-food.s3.amazonaws.com/mega.png', 2, 4);
+
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Penne', 'Penne ao molho especial de tomates rústicos, ervas aromáticas e cebola', 
+       27.00, 'https://jornadajs-food.s3.amazonaws.com/penne.png', 2, 5);
+
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Fritas',  'Batata frita crocante com molho especial de maionese da casa', 
+       14.90, 'https://jornadajs-food.s3.amazonaws.com/fritas.png', 2, 6);
+
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Coca-Cola Lata', 'Coca-cola em lata de 300ml, trincando de gelada para você', 
+       9.90, 'https://jornadajs-food.s3.amazonaws.com/coca.png', 3, 7);
+	   
+insert into produto(nome, descricao, preco, foto, id_categoria, ordem)
+values('Guaraná Antarctica', 'Aguaraná Antarctica em lata de 300ml, trincando de gelada para você', 
+       9.90, 'https://jornadajs-food.s3.amazonaws.com/guarana.png', 3, 8);
+	   

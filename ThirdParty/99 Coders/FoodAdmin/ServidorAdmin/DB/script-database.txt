@@ -1,0 +1,62 @@
+create table produto_categoria(
+    id_categoria integer primary key autoincrement,
+    categoria varchar(100)
+);
+
+create table produto(
+        id_produto integer primary key autoincrement,
+        nome  varchar(100),
+        descricao varchar(200),
+        preco  decimal(9,2),
+        foto  varchar(1000),
+        id_categoria integer
+);
+
+create table usuario(
+    id_usuario integer primary key autoincrement,
+    fone  varchar(20),
+    endereco varchar(200)
+);
+
+create table config(
+    vl_entrega  decimal(9,2)
+);
+
+
+create table pedido(
+    id_pedido integer primary key autoincrement,
+    id_usuario integer,
+    endereco  varchar(200),
+    fone varchar(20),
+    vl_subtotal decimal(9,2),
+    vl_entrega decimal(9,2),
+    vl_total decimal(9,2),
+    dt_pedido datetime,
+    status char(1) -- A (Aberto)  C (Cancelado)  E (Saiu Entrega)  F (Finalizado)
+);
+
+create table pedido_item(
+    id_item integer primary key autoincrement,
+    id_pedido integer,
+    id_produto integer,
+    qtd decimal(9,3),
+    vl_unitario decimal(9,2),
+    vl_total decimal(9,2)
+);
+
+
+alter table produto add ordem integer;
+
+alter table produto_categoria add ordem integer;
+
+create table usuario_admin(
+    id_usuario integer primary key autoincrement,
+    nome  varchar(100),
+    email  varchar(100),
+    senha varchar(100)
+);
+
+alter table pedido_status add cor varchar(20);
+
+
+
