@@ -4,20 +4,19 @@ program Console;
 {$R *.res}
 
 uses
-  System.SysUtils,
+  System.SysUtils, System.JSON,
   Classes,
-  RALIndyServer,
-  RALRequest,
-  RALResponse;
+  RALServer, RALSynopseServer, RALRequest, RALResponse, RALConsts, RALMIMETypes;
 
 type
   { TRALApplication }
 
   TRALApplication = class(TComponent)
   private
-    FServer: TRALIndyServer;
+    FServer: TRALServer;
   protected
     procedure teste(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure Run;
   public
     constructor Create(Owner: TComponent); override;
@@ -29,7 +28,7 @@ type
 constructor TRALApplication.Create(Owner: TComponent);
 begin
   inherited;
-  FServer := TRALIndyServer.Create(nil);
+  FServer := TRALSynopseServer.Create(nil);
 end;
 
 destructor TRALApplication.Destroy;
@@ -38,10 +37,26 @@ begin
   inherited;
 end;
 
+procedure TRALApplication.ping(ARequest: TRALRequest; AResponse: TRALResponse);
+var
+  Json: TJSONObject;
+begin
+  JSON := TJSONObject.Create;
+  try
+    JSON.AddPair('HeaderParams', ARequest.Params.AsString);
+    JSON.AddPair('RequestBody', ARequest.Body.AsString);
+    JSON.AddPair('ParamsAsJSON', ARequest.Params.AsJSON);
+    AResponse.Answer(HTTP_OK, JSON.ToJSON, rctAPPLICATIONJSON);
+  finally
+    JSON.Free;
+  end;
+end;
+
 procedure TRALApplication.Run;
 begin
   inherited;
   FServer.CreateRoute('teste', teste);
+  FServer.CreateRoute('ping', ping);
   FServer.Start;
   Writeln('server running on port', fserver.Port);
   writeln('press any key to end application...');

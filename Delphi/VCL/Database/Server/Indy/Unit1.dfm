@@ -14,7 +14,7 @@ object RALForm1: TRALForm1
   TextHeight = 13
   object server: TRALIndyServer
     Active = False
-    CompressType = ctGZip
+    CompressType = ctNone
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
       'Content-Type'
@@ -99,7 +99,7 @@ object RALForm1: TRALForm1
             'p>The server informs that it doesn'#39't want to work now and you sh' +
             'ould try later</p></body></html>')
       end>
-    Port = 8000
+    Port = 8002
     Routes = <
       item
         InputParams = <>
@@ -133,7 +133,7 @@ object RALForm1: TRALForm1
     AuthRoute.InputParams = <>
     AuthRoute.Route = '/'
     ExpirationSecs = 1800
-    JSONKey = 'token'
+    JSONKey = 'testeJWT'
     Left = 40
     Top = 88
   end

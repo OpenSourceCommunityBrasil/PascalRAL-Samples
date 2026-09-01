@@ -6,6 +6,7 @@ object Form1: TForm1
   Caption = 'Form1'
   ClientHeight = 431
   ClientWidth = 543
+  LCLVersion = '4.3.0.0'
   object DBGrid1: TDBGrid
     Left = 8
     Height = 224
@@ -92,16 +93,17 @@ object Form1: TForm1
     Top = 80
   end
   object cliente: TRALClient
+    Authentication = RALClientJWTAuth1
     BaseURL.Strings = (
       'http://localhost:8000'
     )
     ConnectTimeout = 30000
     CompressType = ctNone
     CriptoOptions.CriptType = crNone
-    EngineType = 'mORMot2'
+    EngineType = 'Indy'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.11.0-11 alpha; Engine mORMot2 lts-2.3.8878'
+    UserAgent = 'RALClient 0.12.4-1 beta; Engine Indy 10.6.3.2'
     Left = 352
     Top = 24
   end

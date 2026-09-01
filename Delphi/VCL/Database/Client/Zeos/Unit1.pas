@@ -14,7 +14,7 @@ uses
   RALAuthentication,
 
   ZMemTable, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  ZAbstractConnection, ZConnection;
+  ZAbstractConnection, ZConnection, RALSynopseClient, RALnetHTTPClient;
 
 type
   TCustomDBGrid = class(TDBGrid)

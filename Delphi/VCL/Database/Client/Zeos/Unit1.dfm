@@ -79,6 +79,7 @@ object Form1: TForm1
   end
   object RALDBConnection1: TRALDBConnection
     Client = RALClient1
+    ModuleRoute = '/db'
     Left = 376
     Top = 112
   end
@@ -113,14 +114,15 @@ object Form1: TForm1
     Top = 304
   end
   object RALClient1: TRALClient
-    Authentication = RALClientJWTAuth1
+    BaseURL.Strings = (
+      'http://localhost:8000')
     ConnectTimeout = 30000
     CompressType = ctNone
     CriptoOptions.CriptType = crNone
-    EngineType = 'Indy'
+    EngineType = 'netHTTP'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.11.0-9 alpha; Engine Indy 10.6.2.0'
+    UserAgent = 'RALClient 0.12.4-1 beta; Engine netHTTP'
     Left = 376
     Top = 64
   end
