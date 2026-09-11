@@ -1,32 +1,31 @@
 object Form1: TForm1
   Left = 275
-  Height = 240
+  Height = 130
   Top = 250
-  Width = 320
-  Caption = 'Form1'
-  ClientHeight = 240
-  ClientWidth = 320
-  LCLVersion = '4.3.0.0'
+  Width = 380
+  Caption = 'RAL Sagui - Basic Server'
+  ClientHeight = 130
+  ClientWidth = 380
   OnCreate = FormCreate
   object ToggleBox1: TToggleBox
-    Left = 8
-    Height = 25
-    Top = 8
-    Width = 75
-    Caption = 'Iniciar'
+    Left = 16
+    Height = 33
+    Top = 16
+    Width = 120
+    Caption = 'Ligar'
     TabOrder = 0
     OnChange = ToggleBox1Change
   end
-  object RALServerBasicAuth1: TRALServerBasicAuth
-    AuthDialog = True
-    Password = 'admin'
-    UserName = 'admin'
-    Left = 184
-    Top = 88
+  object lblStatus: TLabel
+    Left = 16
+    Height = 15
+    Top = 64
+    Width = 40
+    Caption = 'parado'
+    ParentColor = False
   end
   object server: TRALSaguiServer
     Active = False
-    Authentication = RALServerBasicAuth1
     CompressType = ctNone
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -51,10 +50,10 @@ object Form1: TForm1
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
-    ConnectionLimit = -4
-    PoolCount = -1
+    ConnectionLimit = 9999999
+    PoolCount = 32
     SSL.Enabled = False
-    Left = 64
-    Top = 88
+    Left = 176
+    Top = 16
   end
 end
