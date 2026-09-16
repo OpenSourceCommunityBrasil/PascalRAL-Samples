@@ -33,10 +33,11 @@ object RALForm1: TRALForm1
     AuthRoute.Description.Strings = (
       'Get a JWT Token')
     AuthRoute.InputParams = <>
-    AuthRoute.Route = '/'
+    AuthRoute.Route = '/gettoken'
     ExpirationSecs = 1800
-    JSONKey = 'testeJWT'
+    JSONKey = 'token'
     SignSecretKey = 'testeJWT'
+    UseCookie = False
     Left = 128
     Top = 88
   end
@@ -64,7 +65,7 @@ object RALForm1: TRALForm1
   end
   object server: TRALSynopseServer
     Active = False
-    CompressType = ctNone
+    CompressType = ctGZip
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
       'Content-Type'
@@ -75,7 +76,8 @@ object RALForm1: TRALForm1
       'Accept-Encoding')
     CORSOptions.AllowOrigin = '*'
     CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
+    CriptoOptions.CriptType = crAES256
+    CriptoOptions.Key = 'oiuy'
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False

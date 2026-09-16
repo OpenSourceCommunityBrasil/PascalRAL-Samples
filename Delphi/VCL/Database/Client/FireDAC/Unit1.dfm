@@ -60,14 +60,15 @@ object Form1: TForm1
   end
   object RALClient: TRALClient
     BaseURL.Strings = (
-      'localhost:8002')
+      'localhost:8000')
     ConnectTimeout = 30000
-    CompressType = ctNone
-    CriptoOptions.CriptType = crNone
+    CompressType = ctGZip
+    CriptoOptions.CriptType = crAES256
+    CriptoOptions.Key = 'oiuy'
     EngineType = 'mORMot2'
     KeepAlive = True
     RequestTimeout = 10000
-    UserAgent = 'RALClient 0.12.4-1 beta; Engine mORMot2 lts-2.3.8878'
+    UserAgent = 'RALClient 1.1.0-1; Engine mORMot2 2.3.11443'
     Left = 552
     Top = 64
   end
