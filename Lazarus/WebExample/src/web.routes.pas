@@ -5,7 +5,7 @@ unit Web.Routes;
 interface
 
 uses
-  Classes, SysUtils, System.IOUtils,
+  Classes, SysUtils,
   RALWebModule, RALRequest, RALResponse, RALTypes;
 
 procedure RegisterWebRoutes(AServer: TRALWebModule);
@@ -17,16 +17,16 @@ var
 
 procedure IndexReply(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
-  AResponse.Answer(TPath.Combine(DefaultDir, 'index.html'));
+  AResponse.Answer(IncludeTrailingPathDelimiter(DefaultDir) + 'index.html');
 end;
 
 procedure LoginReply(ARequest: TRALRequest; AResponse: TRALResponse);
 begin
   if (ARequest.ParamByName('username').AsString = 'admin')
   and  (ARequest.ParamByName('password').AsString = 'admin') then
-    AResponse.Answer(TPath.Combine(DefaultDir, 'main.html'))
+    AResponse.Answer(IncludeTrailingPathDelimiter(DefaultDir) + 'main.html')
   else
-    AResponse.Answer(TPath.Combine(DefaultDir, 'index.html'));
+    AResponse.Answer(IncludeTrailingPathDelimiter(DefaultDir) + 'index.html');
 
 end;
 

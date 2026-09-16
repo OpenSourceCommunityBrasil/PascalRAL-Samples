@@ -7,7 +7,7 @@ uses
   Graphics,
   Controls, Forms, Dialogs, StdCtrls,
 
-  RALHashes, ExtCtrls;
+  RALTypes, RALHashes, ExtCtrls;
 
 type
 
@@ -71,17 +71,17 @@ implementation
 
 procedure TForm1.Button10Click(Sender: TObject);
 begin
-  Memo1.text := TRALHashes.Decrypt(Edit1.Text, Edit2.text, ctAES128);
+  Memo1.text := TRALHashes.Decrypt(Edit1.Text, Edit2.text, crAES128);
 end;
 
 procedure TForm1.Button11Click(Sender: TObject);
 begin
-  Memo1.text := TRALHashes.Decrypt(Edit1.text, Edit2.text, ctAES192);
+  Memo1.text := TRALHashes.Decrypt(Edit1.text, Edit2.text, crAES192);
 end;
 
 procedure TForm1.Button12Click(Sender: TObject);
 begin
-  Memo1.text := TRALHashes.Decrypt(Edit1.text, Edit2.text, ctAES256);
+  Memo1.text := TRALHashes.Decrypt(Edit1.text, Edit2.text, crAES256);
 end;
 
 procedure TForm1.Button13Click(Sender: TObject);
@@ -131,17 +131,17 @@ end;
 
 procedure TForm1.Button7Click(Sender: TObject);
 begin
-  Memo1.Text := TRALHashes.Encrypt(Edit1.Text, Edit2.Text, ctAES128);;
+  Memo1.Text := TRALHashes.Encrypt(Edit1.Text, Edit2.Text, crAES128);;
 end;
 
 procedure TForm1.Button8Click(Sender: TObject);
 begin
-  Memo1.Text := TRALHashes.Encrypt(Edit1.Text, Edit2.Text, ctAES192);
+  Memo1.Text := TRALHashes.Encrypt(Edit1.Text, Edit2.Text, crAES192);
 end;
 
 procedure TForm1.Button9Click(Sender: TObject);
 begin
-  Memo1.Text := TRALHashes.Encrypt(Edit1.Text, Edit2.Text, ctAES256);
+  Memo1.Text := TRALHashes.Encrypt(Edit1.Text, Edit2.Text, crAES256);
 end;
 
 end.

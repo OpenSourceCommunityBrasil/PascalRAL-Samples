@@ -18,6 +18,11 @@ type
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
+    { Vinha de uma unit ulib_bancodados que nunca foi para o repositorio, e
+      sem ela este exemplo nao compilava. Mora aqui agora, e usa o proprio
+      FireDAC em vez de consultar o catalogo do SQLite a mao: assim vale
+      para qualquer driver, que e' o que um exemplo deve mostrar. }
+    function TabelaExiste(const ANome: string): boolean;
     procedure atualizaBD;
   public
     { Public declarations }
@@ -33,7 +38,22 @@ implementation
 {$R *.dfm}
 
 uses
-  uglobal_vars, ulib_bancodados;
+  uglobal_vars;
+
+function Tdm.TabelaExiste(const ANome: string): boolean;
+var
+  vTabelas: TStringList;
+begin
+  vTabelas := TStringList.Create;
+  try
+    { catalogo e esquema vazios: no SQLite nao existem, e nos bancos em que
+      existem o FireDAC usa os da propria conexao }
+    conexao.GetTableNames('', '', '', vTabelas);
+    Result := vTabelas.IndexOf(ANome) >= 0;
+  finally
+    vTabelas.Free;
+  end;
+end;
 
 procedure Tdm.atualizaBD;
 var
@@ -43,7 +63,7 @@ begin
   try
     q1.Connection := conexao;
 
-    if not TabelaExiste(q1, 'usuarios') then begin
+    if not TabelaExiste('usuarios') then begin
       q1.Close;
       q1.SQL.Clear;
       q1.SQL.Add('create table usuarios(');

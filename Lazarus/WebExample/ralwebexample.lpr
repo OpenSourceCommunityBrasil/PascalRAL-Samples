@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
-  Classes, SysUtils, System.IOUtils, // Used for TPath.Combine
+  Classes, SysUtils,
 
   // Choose here the engine of the server
   RALSynopseServer,
@@ -29,12 +29,16 @@ begin
   try
     FWebModule.Server := FServer;
     {
-    Defining the root path where the webfiles should be stored. We use TPath.Combine
-    here for easy compatibility between Windows and Linux servers, since Windows
-    uses '/' for folders and Linux uses '\'. It's easy to mix those so TPath solves
-    that
+    Defining the root path where the webfiles should be stored.
+
+    IncludeTrailingPathDelimiter, and not the TPath.Combine that the Delphi
+    version of this example uses: System.IOUtils is a Delphi unit and FPC has no
+    such thing, so this project did not compile at all. The plain SysUtils call
+    exists on both compilers and uses the separator of whichever platform is
+    running, which is the whole point of not writing the slash by hand.
     }
-    FWebModule.DocumentRoot := TPath.Combine(ExtractFileDir(ParamStr(0)), 'web');
+    FWebModule.DocumentRoot :=
+      IncludeTrailingPathDelimiter(ExtractFileDir(ParamStr(0))) + 'web';
 
     // adding routes to the server from unit Web.Routes;
     RegisterWebRoutes(FWebModule);

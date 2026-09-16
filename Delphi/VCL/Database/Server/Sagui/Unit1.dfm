@@ -70,8 +70,6 @@ object RALForm1: TRALForm1
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
-    ConnectionLimit = -4
-    PoolCount = -1
     SSL.Enabled = False
     Left = 40
     Top = 16
