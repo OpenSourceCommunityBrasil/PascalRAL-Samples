@@ -77,7 +77,6 @@ object Form1: TForm1
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 1
-    ExplicitTop = 0
     object Edit1: TEdit
       AlignWithMargins = True
       Left = 9
@@ -107,7 +106,6 @@ object Form1: TForm1
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 2
-    ExplicitTop = 41
     object Button1: TButton
       AlignWithMargins = True
       Left = 9
@@ -179,7 +177,6 @@ object Form1: TForm1
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 3
-    ExplicitTop = 95
     object Button7: TButton
       AlignWithMargins = True
       Left = 9
@@ -221,7 +218,6 @@ object Form1: TForm1
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 4
-    ExplicitTop = 128
     object Button10: TButton
       AlignWithMargins = True
       Left = 9
@@ -263,7 +259,6 @@ object Form1: TForm1
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 5
-    ExplicitTop = 161
     object Button13: TButton
       AlignWithMargins = True
       Left = 9

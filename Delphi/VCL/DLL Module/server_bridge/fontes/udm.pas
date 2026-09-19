@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite, FireDAC.Comp.UI, Data.DB,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, FireDAC.Phys.SQLiteWrapper.Stat;
 
 type
   Tdm = class(TDataModule)
@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uglobal_vars, ulib_bancodados;
+  uglobal_vars;
 
 procedure Tdm.atualizaBD;
 var
@@ -43,7 +43,14 @@ begin
   try
     q1.Connection := conexao;
 
-    if not TabelaExiste(q1, 'usuarios') then begin
+    // This runs on Firebird SGBD
+    q1.SQL.Add('SELECT RDB$RELATION_NAME ');
+    q1.SQL.Add('FROM RDB$RELATIONS ');
+    q1.SQL.Add('WHERE RDB$RELATION_NAME = ''usuarios'' ');
+    q1.SQL.Add('  AND COALESCE(RDB$SYSTEM_FLAG, 0) = 0;');
+    q1.Open;
+    if q1.IsEmpty then
+    begin
       q1.Close;
       q1.SQL.Clear;
       q1.SQL.Add('create table usuarios(');
@@ -61,7 +68,8 @@ end;
 
 procedure Tdm.DataModuleCreate(Sender: TObject);
 begin
-  with conexao do begin
+  with conexao do
+  begin
     Close;
     Params.Clear;
     Params.Add('DriverID=SQLite');
