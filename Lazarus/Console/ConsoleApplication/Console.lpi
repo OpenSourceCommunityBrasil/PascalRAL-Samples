@@ -4,14 +4,15 @@
     <Version Value="12"/>
     <PathDelim Value="\"/>
     <General>
+      <Flags>
+        <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
+        <MainUnitHasScaledStatement Value="False"/>
+      </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="db_server"/>
-      <Scaled Value="True"/>
+      <Title Value="My Application"/>
+      <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
-      <UseXPManifest Value="True"/>
-      <XPManifest>
-        <DpiAware Value="True"/>
-      </XPManifest>
     </General>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -25,41 +26,16 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="zcomponentdesign"/>
-      </Item>
-      <Item>
-        <PackageName Value="zcomponent"/>
-      </Item>
-      <Item>
-        <PackageName Value="SynopseRAL"/>
-      </Item>
-      <Item>
-        <PackageName Value="FCL"/>
+        <PackageName Value="fphttpral"/>
       </Item>
       <Item>
         <PackageName Value="PascalRAL"/>
       </Item>
-      <Item>
-        <PackageName Value="raldbzeoslink"/>
-      </Item>
-      <Item>
-        <PackageName Value="RALDBPackage"/>
-      </Item>
-      <Item>
-        <PackageName Value="LCL"/>
-      </Item>
     </RequiredPackages>
     <Units>
       <Unit>
-        <Filename Value="db_server.lpr"/>
+        <Filename Value="Console.lpr"/>
         <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="uprincipal.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="Form1"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -67,22 +43,17 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="db_server"/>
+      <Filename Value="Console"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="D:\SourceForge\pascal_ral\trunk\src\engine\fpHTTP\;D:\SourceForge\pascal_ral\trunk\src\base\;D:\SourceForge\pascal_ral\trunk\src\utils\"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
       <Debugging>
         <DebugInfoType Value="dsDwarf3"/>
-        <UseExternalDbgSyms Value="True"/>
       </Debugging>
-      <Options>
-        <Win32>
-          <GraphicApplication Value="True"/>
-        </Win32>
-      </Options>
     </Linking>
   </CompilerOptions>
   <Debugging>
@@ -95,9 +66,6 @@
       </Item>
       <Item>
         <Name Value="EFOpenError"/>
-      </Item>
-      <Item>
-        <Name Value="EIdConnClosedGracefully"/>
       </Item>
     </Exceptions>
   </Debugging>

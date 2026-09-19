@@ -21,6 +21,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="RALDBPackage"/>
+      </Item>
+      <Item>
         <PackageName Value="PascalRAL"/>
       </Item>
       <Item>

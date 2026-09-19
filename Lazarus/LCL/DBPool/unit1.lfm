@@ -1,0 +1,65 @@
+object Form1: TForm1
+  Left = 307
+  Height = 240
+  Top = 250
+  Width = 317
+  Caption = 'Form1'
+  ClientHeight = 240
+  ClientWidth = 317
+  OnCreate = FormCreate
+  object Memo1: TMemo
+    Left = 8
+    Height = 90
+    Top = 80
+    Width = 280
+    Lines.Strings = (
+      'Configure your DBModule either in design-time here in the control  itself or via code'
+    )
+    TabOrder = 0
+  end
+  object RALSynopseServer1: TRALSynopseServer
+    Active = False
+    CompressType = ctNone
+    CookieLife = 30
+    CORSOptions.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    CORSOptions.AllowOrigin = '*'
+    CORSOptions.MaxAge = 86400
+    CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    ResponsePages = <>
+    Port = 8000
+    Routes = <>
+    Security.BruteForce.ExpirationTime = 1800000
+    Security.BruteForce.MaxTry = 3
+    Security.FloodTimeInterval = 30
+    Security.Options = []
+    ShowServerStatus = True
+    PoolCount = 32
+    QueueSize = 1000
+    SSL.Enabled = False
+    Left = 76
+    Top = 26
+  end
+  object RALDBModule1: TRALDBModule
+    Server = RALSynopseServer1
+    Domain = '/db'
+    DatabaseLink = 'Zeos'
+    DatabaseType = dtPostgreSQL
+    PoolOptions.Enabled = True
+    PoolOptions.MaxSize = 20
+    Port = 0
+    Username = 'postgres'
+    LibLocation = 'D:\IDE\lazarus\4.2\lazarus\D:\IDE\lazarus\4.2\lazarus\'
+    Left = 216
+    Top = 24
+  end
+end
