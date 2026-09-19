@@ -5,8 +5,8 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  RALSynopseServer, RALDBModule, RALDBZeos;
+  Classes, SysUtils, SQLDB, SQLDBLib, PQConnection, Forms, Controls, Graphics,
+  Dialogs, StdCtrls, RALSynopseServer, RALDBModule, RALDBZeos;
 
 type
 

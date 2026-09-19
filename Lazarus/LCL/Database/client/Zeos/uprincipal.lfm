@@ -6,7 +6,6 @@ object Form1: TForm1
   Caption = 'Form1'
   ClientHeight = 431
   ClientWidth = 543
-  LCLVersion = '4.3.0.0'
   object DBGrid1: TDBGrid
     Left = 8
     Height = 224
@@ -98,7 +97,7 @@ object Form1: TForm1
       'http://localhost:8000'
     )
     ConnectTimeout = 30000
-    CompressType = ctNone
+    CompressType = ctGZip
     CriptoOptions.CriptType = crNone
     EngineType = 'Indy'
     KeepAlive = True
@@ -135,7 +134,7 @@ object Form1: TForm1
   end
   object RALClientJWTAuth1: TRALClientJWTAuth
     AutoGetToken = True
-    JSONKey = 'testejwt'
+    JSONKey = 'tokenjwt'
     Route = '/gettoken'
     Left = 357
     Top = 366

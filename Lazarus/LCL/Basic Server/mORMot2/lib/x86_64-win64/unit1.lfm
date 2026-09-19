@@ -1,24 +1,32 @@
 object Form1: TForm1
-  Left = 307
+  Left = 275
   Height = 240
   Top = 250
-  Width = 587
+  Width = 320
   Caption = 'Form1'
   ClientHeight = 240
-  ClientWidth = 587
+  ClientWidth = 320
+  LCLVersion = '4.3.0.0'
   OnCreate = FormCreate
-  object Memo1: TMemo
+  object ToggleBox1: TToggleBox
     Left = 8
-    Height = 90
-    Top = 80
-    Width = 280
-    Lines.Strings = (
-      'Configure your DBModule either in design-time here in the control  itself or via code'
-    )
+    Height = 25
+    Top = 8
+    Width = 75
+    Caption = 'Iniciar'
     TabOrder = 0
+    OnChange = ToggleBox1Change
   end
-  object RALSynopseServer1: TRALSynopseServer
+  object RALServerBasicAuth1: TRALServerBasicAuth
+    AuthDialog = True
+    Password = 'admin'
+    UserName = 'admin'
+    Left = 184
+    Top = 88
+  end
+  object server: TRALSynopseServer
     Active = False
+    Authentication = RALServerBasicAuth1
     CompressType = ctNone
     CookieLife = 30
     CORSOptions.AllowHeaders.Strings = (
@@ -46,20 +54,7 @@ object Form1: TForm1
     PoolCount = 32
     QueueSize = 1000
     SSL.Enabled = False
-    Left = 76
-    Top = 26
-  end
-  object RALDBModule1: TRALDBModule
-    Server = RALSynopseServer1
-    Domain = '/db'
-    DatabaseLink = 'Zeos'
-    DatabaseType = dtPostgreSQL
-    PoolOptions.Enabled = True
-    PoolOptions.MaxSize = 20
-    Port = 0
-    Username = 'postgres'
-    LibLocation = 'D:\IDE\lazarus\4.2\lazarus\'
-    Left = 216
-    Top = 24
+    Left = 56
+    Top = 88
   end
 end

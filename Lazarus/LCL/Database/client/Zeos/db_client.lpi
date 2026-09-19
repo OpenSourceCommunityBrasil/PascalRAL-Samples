@@ -5,14 +5,13 @@
     <PathDelim Value="\"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
-      <Title Value="project1"/>
+      <Title Value="db_client"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True"/>
       </XPManifest>
-      <Icon Value="0"/>
     </General>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -21,11 +20,11 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="$(TargetCPU)-$(TargetOS)\project1"/>
+            <Filename Value="db_client"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <UnitOutputDirectory Value="trash"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>
@@ -46,6 +45,7 @@
               <DebugInfoType Value="dsDwarf3"/>
               <UseHeaptrc Value="True"/>
               <TrashVariables Value="True"/>
+              <UseExternalDbgSyms Value="True"/>
             </Debugging>
             <Options>
               <Win32>
@@ -60,11 +60,11 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="$(TargetCPU)-$(TargetOS)\project1"/>
+            <Filename Value="db_client"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <UnitOutputDirectory Value="trash"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
@@ -76,7 +76,6 @@
             <Debugging>
               <GenerateDebugInfo Value="False"/>
               <RunWithoutDebug Value="True"/>
-              <StripSymbols Value="True"/>
             </Debugging>
             <LinkSmart Value="True"/>
             <Options>
@@ -97,13 +96,37 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="raldbsqldblink"/>
+      </Item>
+      <Item>
         <PackageName Value="raldbzeoslink"/>
       </Item>
       <Item>
-        <PackageName Value="RALDBPackage"/>
+        <PackageName Value="SynopseRAL"/>
       </Item>
       <Item>
-        <PackageName Value="SynopseRAL"/>
+        <PackageName Value="IndyRAL"/>
+      </Item>
+      <Item>
+        <PackageName Value="pascalraldsgn"/>
+      </Item>
+      <Item>
+        <PackageName Value="PascalRAL"/>
+      </Item>
+      <Item>
+        <PackageName Value="fphttpral"/>
+      </Item>
+      <Item>
+        <PackageName Value="zcomponentdesign"/>
+      </Item>
+      <Item>
+        <PackageName Value="zcomponent"/>
+      </Item>
+      <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+      <Item>
+        <PackageName Value="RALDBPackage"/>
       </Item>
       <Item>
         <PackageName Value="LCL"/>
@@ -111,16 +134,15 @@
     </RequiredPackages>
     <Units>
       <Unit>
-        <Filename Value="project1.lpr"/>
+        <Filename Value="db_client.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="unit1.pas"/>
+        <Filename Value="uprincipal.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="Unit1"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -128,11 +150,11 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="$(TargetCPU)-$(TargetOS)\project1"/>
+      <Filename Value="db_client"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <UnitOutputDirectory Value="trash"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
       <Debugging>
