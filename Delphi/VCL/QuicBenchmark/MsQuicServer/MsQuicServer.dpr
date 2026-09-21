@@ -1,14 +1,14 @@
-program MsQuicBenchmarkClient;
+program MsQuicServer;
 
 uses
   Vcl.Forms,
-  UCliente in 'UCliente.pas' {fCliente};
+  UServidor in 'UServidor.pas' {fServidor};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfCliente, fCliente);
+  Application.CreateForm(TfServidor, fServidor);
   Application.Run;
 end.
