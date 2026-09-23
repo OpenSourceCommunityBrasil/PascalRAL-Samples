@@ -81,8 +81,11 @@ object fPrincipal: TfPrincipal
       'Authorization'
       'Content-Encoding'
       'Accept-Encoding')
+    CORSOptions.AllowOrigin = '*'
     CORSOptions.MaxAge = 86400
     CriptoOptions.CriptType = crNone
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
     ResponsePages = <>
     Port = 8000
@@ -92,7 +95,7 @@ object fPrincipal: TfPrincipal
     Security.FloodTimeInterval = 30
     Security.Options = []
     ShowServerStatus = True
-    PoolCount = 32
+    PoolCount = 100
     QueueSize = 1000
     SSL.Enabled = False
     Left = 192

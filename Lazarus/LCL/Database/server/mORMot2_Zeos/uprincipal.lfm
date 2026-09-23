@@ -1,10 +1,20 @@
 object Form1: TForm1
-  Left = 379
-  Height = 269
+  Left = 275
+  Height = 130
   Top = 250
-  Width = 254
-  Caption = 'Form1'
+  Width = 380
+  Caption = 'RAL fpHTTP - Basic Server'
+  ClientHeight = 130
+  ClientWidth = 380
   OnCreate = FormCreate
+  object ToggleBox1: TToggleBox
+    Left = 16
+    Height = 33
+    Top = 16
+    Width = 120
+    Caption = 'Ligar'
+    TabOrder = 0
+    OnChange = ToggleBox1Change
   object dbmodule: TRALDBModule
     Server = server
     Domain = '/db'
@@ -15,6 +25,15 @@ object Form1: TForm1
     Left = 32
     Top = 72
   end
+  object lblStatus: TLabel
+    Left = 16
+    Height = 15
+    Top = 64
+    Width = 40
+    Caption = 'parado'
+    ParentColor = False
+  end
+  object server: TRALfpHttpServer
   object storage_bin: TRALStorageBINLink
     FieldCharCase = fcLower
     Left = 32
@@ -59,55 +78,7 @@ object Form1: TForm1
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
-    ResponsePages = <    
-      item
-        StatusCode = 400
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>400 - BadRequest</h1><p>The server informs that it doesn''t like the input params</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 401
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>401 - Unauthorized</h1><p>The server informs that it doesn''t know you</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 403
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>403 - Forbidden</h1><p>The server informs that it doesn''t want you to access</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 404
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>404 - Not Found</h1><p>The server informs that the page you''re requesting doesn''t exist in this reality</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 415
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>415 - Unsuported Media Type</h1><p>The server informs that it doesn''t know what you''re asking</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 500
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>500 - Internal Server Error</h1><p>The server made something that it shouldn''t</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 501
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>501 - Not Implemented</h1><p>The server informs that it doesn''t exist</p></body></html>'
-        )
-      end    
-      item
-        StatusCode = 503
-        Page.Strings = (
-          '<!DOCTYPE html><html lang="en-US"><head><title>RALServer - 0.9.8 - alpha</title></head><body><h1>503 - Service Unavailable</h1><p>The server informs that it doesn''t want to work now and you should try later</p></body></html>'
-        )
-      end>
+    ResponsePages = <>
     Port = 8000
     Routes = <>
     Security.BruteForce.ExpirationTime = 1800000
@@ -118,8 +89,8 @@ object Form1: TForm1
     PoolCount = 32
     QueueSize = 1000
     SSL.Enabled = False
-    Left = 64
-    Top = 8
+    Left = 176
+    Top = 16
   end
   object RALServerJWTAuth1: TRALServerJWTAuth
     Algorithm = tjaHSHA256

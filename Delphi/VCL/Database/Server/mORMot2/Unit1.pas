@@ -83,7 +83,12 @@ begin
       qryResult.sql.Text := 'PRAGMA table_info("clientes")';
       qryResult.OpenOrExecute;
       if qryResult.IsEmpty then
+      begin
         qryResult.ExecSQL('CREATE TABLE clientes (codigo varchar, nome varchar, teste varchar, teste2 varchar)');
+        qryResult.ExecSQL('insert into clientes values ('+QuotedStr('1') +', '+QuotedStr('aaa') +', '+QuotedStr('qwer') +', '+QuotedStr('123') +')');
+        qryResult.ExecSQL('insert into clientes values ('+QuotedStr('2') +', '+QuotedStr('bbb') +', '+QuotedStr('asdf') +', '+QuotedStr('456') +')');
+        qryResult.ExecSQL('insert into clientes values ('+QuotedStr('3') +', '+QuotedStr('ccc') +', '+QuotedStr('zxcv') +', '+QuotedStr('789') +')');
+      end;
 //
     finally
       qryResult.Free;

@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, DBGrids, StdCtrls,
   DBCtrls, DB, RALStorageBIN, RALStorageJSON, RALDBConnection,
-  RALDBZeosMemTable, RALClient, RALAuthentication, RALfpHTTPClient, RALDBBufDataset,
+  RALDBZeosMemTable, RALClient, RALAuthentication, RALfpHTTPClient,
   RALIndyClient, RALSynopseClient;
 
 type

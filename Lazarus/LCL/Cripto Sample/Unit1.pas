@@ -7,7 +7,7 @@ uses
   Graphics,
   Controls, Forms, Dialogs, StdCtrls,
 
-  RALHashes, RALTypes, RALDBModule, ExtCtrls;
+  RALTypes, RALHashes, ExtCtrls;
 
 type
 

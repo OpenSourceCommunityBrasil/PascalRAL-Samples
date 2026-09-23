@@ -1,0 +1,850 @@
+object fClienteKwik: TfClienteKwik
+  Left = 0
+  Top = 0
+  Caption = 'PascalRAL - Cliente QUIC (Kwik)'
+  ClientHeight = 640
+  ClientWidth = 380
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object tbTopo: TToolBar
+    Size.Width = 380.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lbTitulo: TLabel
+      Align = Client
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 380.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 15.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 'Benchmark QUIC - engine Kwik'
+    end
+  end
+  object tcAbas: TTabControl
+    Align = Client
+    Size.Width = 380.000000000000000000
+    Size.Height = 592.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 1
+    TabPosition = Top
+    Sizes = (
+      380s
+      566s
+      380s
+      566s
+      380s
+      566s
+      380s
+      566s)
+    object tiConexao: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = True
+      Size.Width = 67.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Conexao'
+      ExplicitSize.cx = 95.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object sbConexao: TVertScrollBox
+        Align = Client
+        Size.Width = 380.000000000000000000
+        Size.Height = 566.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 380.000000000000000000
+        Viewport.Height = 566.000000000000000000
+        object loHost: TLayout
+          Align = Top
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object lbHost: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Host'
+          end
+          object edHost: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Text = '192.168.1.10'
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object loPorta: TLayout
+          Align = Top
+          Position.Y = 44.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object lbPorta: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Porta'
+          end
+          object edPorta: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Text = '8443'
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object loTimeout: TLayout
+          Align = Top
+          Position.Y = 88.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object lbTimeout: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Timeout (ms)'
+          end
+          object edTimeout: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Text = '15000'
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object loValidar: TLayout
+          Align = Top
+          Position.Y = 132.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object lbValidar: TLabel
+            Align = Left
+            Size.Width = 180.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Validar certificado'
+          end
+          object swValidar: TSwitch
+            Align = Left
+            IsChecked = False
+            Position.X = 180.000000000000000000
+            Size.Width = 70.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+        end
+        object loPin: TLayout
+          Align = Top
+          Position.Y = 176.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object lbPin: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Pin SHA-256'
+          end
+          object edPin: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'vazio = sem pin'
+          end
+        end
+        object loCompress: TLayout
+          Align = Top
+          Position.Y = 220.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 5
+          object lbCompress: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Compressao'
+          end
+          object cbCompress: TComboBox
+            Align = Client
+            Items.Strings = (
+              'nenhuma'
+              'gzip'
+              'deflate'
+              'zlib')
+            ItemIndex = 0
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+        end
+        object loCripto: TLayout
+          Align = Top
+          Position.Y = 264.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 6
+          object lbCripto: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Criptografia'
+          end
+          object cbCripto: TComboBox
+            Align = Client
+            Items.Strings = (
+              'nenhuma'
+              'AES-128'
+              'AES-192'
+              'AES-256')
+            ItemIndex = 0
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+        end
+        object loChave: TLayout
+          Align = Top
+          Position.Y = 308.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 7
+          object lbChave: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Chave'
+          end
+          object edChave: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'a mesma do servidor'
+          end
+        end
+        object loConexao: TLayout
+          Align = Top
+          Position.Y = 352.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 8
+          object lbConexao: TLabel
+            Align = Left
+            Size.Width = 110.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Conexao'
+          end
+          object cbConexao: TComboBox
+            Align = Client
+            Items.Strings = (
+              'uma por cliente'
+              'compartilhada')
+            ItemIndex = 0
+            Margins.Right = 8.000000000000000000
+            Size.Width = 262.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+        end
+      end
+    end
+    object tiBench: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 79.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Benchmark'
+      ExplicitSize.cx = 95.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object loBenchTopo: TLayout
+        Align = Top
+        Size.Width = 380.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object loClientes: TLayout
+          Align = Top
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          object lbClientes: TLabel
+            Align = Left
+            Size.Width = 130.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Clientes'
+          end
+          object edClientes: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Text = '2'
+            Margins.Right = 8.000000000000000000
+            Size.Width = 242.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object loSimultaneas: TLayout
+          Align = Top
+          Position.Y = 44.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          object lbSimultaneas: TLabel
+            Align = Left
+            Size.Width = 130.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Simultaneas'
+          end
+          object edSimultaneas: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Text = '4'
+            Margins.Right = 8.000000000000000000
+            Size.Width = 242.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object loRajadas: TLayout
+          Align = Top
+          Position.Y = 88.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          object lbRajadas: TLabel
+            Align = Left
+            Size.Width = 130.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Rajadas'
+          end
+          object edRajadas: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 0
+            Text = '25'
+            Margins.Right = 8.000000000000000000
+            Size.Width = 242.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object loRota: TLayout
+          Align = Top
+          Position.Y = 132.000000000000000000
+          Size.Width = 380.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          object lbRota: TLabel
+            Align = Left
+            Size.Width = 130.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Rota'
+          end
+          object cbRota: TComboBox
+            Align = Client
+            Items.Strings = (
+              'ping'
+              'json'
+              'peso')
+            ItemIndex = 0
+            Margins.Right = 8.000000000000000000
+            Size.Width = 242.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+          end
+        end
+      end
+      object loBotoesBench: TLayout
+        Align = Top
+        Position.Y = 176.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 52.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object btIniciar: TButton
+          Position.X = 8.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Iniciar'
+          TextSettings.Trimming = None
+          OnClick = btIniciarClick
+        end
+        object btParar: TButton
+          Enabled = False
+          Position.X = 136.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Parar'
+          TextSettings.Trimming = None
+          OnClick = btPararClick
+        end
+      end
+      object pbProgresso: TProgressBar
+        Align = Top
+        Orientation = Horizontal
+        Margins.Left = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 228.000000000000000000
+        Size.Width = 364.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lbEnviadas: TLabel
+        AutoSize = True
+        TextSettings.WordWrap = True
+        Align = Top
+        Margins.Left = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 248.000000000000000000
+        Size.Width = 372.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Enviadas: 0 de 0'
+        TabOrder = 4
+      end
+      object lbErros: TLabel
+        AutoSize = True
+        TextSettings.WordWrap = True
+        Align = Top
+        Margins.Left = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 268.000000000000000000
+        Size.Width = 372.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Erros: 0'
+        TabOrder = 5
+      end
+      object lbVazao: TLabel
+        AutoSize = True
+        TextSettings.WordWrap = True
+        Align = Top
+        Margins.Left = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 288.000000000000000000
+        Size.Width = 372.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Vazao: 0 req/s'
+        TabOrder = 6
+      end
+      object lbTempos: TLabel
+        AutoSize = True
+        TextSettings.WordWrap = True
+        Align = Top
+        Margins.Left = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 308.000000000000000000
+        Size.Width = 372.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Tempo de resposta: -'
+        TabOrder = 7
+      end
+      object lbDecorrido: TLabel
+        AutoSize = True
+        TextSettings.WordWrap = True
+        Align = Top
+        Margins.Left = 8.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 328.000000000000000000
+        Size.Width = 372.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Decorrido: 0 s'
+        TabOrder = 8
+      end
+      object mmBench: TMemo
+        WordWrap = True
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        ReadOnly = True
+        Align = Client
+        Margins.Left = 8.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Size.Width = 364.000000000000000000
+        Size.Height = 206.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 360.000000000000000000
+        Viewport.Height = 202.000000000000000000
+      end
+    end
+    object tiTestes: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 52.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Testes'
+      ExplicitSize.cx = 95.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object loBotoesTestes: TLayout
+        Align = Top
+        Size.Width = 380.000000000000000000
+        Size.Height = 100.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btPing: TButton
+          Position.X = 8.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 110.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'ping'
+          TextSettings.Trimming = None
+          OnClick = btPingClick
+        end
+        object btParams: TButton
+          Position.X = 126.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 110.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'params'
+          TextSettings.Trimming = None
+          OnClick = btParamsClick
+        end
+        object btMultipart: TButton
+          Position.X = 244.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 110.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'multipart'
+          TextSettings.Trimming = None
+          OnClick = btMultipartClick
+        end
+        object btEco: TButton
+          Position.X = 8.000000000000000000
+          Position.Y = 52.000000000000000000
+          Size.Width = 110.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          Text = 'eco'
+          TextSettings.Trimming = None
+          OnClick = btEcoClick
+        end
+        object btLimpar: TButton
+          Position.X = 126.000000000000000000
+          Position.Y = 52.000000000000000000
+          Size.Width = 110.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'limpar'
+          TextSettings.Trimming = None
+          OnClick = btLimparClick
+        end
+      end
+      object mmTestes: TMemo
+        WordWrap = True
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        ReadOnly = True
+        Align = Client
+        Margins.Left = 8.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Margins.Bottom = 8.000000000000000000
+        Size.Width = 364.000000000000000000
+        Size.Height = 458.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 360.000000000000000000
+        Viewport.Height = 454.000000000000000000
+      end
+    end
+    object tiBanco: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 53.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Banco'
+      ExplicitSize.cx = 95.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object loSQL: TLayout
+        Align = Top
+        Size.Width = 380.000000000000000000
+        Size.Height = 70.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object lbSQL: TLabel
+          Align = Top
+          Margins.Left = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Size.Width = 372.000000000000000000
+          Size.Height = 20.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'SQL'
+        end
+        object edSQL: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 0
+          Text = 'select * from BENCH order by ID'
+          Position.X = 8.000000000000000000
+          Position.Y = 20.000000000000000000
+          Margins.Left = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Size.Width = 364.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+      object tcBanco: TTabControl
+        Align = Client
+        Size.Width = 380.000000000000000000
+        Size.Height = 496.000000000000000000
+        Size.PlatformDefault = False
+        TabIndex = 0
+        TabOrder = 1
+        TabPosition = Top
+        Sizes = (
+          380s
+          470s
+          380s
+          470s)
+        object tiDAO: TTabItem
+          CustomIcon = <
+            item
+            end>
+          TextSettings.Trimming = None
+          IsSelected = True
+          Size.Width = 45.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'DAO'
+          ExplicitSize.cx = 95.000000000000000000
+          ExplicitSize.cy = 26.000000000000000000
+          object loBotoesDAO: TLayout
+            Align = Top
+            Size.Width = 380.000000000000000000
+            Size.Height = 52.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object btAbrirDAO: TButton
+              Position.X = 8.000000000000000000
+              Position.Y = 6.000000000000000000
+              Size.Width = 110.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              Text = 'Abrir'
+              TextSettings.Trimming = None
+              OnClick = btAbrirDAOClick
+            end
+            object btGravarDAO: TButton
+              Position.X = 126.000000000000000000
+              Position.Y = 6.000000000000000000
+              Size.Width = 110.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              Text = 'Gravar'
+              TextSettings.Trimming = None
+              OnClick = btGravarDAOClick
+            end
+          end
+          object lbDAO: TLabel
+            Align = Top
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 52.000000000000000000
+            Size.Width = 372.000000000000000000
+            Size.Height = 20.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'TRALFDQuery - o DAO do RAL'
+            TabOrder = 2
+          end
+          object gridDAO: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 372.000000000000000000
+            Size.Height = 394.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Options = [Editing, ColumnResize, ColLines, RowLines, Tabs, Header]
+            OnGetValue = gridGetValue
+            OnSetValue = gridSetValue
+            Viewport.Width = 368.000000000000000000
+            Viewport.Height = 369.000000000000000000
+          end
+        end
+        object tiDBW: TTabItem
+          CustomIcon = <
+            item
+            end>
+          TextSettings.Trimming = None
+          IsSelected = False
+          Size.Width = 63.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'DBWare'
+          ExplicitSize.cx = 95.000000000000000000
+          ExplicitSize.cy = 26.000000000000000000
+          object loBotoesDBW: TLayout
+            Align = Top
+            Size.Width = 380.000000000000000000
+            Size.Height = 52.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object btAbrirDBW: TButton
+              Position.X = 8.000000000000000000
+              Position.Y = 6.000000000000000000
+              Size.Width = 110.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              Text = 'Abrir'
+              TextSettings.Trimming = None
+              OnClick = btAbrirDBWClick
+            end
+            object btGravarDBW: TButton
+              Position.X = 126.000000000000000000
+              Position.Y = 6.000000000000000000
+              Size.Width = 110.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              Text = 'Gravar'
+              TextSettings.Trimming = None
+              OnClick = btGravarDBWClick
+            end
+          end
+          object lbDBW: TLabel
+            Align = Top
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 52.000000000000000000
+            Size.Width = 372.000000000000000000
+            Size.Height = 20.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'TRALDBFDMemTable - o DBWare do RAL'
+            TabOrder = 2
+          end
+          object gridDBW: TGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 372.000000000000000000
+            Size.Height = 394.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Options = [Editing, ColumnResize, ColLines, RowLines, Tabs, Header]
+            OnGetValue = gridGetValue
+            OnSetValue = gridSetValue
+            Viewport.Width = 368.000000000000000000
+            Viewport.Height = 369.000000000000000000
+          end
+        end
+      end
+    end
+  end
+  object tmBench: TTimer
+    Enabled = False
+    Interval = 250
+    OnTimer = tmBenchTimer
+    Left = 296
+    Top = 8
+  end
+end
