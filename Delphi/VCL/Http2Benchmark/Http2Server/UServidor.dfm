@@ -1,7 +1,7 @@
 object fServidor: TfServidor
   Left = 0
   Top = 0
-  Caption = 'PascalRAL - MsQuic Benchmark - Servidor'
+  Caption = 'PascalRAL - HTTP/2 Benchmark - Servidor'
   ClientHeight = 580
   ClientWidth = 740
   Color = clBtnFace
@@ -27,14 +27,14 @@ object fServidor: TfServidor
       Top = 6
       Width = 360
       Height = 270
-      Caption = ' Servidor QUIC '
+      Caption = ' Servidor HTTP (mORMot2) '
       TabOrder = 0
       object lbPorta: TLabel
         Left = 12
         Top = 24
-        Width = 55
+        Width = 52
         Height = 15
-        Caption = 'Porta UDP'
+        Caption = 'Porta TCP'
       end
       object edPorta: TEdit
         Left = 12
@@ -59,49 +59,67 @@ object fServidor: TfServidor
         TabOrder = 1
         Text = '1'
       end
-      object lbCert: TLabel
+      object lbModo: TLabel
         Left = 12
         Top = 72
-        Width = 108
+        Width = 30
         Height = 15
-        Caption = 'Certificado (PEM)'
+        Caption = 'Modo'
       end
-      object edCert: TEdit
+      object cbModo: TComboBox
         Left = 12
         Top = 90
-        Width = 336
+        Width = 110
         Height = 23
+        Style = csDropDownList
+        ItemIndex = 2
         TabOrder = 2
+        Text = 'http.sys'
+        OnChange = cbModoChange
+        Items.Strings = (
+          'threads'
+          'async'
+          'http.sys')
       end
-      object lbChave: TLabel
-        Left = 12
-        Top = 118
-        Width = 111
+      object lbDominio: TLabel
+        Left = 132
+        Top = 72
+        Width = 105
         Height = 15
-        Caption = 'Chave privada (PEM)'
+        Caption = 'Dom'#237'nio do http.sys'
       end
-      object edChave: TEdit
-        Left = 12
-        Top = 136
-        Width = 336
+      object edDominio: TEdit
+        Left = 132
+        Top = 90
+        Width = 100
         Height = 23
         TabOrder = 3
+        Text = '+'
+      end
+      object btPreparar: TButton
+        Left = 240
+        Top = 89
+        Width = 108
+        Height = 25
+        Caption = 'Preparar http.sys'
+        TabOrder = 4
+        OnClick = btPrepararClick
       end
       object lbCompress: TLabel
         Left = 12
-        Top = 166
+        Top = 120
         Width = 66
         Height = 15
         Caption = 'Compress'#227'o'
       end
       object cbCompress: TComboBox
         Left = 12
-        Top = 184
+        Top = 138
         Width = 100
         Height = 23
         Style = csDropDownList
         ItemIndex = 0
-        TabOrder = 4
+        TabOrder = 5
         Text = 'Nenhuma'
         Items.Strings = (
           'Nenhuma'
@@ -111,19 +129,19 @@ object fServidor: TfServidor
       end
       object lbCripto: TLabel
         Left = 122
-        Top = 166
+        Top = 120
         Width = 69
         Height = 15
         Caption = 'Criptografia'
       end
       object cbCripto: TComboBox
         Left = 122
-        Top = 184
+        Top = 138
         Width = 100
         Height = 23
         Style = csDropDownList
         ItemIndex = 0
-        TabOrder = 5
+        TabOrder = 6
         Text = 'Nenhuma'
         Items.Strings = (
           'Nenhuma'
@@ -133,34 +151,43 @@ object fServidor: TfServidor
       end
       object lbChaveCripto: TLabel
         Left = 232
-        Top = 166
+        Top = 120
         Width = 90
         Height = 15
         Caption = 'Chave da cripto'
       end
       object edChaveCripto: TEdit
         Left = 232
-        Top = 184
+        Top = 138
         Width = 116
         Height = 23
-        TabOrder = 6
+        TabOrder = 7
       end
       object btLigar: TButton
         Left = 12
-        Top = 214
+        Top = 174
         Width = 110
         Height = 27
         Caption = 'Ligar'
-        TabOrder = 7
+        TabOrder = 8
         OnClick = btLigarClick
       end
       object lbStatus: TLabel
         Left = 12
-        Top = 248
+        Top = 208
         Width = 336
         Height = 15
         AutoSize = False
         Caption = 'parado'
+      end
+      object lbDica: TLabel
+        Left = 12
+        Top = 228
+        Width = 336
+        Height = 32
+        AutoSize = False
+        Caption = 'http.sys: https, e HTTP/2 pelo ALPN.'
+        WordWrap = True
       end
     end
     object gbFirebird: TGroupBox

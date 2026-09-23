@@ -107,7 +107,7 @@ object fClienteKwik: TfClienteKwik
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Client
             TabOrder = 0
-            Text = '8100'
+            Text = '8443'
             Margins.Right = 8.000000000000000000
             Size.Width = 262.000000000000000000
             Size.Height = 44.000000000000000000

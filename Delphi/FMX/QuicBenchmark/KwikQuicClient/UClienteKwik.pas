@@ -410,7 +410,7 @@ end;
 function TfClienteKwik.LerConfig: TConfigCliente;
 begin
   Result.Host := Trim(edHost.Text);
-  Result.Porta := StrToIntDef(edPorta.Text, 8100);
+  Result.Porta := StrToIntDef(edPorta.Text, 8443);
   Result.Timeout := StrToIntDef(edTimeout.Text, 15000);
   Result.Validar := swValidar.IsChecked;
   Result.Pin := Trim(edPin.Text);

@@ -97,7 +97,7 @@ implementation
 {$R *.dfm}
 
 const
-  PORTA_PADRAO = 8100;
+  PORTA_PADRAO = 8443;
   ROTA_LENTA_MS = 50;
   REGISTROS = 2000;
 
@@ -348,11 +348,31 @@ begin
   end;
 end;
 
+{ A RAZAO requisicoes/conexoes e' a leitura que interessa, e por isso ela vem
+  pronta em vez de sair da cabeca de quem olha: cada requisicao do QUIC e' um
+  stream, e muitos streams numa conexao so' e' exatamente o que "uma conexao
+  por cliente, multiplexada" deve produzir deste lado. Uma requisicao por
+  conexao quer dizer que a multiplexacao nao aconteceu.
+
+  Os dois numeros sao do proprio engine, que conta as conexoes que o listener
+  aceitou. No benchmark de HTTP/2 ao lado a mesma conta sai de
+  ClientInfo.ConnectionID, porque la' o http.sys nao expoe contador nenhum. }
 procedure TfServidor.tmContadoresTimer(Sender: TObject);
+var
+  vConns, vReqs: Integer;
 begin
-  if (FServer <> nil) and FServer.Active then
-    lbStatus.Caption := Format('no ar - %d conexoes aceitas, %d requisicoes',
-      [FServer.ConnectionCount, FServer.RequestCount]);
+  if (FServer = nil) or (not FServer.Active) then
+    Exit;
+
+  vConns := FServer.ConnectionCount;
+  vReqs := FServer.RequestCount;
+  { Sem o "no ar" na frente: quem diz isso e' o botao, que esta' escrito
+    "Desligar", e o espaco cabe a' conta - que e' o que se olha. }
+  if vConns > 0 then
+    lbStatus.Caption := Format('%d req / %d conn (%.1f req/conn)',
+      [vReqs, vConns, vReqs / vConns])
+  else
+    lbStatus.Caption := Format('%d conn, %d req', [vConns, vReqs]);
 end;
 
 { --------------------------------------------------------------------- rotas }

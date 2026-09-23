@@ -1,16 +1,27 @@
-/// Cliente do benchmark MsQuic (QUIC) do PascalRAL.
+/// Cliente do benchmark HTTP/2 do PascalRAL, sobre o engine netHTTP.
 ///
-/// Tres abas sobre a mesma configuracao de conexao (host, porta, validacao do
-/// certificado, compressao, criptografia):
+/// E' o mesmo cliente do QuicBenchmark ao lado, com o motor trocado: onde la'
+/// ia TRALMsQuicClient sobre QUIC, aqui vai RALnetHTTPClient sobre TCP+TLS, com
+/// HTTP/2 negociado por ALPN. As tres abas, as rotas e o banco sao os mesmos, de
+/// proposito - o que muda e' o transporte, e e' isso que esta' sendo comparado.
+///
 ///   1. Benchmark: N clientes x M requisicoes simultaneas por cliente x R
 ///      rajadas, com taxa de erro, vazao e tempo de resposta.
 ///   2. Testes: ping, parametros, multipart e eco, com a saida num memo.
 ///   3. Banco: a mesma tabela Firebird pelos dois stacks de banco do RAL, o
 ///      DAO (TRALFDQuery) e o DBWare (TRALDBFDMemTable), lado a lado.
 ///
-/// QUIC e' sempre TLS. "Validar certificado" liga a verificacao pela cadeia do
-/// sistema; o pin (SHA-256 do certificado) aceita so' aquele certificado, o que
-/// e' o jeito de conversar com um servidor autoassinado sem desligar tudo.
+/// DUAS COISAS SO' EXISTEM AQUI, e sao as que fazem a comparacao valer:
+///
+/// "Versao HTTP" e' o que o cliente PEDE (TRALClient.HTTPVersion); o que o ALPN
+/// fechou de verdade vem em TRALResponse.ProtocolVersion, e o benchmark conta
+/// quantas respostas voltaram em h2. Pedir nao e' obter - h2 so' acontece sobre
+/// TLS e, do lado do servidor, so' no modo http.sys.
+///
+/// "Esquema" existe porque os modos de socket do servidor sobem em http simples
+/// (o certificado do modo http.sys mora na loja da maquina, e os de socket
+/// leriam um arquivo que este benchmark nao tem). Com http nao ha ALPN, logo nao
+/// ha HTTP/2: e' a linha de base HTTP/1.1.
 unit UCliente;
 
 interface
@@ -32,16 +43,18 @@ uses
 
   RALTypes, RALConsts, RALMIMETypes, RALClient, RALRequest, RALResponse,
   RALParams, RALCompress, RALCompressZLib, RALCripto, RALCriptoAES,
-  RALMsQuicClient,
+  RALnetHTTPClient,
   RALStorage, RALStorageBIN, RALDBConnection, RALDBFiredacMemTable,
   RALDBFiredacDAO;
 
 type
   /// O que a barra de cima define, copiado para quem for usar.
   TConfigCliente = record
+    Esquema: string;
     Host: string;
     Porta: Integer;
     Timeout: Integer;
+    Versao: TRALHTTPVersion;
     Validar: Boolean;
     Pin: string;
     Compress: TRALCompressType;
@@ -64,6 +77,9 @@ type
   public
     Enviadas: Integer;
     Erros: Integer;
+    { quantas RESPOSTAS voltaram em HTTP/2 - a unica medida honesta, ja' que
+      pedir rhv2 nao e' obter rhv2 }
+    EmH2: Integer;
     SomaTicks: Int64;
     MinTicks: Int64;
     MaxTicks: Int64;
@@ -100,6 +116,10 @@ type
     cbCripto: TComboBox;
     lbChaveCripto: TLabel;
     edChaveCripto: TEdit;
+    lbEsquema: TLabel;
+    cbEsquema: TComboBox;
+    lbVersao: TLabel;
+    cbVersao: TComboBox;
     ckValidar: TCheckBox;
     lbPin: TLabel;
     edPin: TEdit;
@@ -122,6 +142,7 @@ type
     lbEnviadas: TLabel;
     lbErros: TLabel;
     lbVazao: TLabel;
+    lbProtocolo: TLabel;
     lbTempos: TLabel;
     lbDecorrido: TLabel;
     mmBench: TMemo;
@@ -190,7 +211,7 @@ type
   public
   end;
 
-/// Um TRALClient sobre o engine MsQuic, com tudo que a barra de cima pede.
+/// Um TRALClient sobre o engine netHTTP, com tudo que a barra de cima pede.
 function NovoCliente(const AConfig: TConfigCliente): TRALClient;
 
 var
@@ -203,14 +224,18 @@ implementation
 var
   gFeitas: Integer;
   gErros: Integer;
+  gEmH2: Integer;
   gConcluidos: Integer;
   gParar: Boolean;
 
 function NovoCliente(const AConfig: TConfigCliente): TRALClient;
 begin
   Result := TRALClient.Create(nil);
-  Result.EngineType := ENGINEMSQUIC;
-  Result.BaseURL.Text := Format('https://%s:%d', [AConfig.Host, AConfig.Porta]);
+  Result.EngineType := ENGINENETHTTP;
+  { depois do EngineType, sempre: trocar o engine REPOE a versao (um rhv2
+    deixado para tras derrubaria um engine que so' fala 1.1) }
+  Result.HTTPVersion := AConfig.Versao;
+  Result.BaseURL.Text := Format('%s://%s:%d', [AConfig.Esquema, AConfig.Host, AConfig.Porta]);
   Result.ConnectTimeout := AConfig.Timeout;
   Result.RequestTimeout := AConfig.Timeout;
   Result.CompressType := AConfig.Compress;
@@ -242,7 +267,7 @@ procedure TTrabalhador.Execute;
 var
   vInt: Integer;
   vResp: TRALResponse;
-  vOk: Boolean;
+  vOk, vH2: Boolean;
   vRelogio: TStopwatch;
   vTicks: Int64;
 begin
@@ -253,11 +278,13 @@ begin
 
     vRelogio := TStopwatch.StartNew;
     vResp := nil;
+    vH2 := False;
     try
       { a sobrecarga com "var AResponse" e' sincrona e levanta excecao quando o
         transporte falha; um status diferente de 200 volta normalmente }
       FMaquina.Client.Get(StringRAL(FRota), vResp);
       vOk := (vResp <> nil) and (vResp.StatusCode = HTTP_OK);
+      vH2 := (vResp <> nil) and (vResp.ProtocolVersion = rhv2);
     except
       vOk := False;
     end;
@@ -267,6 +294,8 @@ begin
     Inc(Enviadas);
     if not vOk then
       Inc(Erros);
+    if vH2 then
+      Inc(EmH2);
     SomaTicks := SomaTicks + vTicks;
     if vTicks < MinTicks then
       MinTicks := vTicks;
@@ -276,6 +305,8 @@ begin
     TInterlocked.Increment(gFeitas);
     if not vOk then
       TInterlocked.Increment(gErros);
+    if vH2 then
+      TInterlocked.Increment(gEmH2);
   end;
   TInterlocked.Increment(gConcluidos);
 end;
@@ -290,12 +321,13 @@ begin
   inherited Create;
   FConfig := AConfig;
   FClient := NovoCliente(AConfig);
-  { COM ShareConnection LIGADO o RAL junta na mesma conexao QUIC todo cliente
-    que julgue o certificado do mesmo jeito - e todas as maquinas deste
-    processo julgariam igual, entao virariam UMA conexao. O evento e' o que
-    distingue: cada maquina julga com um metodo seu, a politica passa a ser
-    dela, e ela ganha uma conexao propria, multiplexada pelas suas M threads.
-    E' exatamente o que um aparelho com varias telas abertas faz. }
+  { COM ShareConnection LIGADO o netHTTP junta no mesmo transporte - e por isso
+    na mesma conexao TCP, quando fecha em h2 - todo cliente que julgue o
+    certificado do mesmo jeito, e todas as maquinas deste processo julgariam
+    igual, entao virariam UMA. O evento e' o que distingue: CertPolicyKey leva
+    o endereco do metodo E o do objeto, cada maquina julga com o seu, a politica
+    passa a ser dela, e ela ganha um transporte proprio, multiplexado pelas suas
+    M threads. E' exatamente o que um aparelho com varias telas abertas faz. }
   if AConfig.Compartilhar then
     FClient.OnValidateServerCert := AceitaCertificado;
 
@@ -332,6 +364,8 @@ end;
 
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
+  cbEsquema.ItemIndex := 1;
+  cbVersao.ItemIndex := 1;
   cbCompress.ItemIndex := 0;
   cbCripto.ItemIndex := 0;
   cbConexao.ItemIndex := 0;
@@ -356,9 +390,17 @@ end;
 
 function TfCliente.LerConfig: TConfigCliente;
 begin
+  if cbEsquema.ItemIndex = 1 then
+    Result.Esquema := 'https'
+  else
+    Result.Esquema := 'http';
   Result.Host := Trim(edHost.Text);
   Result.Porta := StrToIntDef(edPorta.Text, 8443);
   Result.Timeout := StrToIntDef(edTimeout.Text, 15000);
+  if cbVersao.ItemIndex = 1 then
+    Result.Versao := rhv2
+  else
+    Result.Versao := rhv11;
   Result.Validar := ckValidar.Checked;
   Result.Pin := Trim(edPin.Text);
   case cbCompress.ItemIndex of
@@ -379,6 +421,12 @@ begin
   Result.Compartilhar := cbConexao.ItemIndex = 1;
   if (Result.Cripto <> crNone) and (Result.Chave = '') then
     raise Exception.Create('Informe a chave da criptografia - a mesma do servidor.');
+  { pedir h2 em http simples nao e' erro, e' so' inutil: sem TLS nao ha ALPN.
+    Dizer isso antes vale mais do que deixar a coluna de h2 zerada sem motivo
+    aparente. }
+  if (Result.Versao = rhv2) and (Result.Esquema = 'http') then
+    raise Exception.Create('HTTP/2 s' + #243 + ' existe sobre TLS: escolha o esquema https, ' +
+      'ou pe' + #231 + 'a HTTP/1.1.');
 end;
 
 procedure TfCliente.LogBench(const ATexto: string);
@@ -421,16 +469,17 @@ begin
   LiberarMaquinas;
   gFeitas := 0;
   gErros := 0;
+  gEmH2 := 0;
   gConcluidos := 0;
   gParar := False;
   FTotal := vClientes * vSimultaneas * vRajadas;
   pbProgresso.Max := FTotal;
   pbProgresso.Position := 0;
 
-  LogBench(Format('%d clientes x %d simultaneas x %d rajadas = %d requisicoes em /%s, ' +
-    'compressao %s, cripto %s, %s',
-    [vClientes, vSimultaneas, vRajadas, FTotal, cbRota.Text, cbCompress.Text, cbCripto.Text,
-     cbConexao.Text]));
+  LogBench(Format('%d clientes x %d simultaneas x %d rajadas = %d requisicoes em ' +
+    '%s /%s, pedindo HTTP/%s, compressao %s, cripto %s, %s',
+    [vClientes, vSimultaneas, vRajadas, FTotal, vCfg.Esquema, cbRota.Text,
+     cbVersao.Text, cbCompress.Text, cbCripto.Text, cbConexao.Text]));
 
   SetLength(FMaquinas, vClientes);
   for vInt := 0 to vClientes - 1 do
@@ -464,6 +513,7 @@ begin
   lbErros.Caption := Format('Erros: %d', [vErros]);
   if vMs > 0 then
     lbVazao.Caption := Format('Vazao: %.0f req/s', [(vFeitas - vErros) / (vMs / 1000)]);
+  lbProtocolo.Caption := Format('HTTP/2: %d de %d', [gEmH2, vFeitas]);
   lbDecorrido.Caption := Format('Decorrido: %.1f s', [vMs / 1000]);
 
   vTotalTrab := 0;
@@ -475,7 +525,7 @@ end;
 
 procedure TfCliente.FinalizarBench;
 var
-  vInt, vTrab, vEnviadas, vErros: Integer;
+  vInt, vTrab, vEnviadas, vErros, vEmH2: Integer;
   vSoma, vMin, vMax: Int64;
   vMs, vMedia, vMinMs, vMaxMs, vVazao, vTaxa: Double;
   vT: TTrabalhador;
@@ -485,6 +535,7 @@ begin
 
   vEnviadas := 0;
   vErros := 0;
+  vEmH2 := 0;
   vSoma := 0;
   vMin := High(Int64);
   vMax := 0;
@@ -495,6 +546,7 @@ begin
       vT.WaitFor;
       Inc(vEnviadas, vT.Enviadas);
       Inc(vErros, vT.Erros);
+      Inc(vEmH2, vT.EmH2);
       vSoma := vSoma + vT.SomaTicks;
       if vT.MinTicks < vMin then
         vMin := vT.MinTicks;
@@ -525,14 +577,18 @@ begin
   lbEnviadas.Caption := Format('Enviadas: %d de %d', [vEnviadas, FTotal]);
   lbErros.Caption := Format('Erros: %d (%.2f%%)', [vErros, vTaxa]);
   lbVazao.Caption := Format('Vazao: %.0f req/s', [vVazao]);
+  lbProtocolo.Caption := Format('HTTP/2: %d de %d', [vEmH2, vEnviadas]);
   lbTempos.Caption := Format('Tempo de resposta: media %.2f ms, min %.2f, max %.2f',
     [vMedia, vMinMs, vMaxMs]);
   lbDecorrido.Caption := Format('Decorrido: %.2f s', [vMs / 1000]);
   pbProgresso.Position := vEnviadas;
 
-  LogBench(Format('RESULTADO: %d requisicoes, %d erros (%.2f%%), %.0f req/s, ' +
-    'media %.2f ms, min %.2f, max %.2f, em %.2f s',
-    [vEnviadas, vErros, vTaxa, vVazao, vMedia, vMinMs, vMaxMs, vMs / 1000]));
+  LogBench(Format('RESULTADO: %d requisicoes, %d erros (%.2f%%), %d em HTTP/2, ' +
+    '%.0f req/s, media %.2f ms, min %.2f, max %.2f, em %.2f s',
+    [vEnviadas, vErros, vTaxa, vEmH2, vVazao, vMedia, vMinMs, vMaxMs, vMs / 1000]));
+  if (vEmH2 = 0) and (vEnviadas > vErros) then
+    LogBench('nenhuma resposta veio em HTTP/2 - confira: esquema https, ' +
+      'versao HTTP/2 aqui, e servidor no modo http.sys');
 
   btIniciar.Enabled := True;
   btParar.Enabled := False;
@@ -565,9 +621,12 @@ begin
   vRelogio := TStopwatch.StartNew;
   try
     vCli.Get('ping', vResp);
-    LogTeste(Format('ping: HTTP %d "%s" em %d ms (compressao da resposta: %d, cripto: %d)',
+    { Protocol e' a face de texto de ProtocolVersion, e vem vazia quando o
+      transporte nao soube dizer - nunca um palpite }
+    LogTeste(Format('ping: HTTP %d "%s" em %d ms (protocolo negociado: %s, ' +
+      'compressao da resposta: %d, cripto: %d)',
       [vResp.StatusCode, string(vResp.ResponseText), vRelogio.ElapsedMilliseconds,
-       Ord(vResp.ContentCompress), Ord(vResp.ContentCripto)]));
+       string(vResp.Protocol), Ord(vResp.ContentCompress), Ord(vResp.ContentCripto)]));
   except
     on e: Exception do
       LogTeste('ping: FALHOU - ' + e.Message);
@@ -658,8 +717,9 @@ begin
   try
     vCli.Post('eco', vResp);
     if string(vResp.ResponseText) = vCorpo then
-      LogTeste(Format('eco: HTTP %d, %d caracteres voltaram iguais em %d ms',
-        [vResp.StatusCode, Length(vCorpo), vRelogio.ElapsedMilliseconds]))
+      LogTeste(Format('eco: HTTP %d, %d caracteres voltaram iguais em %d ms (protocolo %s)',
+        [vResp.StatusCode, Length(vCorpo), vRelogio.ElapsedMilliseconds,
+         string(vResp.Protocol)]))
     else
       LogTeste(Format('eco: HTTP %d, corpo DIFERENTE (%d caracteres voltaram)',
         [vResp.StatusCode, Length(string(vResp.ResponseText))]));

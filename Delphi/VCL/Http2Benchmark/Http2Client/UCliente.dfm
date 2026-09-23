@@ -1,7 +1,7 @@
 object fCliente: TfCliente
   Left = 0
   Top = 0
-  Caption = 'PascalRAL - MsQuic Benchmark - Cliente'
+  Caption = 'PascalRAL - HTTP/2 Benchmark - Cliente'
   ClientHeight = 640
   ClientWidth = 980
   Color = clBtnFace
@@ -42,14 +42,14 @@ object fCliente: TfCliente
         Width = 150
         Height = 23
         TabOrder = 0
-        Text = '127.0.0.1'
+        Text = 'localhost'
       end
       object lbPorta: TLabel
         Left = 170
         Top = 22
-        Width = 55
+        Width = 52
         Height = 15
-        Caption = 'Porta UDP'
+        Caption = 'Porta TCP'
       end
       object edPorta: TEdit
         Left = 170
@@ -123,7 +123,7 @@ object fCliente: TfCliente
         Top = 22
         Width = 173
         Height = 15
-        Caption = 'Chave da cripto (a mesma do servidor)'
+        Caption = 'Chave da cripto (= a do servidor)'
       end
       object edChaveCripto: TEdit
         Left = 540
@@ -132,43 +132,83 @@ object fCliente: TfCliente
         Height = 23
         TabOrder = 5
       end
+      object lbEsquema: TLabel
+        Left = 750
+        Top = 22
+        Width = 48
+        Height = 15
+        Caption = 'Esquema'
+      end
+      object cbEsquema: TComboBox
+        Left = 750
+        Top = 40
+        Width = 90
+        Height = 23
+        Style = csDropDownList
+        ItemIndex = 1
+        TabOrder = 6
+        Text = 'https'
+        Items.Strings = (
+          'http'
+          'https')
+      end
+      object lbVersao: TLabel
+        Left = 850
+        Top = 22
+        Width = 105
+        Height = 15
+        Caption = 'Vers'#227'o HTTP'
+      end
+      object cbVersao: TComboBox
+        Left = 850
+        Top = 40
+        Width = 100
+        Height = 23
+        Style = csDropDownList
+        ItemIndex = 1
+        TabOrder = 7
+        Text = '2'
+        Items.Strings = (
+          '1.1'
+          '2')
+      end
       object ckValidar: TCheckBox
         Left = 12
         Top = 86
         Width = 150
         Height = 17
         Caption = 'Validar certificado'
-        TabOrder = 6
+        TabOrder = 8
       end
       object lbPin: TLabel
         Left = 170
         Top = 68
         Width = 320
         Height = 15
-        Caption = 'Pin do certificado (SHA-256, opcional - aceita s'#243' aquele certificado)'
+        Caption = 'Pin do certificado (SHA-256, opcional)'
       end
       object edPin: TEdit
         Left = 170
         Top = 86
-        Width = 400
+        Width = 330
         Height = 23
-        TabOrder = 7
+        TabOrder = 9
       end
       object lbConexao: TLabel
-        Left = 580
+        Left = 510
         Top = 68
         Width = 200
         Height = 15
-        Caption = 'Conex'#227'o QUIC (ShareConnection)'
+        Caption = 'Conex'#227'o HTTP (ShareConnection)'
       end
       object cbConexao: TComboBox
-        Left = 580
+        Left = 510
         Top = 86
-        Width = 300
+        Width = 290
         Height = 23
         Style = csDropDownList
         ItemIndex = 0
-        TabOrder = 8
+        TabOrder = 10
         Text = 'Uma conex'#227'o por thread'
         Items.Strings = (
           'Uma conex'#227'o por thread'
@@ -304,6 +344,13 @@ object fCliente: TfCliente
           Width = 200
           Height = 15
           Caption = 'Vaz'#227'o: -'
+        end
+        object lbProtocolo: TLabel
+          Left = 680
+          Top = 86
+          Width = 280
+          Height = 15
+          Caption = 'HTTP/2: -'
         end
         object lbTempos: TLabel
           Left = 12
