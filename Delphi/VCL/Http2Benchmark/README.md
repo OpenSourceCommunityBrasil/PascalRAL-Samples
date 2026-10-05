@@ -10,7 +10,8 @@ mesma máquina, e comparar QUIC com HTTP/2.
 | **`Http2Benchmark`** | `TRALSynopseServer` (mORMot2) | **netHTTP** | TCP + TLS, HTTP/1.1 ou HTTP/2 |
 
 As telas, as rotas, o banco e as contas são os mesmos, de propósito. O que muda
-é o transporte, e por isso os números dos dois são comparáveis.
+é o transporte, e por isso os números dos dois são comparáveis. A exceção é a
+rota `15params`, que por enquanto só existe aqui.
 
 ## O que precisa
 
@@ -90,9 +91,9 @@ desenvolvimento seu usa um autoassinado de `localhost`, ele aparece ali.
 Porta TCP, `PoolCount` (quantas requisições são processadas ao mesmo tempo — uma
 basta para rota que só computa, e é o que limita a rota `/lento`), **Modo**,
 **Domínio do http.sys**, compressão e criptografia com a chave. Sobe as rotas
-`/ping`, `/params`, `/multipart`, `/eco` e `/lento`, publica o Firebird pelo DAO
-(`TRALFDConnection`, rota `/RALConnBench`) e pelo DBWare (`TRALDBModule`, rotas
-sob `/db`).
+`/ping`, `/params`, `/multipart`, `/eco`, `/lento` e `/15params`, publica o
+Firebird pelo DAO (`TRALFDConnection`, rota `/RALConnBench`) e pelo DBWare
+(`TRALDBModule`, rotas sob `/db`).
 
 **O modo manda no TLS**, e não o contrário:
 
@@ -208,6 +209,20 @@ sobem 10 clientes, cada um com 3 threads mandando uma requisição por vez, 50
 vezes cada: 1500 requisições. Sai taxa de erro, vazão, quantas voltaram em h2,
 tempo médio, mínimo e máximo de resposta e o tempo total. A rota `lento` (50 ms)
 é para ver o efeito do `PoolCount` do servidor.
+
+A rota `15params` é um POST com 15 parâmetros de corpo, um de cada tipo, que o
+servidor lê pelo nome, converte e confere. Metade é **tipada**: inteiro, int64,
+double, moeda, lógico, data e hora, data e hora sozinha. O valor viaja em
+binário, com o tipo no `Content-Type` da parte (`application/x-ral-int32` e
+companhia). A outra metade vai em **texto**, e o servidor converte como uma
+aplicação faria: texto simples, texto com acentos, ideogramas e emoji,
+inteiro, decimal, lógico, data ISO 8601 e GUID. Volta `OK` quando os 15 chegam
+iguais, e 400 com o nome dos que não chegaram. Os valores ficam nas duas units,
+e as duas listas andam juntas. Enquanto `ping` mede o transporte, esta rota mede
+o caminho dos parâmetros: multipart, decodificação, busca pelo nome e conversão.
+
+Quando há erros, o log do benchmark mostra o motivo da primeira falha: o status
+e o corpo da resposta, ou a mensagem da exceção.
 
 **Testes** — ping pong, parâmetros (query, corpo e cookie devolvidos pelo
 servidor), multipart (dois arquivos e um campo) e eco de 20 KB, com a saída no

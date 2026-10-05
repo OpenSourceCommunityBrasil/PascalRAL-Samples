@@ -6,7 +6,8 @@
 /// proposito - o que muda e' o transporte, e e' isso que esta' sendo comparado.
 ///
 ///   1. Benchmark: N clientes x M requisicoes simultaneas por cliente x R
-///      rajadas, com taxa de erro, vazao e tempo de resposta.
+///      rajadas, com taxa de erro, vazao e tempo de resposta - em /ping, em
+///      /lento ou em /15params, um POST com 15 parametros de tipos diferentes.
 ///   2. Testes: ping, parametros, multipart e eco, com a saida num memo.
 ///   3. Banco: a mesma tabela Firebird pelos dois stacks de banco do RAL, o
 ///      DAO (TRALFDQuery) e o DBWare (TRALDBFDMemTable), lado a lado.
@@ -80,6 +81,9 @@ type
     { quantas RESPOSTAS voltaram em HTTP/2 - a unica medida honesta, ja' que
       pedir rhv2 nao e' obter rhv2 }
     EmH2: Integer;
+    { o motivo da primeira falha desta thread: o contador sozinho nao diz se
+      foi transporte, timeout ou o servidor recusando os parametros }
+    PrimeiroErro: string;
     SomaTicks: Int64;
     MinTicks: Int64;
     MaxTicks: Int64;
@@ -221,12 +225,39 @@ implementation
 
 {$R *.dfm}
 
+const
+  { Os 15 parametros de /15params, com os valores que UServidor confere - as
+    duas listas andam juntas. Metade TIPADOS: o valor viaja em binario e o tipo
+    vai no Content-Type da parte (application/x-ral-int32, -int64, -double,
+    -currency, -boolean, -datetime; data e hora sao TDateTime e viajam como
+    datetime). A outra metade em TEXTO, como um formulario mandaria, e o
+    servidor converte. Quinze partes de corpo: o RAL manda multipart. }
+  ROTA_15PARAMS = '15params';
+  P15_INTEIRO = 1234567890;
+  P15_INT64 = Int64(9007199254740993); // 2^53 + 1: um double nao guarda
+  P15_DOUBLE: Double = 3.141592653589793;
+  P15_MOEDA: Currency = 1234567.8912;
+  P15_TEXTO = 'Pascal REST API Lite';
+  P15_UNICODE = 'a'#231#227'o, cora'#231#227'o, '#$65E5#$672C#$8A9E', '#$00FC#$00F1 +
+    ' '#$20AC' '#$D83D#$DE00;
+  P15_INTEIRO_TEXTO = '-987654321';
+  P15_DECIMAL_TEXTO = '12345.6789';
+  P15_LOGICO_TEXTO = 'true';
+  P15_DATAHORA_TEXTO = '2026-10-05T13:45:30.123';
+  P15_GUID_TEXTO = '{8E3A4F2C-1B7D-4C9E-A5F0-3D2B6E8C1A47}';
+
 var
   gFeitas: Integer;
   gErros: Integer;
   gEmH2: Integer;
   gConcluidos: Integer;
   gParar: Boolean;
+  { calculados uma vez, no initialization: TDateTime nao tem constante, e o
+    texto unicode ja' vai em UTF-8, sem conversao a cada requisicao }
+  gP15DataHora: TDateTime;
+  gP15Data: TDate;
+  gP15Hora: TTime;
+  gP15Unicode: StringRAL;
 
 function NovoCliente(const AConfig: TConfigCliente): TRALClient;
 begin
@@ -250,6 +281,31 @@ begin
     Result.SSL.Pins.Add(AConfig.Pin);
 end;
 
+{ Os 15 parametros, montados de novo a cada requisicao, como uma aplicacao
+  faria: cada chamada leva os seus. }
+procedure Monta15Params(ARequest: TRALRequest);
+var
+  vParams: TRALParams;
+begin
+  ARequest.Clear;
+  vParams := ARequest.Params;
+  vParams.AddParam('inteiro', P15_INTEIRO, rpkBODY, rptInteger);
+  vParams.AddParam('int64', P15_INT64, rpkBODY, rptInt64);
+  vParams.AddParam('double', P15_DOUBLE, rpkBODY, rptDouble);
+  vParams.AddParam('moeda', P15_MOEDA, rpkBODY, rptCurrency);
+  vParams.AddParam('logico', True, rpkBODY, rptBoolean);
+  vParams.AddParam('datahora', gP15DataHora, rpkBODY, rptDateTime);
+  vParams.AddParam('data', gP15Data, rpkBODY, rptDateTime);
+  vParams.AddParam('hora', gP15Hora, rpkBODY, rptDateTime);
+  vParams.AddParam('texto', P15_TEXTO, rpkBODY);
+  vParams.AddParam('unicode', gP15Unicode, rpkBODY);
+  vParams.AddParam('inteiro_texto', P15_INTEIRO_TEXTO, rpkBODY);
+  vParams.AddParam('decimal_texto', P15_DECIMAL_TEXTO, rpkBODY);
+  vParams.AddParam('logico_texto', P15_LOGICO_TEXTO, rpkBODY);
+  vParams.AddParam('datahora_texto', P15_DATAHORA_TEXTO, rpkBODY);
+  vParams.AddParam('guid', P15_GUID_TEXTO, rpkBODY);
+end;
+
 { ------------------------------------------------------------- TTrabalhador }
 
 constructor TTrabalhador.Create(AMaquina: TMaquina; ARajadas: Integer;
@@ -267,10 +323,13 @@ procedure TTrabalhador.Execute;
 var
   vInt: Integer;
   vResp: TRALResponse;
-  vOk, vH2: Boolean;
+  vOk, vH2, v15: Boolean;
   vRelogio: TStopwatch;
   vTicks: Int64;
+  vRota: StringRAL;
 begin
+  vRota := StringRAL(FRota);
+  v15 := FRota = ROTA_15PARAMS;
   for vInt := 1 to FRajadas do
   begin
     if gParar then
@@ -282,11 +341,23 @@ begin
     try
       { a sobrecarga com "var AResponse" e' sincrona e levanta excecao quando o
         transporte falha; um status diferente de 200 volta normalmente }
-      FMaquina.Client.Get(StringRAL(FRota), vResp);
+      if v15 then
+      begin
+        { o Request do TRALClient e' um por thread: as M threads desta maquina
+          montam cada uma o seu, sem disputa }
+        Monta15Params(FMaquina.Client.Request);
+        FMaquina.Client.Post(vRota, vResp);
+      end
+      else
+        FMaquina.Client.Get(vRota, vResp);
       vOk := (vResp <> nil) and (vResp.StatusCode = HTTP_OK);
       vH2 := (vResp <> nil) and (vResp.ProtocolVersion = rhv2);
+      if (not vOk) and (vResp <> nil) and (PrimeiroErro = '') then
+        PrimeiroErro := Format('HTTP %d: %s', [vResp.StatusCode, string(vResp.ResponseText)]);
     except
       vOk := False;
+      if (PrimeiroErro = '') and (ExceptObject is Exception) then
+        PrimeiroErro := Exception(ExceptObject).Message;
     end;
     vResp.Free;
     vTicks := vRelogio.ElapsedTicks;
@@ -529,10 +600,12 @@ var
   vSoma, vMin, vMax: Int64;
   vMs, vMedia, vMinMs, vMaxMs, vVazao, vTaxa: Double;
   vT: TTrabalhador;
+  vPrimeiroErro: string;
 begin
   tmBench.Enabled := False;
   vMs := FInicio.ElapsedMilliseconds;
 
+  vPrimeiroErro := '';
   vEnviadas := 0;
   vErros := 0;
   vEmH2 := 0;
@@ -552,6 +625,8 @@ begin
         vMin := vT.MinTicks;
       if vT.MaxTicks > vMax then
         vMax := vT.MaxTicks;
+      if vPrimeiroErro = '' then
+        vPrimeiroErro := vT.PrimeiroErro;
     end;
   LiberarMaquinas;
 
@@ -586,6 +661,8 @@ begin
   LogBench(Format('RESULTADO: %d requisicoes, %d erros (%.2f%%), %d em HTTP/2, ' +
     '%.0f req/s, media %.2f ms, min %.2f, max %.2f, em %.2f s',
     [vEnviadas, vErros, vTaxa, vEmH2, vVazao, vMedia, vMinMs, vMaxMs, vMs / 1000]));
+  if vPrimeiroErro <> '' then
+    LogBench('primeira falha: ' + vPrimeiroErro);
   if (vEmH2 = 0) and (vEnviadas > vErros) then
     LogBench('nenhuma resposta veio em HTTP/2 - confira: esquema https, ' +
       'versao HTTP/2 aqui, e servidor no modo http.sys');
@@ -870,5 +947,11 @@ begin
       lbDBW.Caption := 'erro ao gravar: ' + e.Message;
   end;
 end;
+
+initialization
+  gP15DataHora := EncodeDateTime(2026, 10, 5, 13, 45, 30, 123);
+  gP15Data := EncodeDate(2026, 10, 5);
+  gP15Hora := EncodeTime(13, 45, 30, 0);
+  gP15Unicode := StringRAL(P15_UNICODE);
 
 end.
