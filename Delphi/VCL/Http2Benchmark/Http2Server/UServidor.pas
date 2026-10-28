@@ -5,7 +5,8 @@
 /// rotas, o banco e a tela sao os mesmos, de proposito - o que muda e' o
 /// transporte, e e' isso que esta' sendo comparado.
 ///
-/// Sobe as rotas que o cliente usa (ping, params, multipart, eco, lento),
+/// Sobe as rotas que o cliente usa (ping, params, multipart, eco, lento,
+/// 15params),
 /// publica o banco Firebird pelos DOIS stacks de banco do RAL - o DAO
 /// (TRALFDConnection, consumido por TRALFDQuery) e o DBWare (TRALDBModule,
 /// consumido por TRALDBFDMemTable) - e cria o banco de teste com 2000
@@ -22,7 +23,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.ShellAPI, System.SysUtils, System.Classes,
-  System.SyncObjs, System.DateUtils, System.IOUtils,
+  System.SyncObjs, System.DateUtils, System.IOUtils, System.Math,
   Vcl.Forms, Vcl.Controls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Graphics,
   Data.DB,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Def, FireDAC.Stan.Pool,
@@ -32,7 +33,7 @@ uses
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Comp.Client, FireDAC.Comp.DataSet,
 
   RALTypes, RALConsts, RALMIMETypes, RALServer, RALRequest, RALResponse,
-  RALParams, RALCompress, RALCompressZLib, RALCripto, RALCriptoAES,
+  RALParams, RALCompress, RALCompressZLib, RALCripto, RALCriptoAES, RALTools,
   RALSynopseServer,
   { os storages so' existem no executavel que os liga - sem RALStorageBIN o
     DBWare responde "Storage 1 not declared in uses" a todo opensql }
@@ -123,6 +124,7 @@ type
     procedure RotaMultipart(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure RotaEco(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure RotaLenta(ARequest: TRALRequest; AResponse: TRALResponse);
+    procedure Rota15Params(ARequest: TRALRequest; AResponse: TRALResponse);
   public
   end;
 
@@ -140,6 +142,31 @@ const
   { O appid do netsh e' so' um rotulo, mas tem de ser o MESMO em toda maquina
     onde isto rodou, ou cada preparacao deixa uma amarracao orfa na porta. }
   APPID_NETSH = '{3f9a6c21-58d4-4e7b-9c10-6ad2be5f7413}';
+
+  { Os 15 parametros da rota /15params, com os valores que o cliente manda -
+    os mesmos de UCliente, e as duas listas andam juntas. Metade TIPADOS: o
+    valor viaja em binario e o tipo vai no Content-Type da parte
+    (application/x-ral-int32, -int64, -double, -currency, -boolean,
+    -datetime; data e hora sao TDateTime e viajam como datetime), entao chega
+    exato. A outra metade em TEXTO, como um formulario mandaria, e a rota
+    converte cada um como uma aplicacao faria. }
+  ROTA_15PARAMS = '15params';
+  P15_INTEIRO = 1234567890;
+  P15_INT64 = Int64(9007199254740993); // 2^53 + 1: um double nao guarda
+  P15_DOUBLE: Double = 3.141592653589793;
+  P15_MOEDA: Currency = 1234567.8912;
+  P15_TEXTO = 'Pascal REST API Lite';
+  P15_UNICODE = 'a'#231#227'o, cora'#231#227'o, '#$65E5#$672C#$8A9E', '#$00FC#$00F1 +
+    ' '#$20AC' '#$D83D#$DE00;
+  P15_INTEIRO_TEXTO = -987654321;
+  P15_DECIMAL_TEXTO = 12345.6789;
+  P15_GUID: TGUID = '{8E3A4F2C-1B7D-4C9E-A5F0-3D2B6E8C1A47}';
+
+var
+  { TDateTime nao tem constante: as tres saem do initialization }
+  gP15DataHora: TDateTime;
+  gP15Data: TDate;
+  gP15Hora: TTime;
 
 { ---------------------------------------------------------------- formulario }
 
@@ -491,6 +518,8 @@ begin
     FServer.CreateRoute('multipart', RotaMultipart, 'lista as partes recebidas');
     FServer.CreateRoute('eco', RotaEco, 'devolve o corpo recebido');
     FServer.CreateRoute('lento', RotaLenta, 'demora, para medir paralelismo');
+    FServer.CreateRoute(ROTA_15PARAMS, Rota15Params,
+      'confere 15 parametros, metade tipados, e responde OK');
 
     { --- stack 1: DAO. O TRALFDConnection publica sozinho a rota que o
           TRALFDQuery do cliente consome; o nome do componente e' a rota, e o
@@ -545,7 +574,8 @@ begin
         'no status diz quantas requisicoes realmente chegaram assim')
   else
     Log('modo de socket: sem TLS nao ha ALPN, logo tudo chega em HTTP/1.1');
-  Log('rotas: /ping /params /multipart /eco /lento, DAO em /RALConnBench, DBWare em /db');
+  Log('rotas: /ping /params /multipart /eco /lento /15params, DAO em /RALConnBench, ' +
+      'DBWare em /db');
   btLigar.Caption := 'Desligar';
   cbModo.Enabled := False;
   edPorta.Enabled := False;
@@ -727,5 +757,57 @@ begin
   Sleep(ROTA_LENTA_MS);
   AResponse.Answer(HTTP_OK, 'ok', rctTEXTPLAIN);
 end;
+
+{ Le os 15 parametros pelo nome, cada um no seu tipo, e confere com o que o
+  cliente mandou: OK quando todos chegaram iguais, 400 com o nome dos que nao
+  chegaram. Um parametro que faltou le como 0 ou vazio, e cai na conferencia
+  como qualquer outro; so' o GUID levanta, e a excecao vira o 500 do RAL. }
+procedure TfServidor.Rota15Params(ARequest: TRALRequest; AResponse: TRALResponse);
+var
+  vErrados: string;
+  vDouble: DoubleRAL;
+  vData: TDateTime;
+
+  procedure Confere(AOk: Boolean; const ANome: string);
+  begin
+    if not AOk then
+      vErrados := vErrados + ' ' + ANome;
+  end;
+
+begin
+  vErrados := '';
+  // tipados: chegam em binario, entao a comparacao e' exata
+  Confere(ARequest.ParamByName('inteiro').AsInteger = P15_INTEIRO, 'inteiro');
+  Confere(ARequest.ParamByName('int64').AsInt64 = P15_INT64, 'int64');
+  Confere(ARequest.ParamByName('double').AsDouble = P15_DOUBLE, 'double');
+  Confere(ARequest.ParamByName('moeda').AsCurrency = P15_MOEDA, 'moeda');
+  Confere(ARequest.ParamByName('logico').AsBoolean, 'logico');
+  Confere(ARequest.ParamByName('datahora').AsDateTime = gP15DataHora, 'datahora');
+  Confere(ARequest.ParamByName('data').AsDateTime = gP15Data, 'data');
+  Confere(ARequest.ParamByName('hora').AsDateTime = gP15Hora, 'hora');
+  // texto: convertido aqui
+  Confere(string(ARequest.ParamByName('texto').AsString) = P15_TEXTO, 'texto');
+  Confere(string(ARequest.ParamByName('unicode').AsString) = P15_UNICODE, 'unicode');
+  Confere(ARequest.ParamByName('inteiro_texto').AsInteger = P15_INTEIRO_TEXTO,
+    'inteiro_texto');
+  Confere(ARequest.ParamByName('decimal_texto').TryAsDouble(vDouble) and
+    SameValue(vDouble, P15_DECIMAL_TEXTO), 'decimal_texto');
+  Confere(ARequest.ParamByName('logico_texto').AsBoolean, 'logico_texto');
+  Confere(RALTryISO8601ToDateTime(ARequest.ParamByName('datahora_texto').AsString, vData) and
+    SameDateTime(vData, gP15DataHora), 'datahora_texto');
+  Confere(IsEqualGUID(StringToGUID(string(ARequest.ParamByName('guid').AsString)), P15_GUID),
+    'guid');
+
+  if vErrados = '' then
+    AResponse.Answer(HTTP_OK, 'OK', rctTEXTPLAIN)
+  else
+    AResponse.Answer(HTTP_BadRequest, StringRAL('chegaram diferentes:' + vErrados),
+      rctTEXTPLAIN);
+end;
+
+initialization
+  gP15DataHora := EncodeDateTime(2026, 10, 5, 13, 45, 30, 123);
+  gP15Data := EncodeDate(2026, 10, 5);
+  gP15Hora := EncodeTime(13, 45, 30, 0);
 
 end.

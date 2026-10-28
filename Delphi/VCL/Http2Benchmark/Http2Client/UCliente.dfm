@@ -297,7 +297,8 @@ object fCliente: TfCliente
           Text = 'ping'
           Items.Strings = (
             'ping'
-            'lento')
+            'lento'
+            '15params')
         end
         object btIniciar: TButton
           Left = 504

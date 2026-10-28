@@ -3,7 +3,7 @@ unit Controllers.Produto;
 interface
 
 uses
-  RALRequest, RALResponse, RALServer, RALTypes, RALConsts, RALMIMETypes,
+  RALRequest, RALResponse, RALServer, RALTypes, RALConsts, RALMIMETypes, RALParams,
   System.JSON, System.SysUtils, System.Classes, DataModule.Global;
 
 procedure RegistrarRotas(AServer: TRALServer);
@@ -180,7 +180,8 @@ procedure EditarFoto(Req: TRALRequest; Res: TRALResponse);
 var
   DmGlobal: TDmGlobal;
   id_produto: integer;
-  arqfoto, arqparam: TFileStream;
+  vArquivo: TRALParam;
+  vPasta, vNome: string;
 begin
   id_produto := Req.ParamByName('id_produto').AsInteger;
 
@@ -194,19 +195,29 @@ begin
     gente trata dessa forma abaixo:
   }
 
-  arqparam := TFileStream(Req.ParamByName('files').AsStream);
-  try
-    arqfoto := TFileStream.Create(ExtractFilePath(ParamStr(0)) + 'Fotos/' + arqparam.FileName, fmOpenReadWrite);
-    arqfoto.CopyFrom(arqparam, arqparam.Size);
+  vArquivo := Req.ParamByName('files');
+  if (vArquivo = nil) or (vArquivo.Size = 0) then
+  begin
+    Res.Answer(HTTP_BadRequest, 'Arquivo da foto ausente', rctTEXTPLAIN);
+    Exit;
+  end;
 
-    DmGlobal := TDmGlobal.Create(nil);
-    try
-      DmGlobal.EditarFoto(id_produto, arqfoto.FileName);
-    finally
-      DmGlobal.Free;
-    end;
+  { O arquivo é gravado direto do parâmetro. AsStream devolve uma CÓPIA em
+    memória a cada leitura - não um TFileStream: o cast escondia isso, o
+    FileName lido dali era lixo e a cópia nunca era liberada. SaveToFile usa
+    só o último componente do nome, então um nome com ..\ não sai da pasta. }
+  vPasta := ExtractFilePath(ParamStr(0)) + 'Fotos';
+  ForceDirectories(vPasta);
+  vNome := ExtractFileName(StringReplace(vArquivo.FileName, '/', '\', [rfReplaceAll]));
+  if vNome = '' then
+    vNome := 'produto_' + IntToStr(id_produto) + '.jpg';
+  vArquivo.SaveToFile(vPasta, vNome);
+
+  DmGlobal := TDmGlobal.Create(nil);
+  try
+    DmGlobal.EditarFoto(id_produto, IncludeTrailingPathDelimiter(vPasta) + vNome);
   finally
-    arqfoto.Free;
+    DmGlobal.Free;
   end;
 
   Res.Answer(HTTP_OK);
