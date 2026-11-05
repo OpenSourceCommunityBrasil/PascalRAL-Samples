@@ -14,18 +14,7 @@ object RALForm1: TRALForm1
   TextHeight = 13
   object server: TRALIndyServer
     Active = False
-    CompressType = ctNone
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
-      'Content-Type'
-      'Origin'
-      'Accept'
-      'Authorization'
-      'Content-Encoding'
-      'Accept-Encoding')
-    CORSOptions.AllowOrigin = '*'
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
@@ -112,10 +101,6 @@ object RALForm1: TRALForm1
         URIParams = <>
         OnReply = serverRoutes_pingReply
       end>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
     ShowServerStatus = True
     ListenQueue = -1
     MaxConnections = -1
@@ -125,6 +110,25 @@ object RALForm1: TRALForm1
     SSL.SSLOptions.VerifyDepth = 0
     Left = 40
     Top = 24
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = server
+    Left = 40
+    Top = 80
+  end
+  object RALCORSPlugin1: TRALCORSPlugin
+    Server = server
+    Options.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding')
+    Options.AllowOrigin = '*'
+    Options.MaxAge = 86400
+    Left = 40
+    Top = 136
   end
   object JWTAuth: TRALServerJWTAuth
     Algorithm = tjaHSHA256

@@ -25,7 +25,7 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="raldbzeoslink"/>
+        <PackageName Value="raldbzeospackage"/>
       </Item>
       <Item>
         <PackageName Value="pascalraldsgn"/>
@@ -50,6 +50,15 @@
       </Item>
       <Item>
         <PackageName Value="LCL"/>
+      </Item>
+      <Item>
+        <PackageName Value="ralmoduleswaggerpackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="ralpluginauthpackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="ralstoragepackage"/>
       </Item>
     </RequiredPackages>
     <Units>

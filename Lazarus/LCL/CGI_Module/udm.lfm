@@ -7,19 +7,7 @@ object dm: Tdm
   Width = 506
   object CGIServer: TRALCGIServer
     Active = False
-    CompressType = ctNone
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
-      'Content-Type'
-      'Origin'
-      'Accept'
-      'Authorization'
-      'Content-Encoding'
-      'Accept-Encoding'
-    )
-    CORSOptions.AllowOrigin = '*'
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
@@ -74,12 +62,28 @@ object dm: Tdm
       end>
     Port = 8000
     Routes = <>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
     ShowServerStatus = True
     Left = 72
     Top = 56
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = CGIServer
+    Left = 72
+    Top = 112
+  end
+  object RALCORSPlugin1: TRALCORSPlugin
+    Server = CGIServer
+    Options.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    Options.AllowOrigin = '*'
+    Options.MaxAge = 86400
+    Left = 72
+    Top = 168
   end
 end

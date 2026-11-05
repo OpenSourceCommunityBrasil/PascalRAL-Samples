@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZConnection,
   RALIndyServer, RALDBModule, RALDBZeos, RALStorage, RALStorageBIN,
-  RALStorageJSON, RALAuthentication;
+  RALStorageJSON, RALAuthentication, RALCORS, RALContent;
 
 type
 
@@ -19,6 +19,9 @@ type
     RALServerJWTAuth1: TRALServerJWTAuth;
     RALStorageJSONLink1: TRALStorageJSONLink;
     server: TRALIndyServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCriptoPlugin1: TRALCriptoPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     storage_bin: TRALStorageBINLink;
     ZConnection1: TZConnection;
     procedure FormCreate(Sender: TObject);

@@ -72,28 +72,19 @@ object fPrincipal: TfPrincipal
   end
   object Server: TRALSaguiServer
     Active = False
-    CompressType = ctNone
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
-      'Content-Type'
-      'Origin'
-      'Accept'
-      'Authorization'
-      'Content-Encoding'
-      'Accept-Encoding')
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
     IPConfig.IPv6Enabled = False
     ResponsePages = <>
     Port = 8000
     Routes = <>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
     ShowServerStatus = True
     SSL.Enabled = False
     Left = 192
     Top = 8
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = Server
+    Left = 192
+    Top = 64
   end
 end

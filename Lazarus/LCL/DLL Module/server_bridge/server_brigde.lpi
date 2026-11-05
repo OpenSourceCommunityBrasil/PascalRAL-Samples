@@ -46,6 +46,12 @@
       <Item>
         <PackageName Value="LCL"/>
       </Item>
+      <Item>
+        <PackageName Value="ralmoduleswaggerpackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="ralpluginauthpackage"/>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>

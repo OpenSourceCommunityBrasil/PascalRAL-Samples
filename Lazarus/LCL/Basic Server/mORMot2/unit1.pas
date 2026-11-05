@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, StdCtrls,
-  RALSynopseServer, RALRequest, RALResponse, RALConsts, RALMIMETypes;
+  RALSynopseServer, RALRequest, RALResponse, RALConsts, RALMIMETypes, RALCORS, RALContent;
 
 type
 
@@ -14,6 +14,8 @@ type
 
   TForm1 = class(TForm)
     server: TRALSynopseServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     lblStatus: TLabel;
     ToggleBox1: TToggleBox;
     procedure FormCreate(Sender: TObject);

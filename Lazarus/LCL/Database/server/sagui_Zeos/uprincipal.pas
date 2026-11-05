@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZConnection,
   RALSaguiServer, RALDBModule, RALStorageBIN,
-  RALSwaggerModule, RALDBZeos;
+  RALSwaggerModule, RALDBZeos, RALCORS, RALContent;
 
 type
 
@@ -16,6 +16,8 @@ type
   TForm1 = class(TForm)
     dbmodule: TRALDBModule;
     server: TRALSaguiServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     swagger: TRALSwaggerModule;
     storage_bin: TRALStorageBINLink;
     ZConnection1: TZConnection;

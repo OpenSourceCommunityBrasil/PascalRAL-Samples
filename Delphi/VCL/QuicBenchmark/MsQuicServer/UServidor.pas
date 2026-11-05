@@ -23,7 +23,7 @@ uses
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Comp.Client, FireDAC.Comp.DataSet,
 
   RALTypes, RALConsts, RALMIMETypes, RALServer, RALRequest, RALResponse,
-  RALParams, RALCompress, RALCompressZLib, RALCripto, RALCriptoAES,
+  RALParams, RALCompress, RALCompressZLib, RALCripto, RALCriptoAES, RALContent,
   RALMsQuicServer,
   { os storages so' existem no executavel que os liga - sem RALStorageBIN o
     DBWare responde "Storage 1 not declared in uses" a todo opensql }
@@ -72,6 +72,8 @@ type
     procedure tmContadoresTimer(Sender: TObject);
   private
     FServer: TRALMsQuicServer;
+    FCompress: TRALCompressPlugin;
+    FCripto: TRALCriptoPlugin;
     FConnDAO: TRALFDConnection;
     FModulo: TRALDBModule;
     procedure Log(const ATexto: string);
@@ -235,23 +237,22 @@ begin
   FServer.PoolCount := StrToIntDef(edPool.Text, 1);
   FServer.SSL.CertificateFile := edCert.Text;
   FServer.SSL.PrivateKeyFile := edChave.Text;
-  { O servidor decide a compressao da resposta quando CompressType nao e'
-    ctNone; com ctNone quem decide e' o Accept-Encoding do cliente. }
+  { Desde o RAL 2.0 compressao e cifra do servidor sao plugins. O plugin
+    decide a compressao da resposta quando CompressType nao e' ctNone; com
+    ctNone quem decide e' o Accept-Encoding do cliente. }
   case cbCompress.ItemIndex of
-    1: FServer.CompressType := ctGZip;
-    2: FServer.CompressType := ctDeflate;
-    3: FServer.CompressType := ctZLib;
+    1: FCompress.CompressType := ctGZip;
+    2: FCompress.CompressType := ctDeflate;
+    3: FCompress.CompressType := ctZLib;
   else
-    FServer.CompressType := ctNone;
+    FCompress.CompressType := ctNone;
   end;
-  case cbCripto.ItemIndex of
-    1: FServer.CriptoOptions.CriptType := crAES128;
-    2: FServer.CriptoOptions.CriptType := crAES192;
-    3: FServer.CriptoOptions.CriptType := crAES256;
+  { a cifra da resposta e' a que o cliente aceita (Accept-Encription), entao o
+    tamanho escolhido aqui vale para o cliente; o servidor so' precisa da chave }
+  if cbCripto.ItemIndex > 0 then
+    FCripto.Key := StringRAL(edChaveCripto.Text)
   else
-    FServer.CriptoOptions.CriptType := crNone;
-  end;
-  FServer.CriptoOptions.Key := StringRAL(edChaveCripto.Text);
+    FCripto.Key := '';
 end;
 
 procedure TfServidor.Ligar;
@@ -262,6 +263,10 @@ begin
   if FServer = nil then
   begin
     FServer := TRALMsQuicServer.Create(Self);
+    FCompress := TRALCompressPlugin.Create(Self);
+    FCompress.Server := FServer;
+    FCripto := TRALCriptoPlugin.Create(Self);
+    FCripto.Server := FServer;
     FServer.CreateRoute('ping', RotaPing, 'responde pong');
     FServer.CreateRoute('params', RotaParams, 'devolve os parametros recebidos');
     FServer.CreateRoute('multipart', RotaMultipart, 'lista as partes recebidas');

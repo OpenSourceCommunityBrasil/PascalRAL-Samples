@@ -3,7 +3,7 @@ unit Unit1;
 interface
 
 uses
-  SysUtils, Variants, Classes,
+  Windows, SysUtils, Variants, Classes,
   Graphics,
   Controls, Forms, Dialogs, StdCtrls,
 

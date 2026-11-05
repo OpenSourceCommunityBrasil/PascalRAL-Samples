@@ -26,29 +26,13 @@ object Form1: TForm1
   end
   object server: TRALIndyServer
     Active = False
-    CompressType = ctNone
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
-      'Content-Type'
-      'Origin'
-      'Accept'
-      'Authorization'
-      'Content-Encoding'
-      'Accept-Encoding'
-    )
-    CORSOptions.AllowOrigin = '*'
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
     ResponsePages = <>
     Port = 8000
     Routes = <>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
     ShowServerStatus = True
     ListenQueue = -1
     MaxConnections = -1
@@ -58,5 +42,25 @@ object Form1: TForm1
     SSL.SSLOptions.VerifyDepth = 0
     Left = 176
     Top = 16
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = server
+    Left = 176
+    Top = 72
+  end
+  object RALCORSPlugin1: TRALCORSPlugin
+    Server = server
+    Options.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    Options.AllowOrigin = '*'
+    Options.MaxAge = 86400
+    Left = 176
+    Top = 128
   end
 end

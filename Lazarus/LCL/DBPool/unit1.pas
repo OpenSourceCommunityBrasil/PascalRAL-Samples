@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, SQLDB, SQLDBLib, PQConnection, Forms, Controls, Graphics,
-  Dialogs, StdCtrls, RALSynopseServer, RALDBModule, RALDBZeos;
+  Dialogs, StdCtrls, RALSynopseServer, RALDBModule, RALDBZeos, RALCORS, RALContent;
 
 type
 
@@ -16,6 +16,8 @@ type
     Memo1: TMemo;
     RALDBModule1: TRALDBModule;
     RALSynopseServer1: TRALSynopseServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     procedure FormCreate(Sender: TObject);
   private
 

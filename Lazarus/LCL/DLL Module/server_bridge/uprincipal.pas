@@ -13,7 +13,7 @@ uses
   {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
   Menus, Buttons, StdCtrls, DBGrids, ZDataset, DB, RALSwaggerModule, Themes,
-  RALAuthentication, RALSynopseServer, RALServer, RALResponse, RALRequest, Grids, RALToken;
+  RALAuthentication, RALSynopseServer, RALServer, RALResponse, RALRequest, Grids, RALToken, RALCORS, RALContent;
 
 type
 
@@ -51,6 +51,8 @@ type
     Panel2: TPanel;
     pgPrincipal: TPageControl;
     server: TRALSynopseServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     qUsuariosativo: TStringField;
     qUsuarioscodigo: TLongintField;
     qUsuariossenha: TStringField;

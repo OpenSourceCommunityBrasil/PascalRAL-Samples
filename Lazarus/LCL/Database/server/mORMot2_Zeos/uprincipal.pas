@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZConnection,
   RALSynopseServer, RALDBModule, RALDBZeos, RALStorageBIN,
-  RALSwaggerModule, RALAuthentication, raldbzeoslink;
+  RALSwaggerModule, RALAuthentication, raldbzeospackage, RALCORS, RALContent;
 
 type
 
@@ -17,6 +17,8 @@ type
     dbmodule: TRALDBModule;
     RALServerJWTAuth1: TRALServerJWTAuth;
     server: TRALSynopseServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     swagger: TRALSwaggerModule;
     storage_bin: TRALStorageBINLink;
     ZConnection1: TZConnection;

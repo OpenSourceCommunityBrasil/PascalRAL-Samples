@@ -11,11 +11,13 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, RALResponse,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Async, FireDAC.DApt,
-  RALTypes, Themes;
+  RALTypes, Themes, RALCORS, RALContent;
 
 type
   Tfprincipal = class(TForm)
     pooler: TRALSynopseServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     jwt: TRALServerJWTAuth;
     basic: TRALServerBasicAuth;
     pgPrincipal: TPageControl;

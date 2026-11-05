@@ -99,7 +99,7 @@
         <PackageName Value="SQLDBLaz"/>
       </Item>
       <Item>
-        <PackageName Value="raldbzeoslink"/>
+        <PackageName Value="raldbzeospackage"/>
       </Item>
       <Item>
         <PackageName Value="RALDBPackage"/>
@@ -109,6 +109,9 @@
       </Item>
       <Item>
         <PackageName Value="LCL"/>
+      </Item>
+      <Item>
+        <PackageName Value="pascalral"/>
       </Item>
     </RequiredPackages>
     <Units>

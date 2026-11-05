@@ -11,7 +11,7 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, zcomponent, uprincipal, fphttpral, indyral, synopseral,
-  raldbpackage, raldbzeoslink, raldbsqldblink, pascalral;
+  raldbpackage, raldbzeospackage, raldbsqldbpackage, pascalral;
 
 {$R *.res}
 

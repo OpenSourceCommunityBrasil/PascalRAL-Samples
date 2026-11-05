@@ -96,10 +96,10 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="raldbsqldblink"/>
+        <PackageName Value="raldbsqldbpackage"/>
       </Item>
       <Item>
-        <PackageName Value="raldbzeoslink"/>
+        <PackageName Value="raldbzeospackage"/>
       </Item>
       <Item>
         <PackageName Value="SynopseRAL"/>
@@ -130,6 +130,12 @@
       </Item>
       <Item>
         <PackageName Value="LCL"/>
+      </Item>
+      <Item>
+        <PackageName Value="ralpluginauthpackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="ralstoragepackage"/>
       </Item>
     </RequiredPackages>
     <Units>

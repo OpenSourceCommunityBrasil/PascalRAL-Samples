@@ -1,0 +1,96 @@
+object fPrincipal: TfPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'RAL Balancer (TRALBalancer)'
+  ClientHeight = 420
+  ClientWidth = 760
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  TextHeight = 13
+  object pnlTopo: TPanel
+    Left = 0
+    Top = 0
+    Width = 760
+    Height = 65
+    Align = alTop
+    TabOrder = 0
+    object lInfo: TLabel
+      Left = 12
+      Top = 42
+      Width = 4
+      Height = 13
+    end
+    object btnIniciar: TButton
+      Left = 12
+      Top = 8
+      Width = 90
+      Height = 25
+      Caption = 'Iniciar'
+      TabOrder = 0
+      OnClick = btnIniciarClick
+    end
+    object btnParar: TButton
+      Left = 108
+      Top = 8
+      Width = 90
+      Height = 25
+      Caption = 'Parar'
+      TabOrder = 1
+      OnClick = btnPararClick
+    end
+    object btnTestar: TButton
+      Left = 204
+      Top = 8
+      Width = 120
+      Height = 25
+      Caption = 'Testar servidores'
+      TabOrder = 2
+      OnClick = btnTestarClick
+    end
+  end
+  object mLog: TMemo
+    Left = 0
+    Top = 65
+    Width = 760
+    Height = 355
+    Align = alClient
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 1
+    WordWrap = False
+  end
+  object Upstream1: TRALUpstream
+    Servers = <
+      item
+        URL = 'http://127.0.0.1:8101'
+      end
+      item
+        URL = 'http://127.0.0.1:8102'
+      end>
+    EngineType = 'Indy'
+    HealthCheck.Path = '/quem'
+    Left = 600
+    Top = 104
+  end
+  object Balancer1: TRALBalancer
+    Port = 8100
+    StatsPath = '/status'
+    Upstream = Upstream1
+    Via = 'ralbalancer'
+    OnAccess = Balancer1Access
+    Left = 600
+    Top = 160
+  end
+  object Timer1: TTimer
+    Interval = 250
+    OnTimer = Timer1Timer
+    Left = 600
+    Top = 216
+  end
+end

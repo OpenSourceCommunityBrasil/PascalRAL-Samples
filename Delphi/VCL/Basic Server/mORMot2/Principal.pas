@@ -14,7 +14,7 @@ uses
   RALTypes,
   RALConsts, RALMIMETypes, RALCustomObjects, RALSynopseServer
 
-    ;
+    , RALCORS, RALContent;
 
 type
   TfPrincipal = class(TForm)
@@ -26,6 +26,8 @@ type
     lePort: TLabeledEdit;
     Memo1: TMemo;
     Server: TRALSynopseServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     procedure Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
     procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);

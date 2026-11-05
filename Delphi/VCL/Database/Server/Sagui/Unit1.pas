@@ -17,7 +17,7 @@ uses
   RALDBModule, RALDBFireDAC,
 
   // General use units
-  RALConsts, RALMimeTypes, RALTypes;
+  RALConsts, RALMimeTypes, RALTypes, RALCORS, RALContent;
 
 type
   TRALForm1 = class(TForm)
@@ -26,6 +26,8 @@ type
     StorageBIN: TRALStorageBINLink;
     StorageJSON: TRALStorageJSONLink;
     Server: TRALSaguiServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     procedure FormCreate(Sender: TObject);
     procedure serverRoutes_pingReply(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure RALServerJWTAuth1GetToken(ARequest: TRALRequest;

@@ -17,11 +17,13 @@ uses
   RALDBModule, RALDBFireDAC, RALStorageJSON, RALStorage, RALStorageBIN,
 
   // General use units
-  RALConsts, RALMimeTypes, RALTypes;
+  RALConsts, RALMimeTypes, RALTypes, RALCORS, RALContent;
 
 type
   TRALForm1 = class(TForm)
     server: TRALIndyServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     JWTAuth: TRALServerJWTAuth;
     DBModule: TRALDBModule;
     StorageBIN: TRALStorageBINLink;

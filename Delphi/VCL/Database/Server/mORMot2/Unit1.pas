@@ -17,7 +17,7 @@ uses
   RALDBModule, RALDBFireDAC,
 
   // General use units
-  RALConsts, RALMimeTypes, RALTypes, Vcl.StdCtrls;
+  RALConsts, RALMimeTypes, RALTypes, Vcl.StdCtrls, RALCORS, RALContent;
 
 type
   TRALForm1 = class(TForm)
@@ -26,6 +26,9 @@ type
     StorageBIN: TRALStorageBINLink;
     StorageJSON: TRALStorageJSONLink;
     server: TRALSynopseServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCriptoPlugin1: TRALCriptoPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     lInfo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure serverRoutes_pingReply(ARequest: TRALRequest; AResponse: TRALResponse);

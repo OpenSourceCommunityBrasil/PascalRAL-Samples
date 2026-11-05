@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils,
-  RALCGIServer, RALRequest, RALResponse;
+  RALCGIServer, RALRequest, RALResponse, RALCORS, RALContent;
 
 type
 
@@ -14,6 +14,8 @@ type
 
   Tdm = class(TDataModule)
     CGIServer: TRALCGIServer;
+    RALCompressPlugin1: TRALCompressPlugin;
+    RALCORSPlugin1: TRALCORSPlugin;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure teste(ARequest : TRALRequest; AResponse : TRALResponse);

@@ -14,7 +14,7 @@ uses
   RALTypes,
   RALConsts, RALMIMETypes, RALCustomObjects, RALSaguiServer
 
-    ;
+    , RALContent;
 
 type
   TfPrincipal = class(TForm)
@@ -26,6 +26,7 @@ type
     lePort: TLabeledEdit;
     Memo1: TMemo;
     Server: TRALSaguiServer;
+    RALCompressPlugin1: TRALCompressPlugin;
     procedure Clientes(ARequest: TRALRequest; AResponse: TRALResponse);
     procedure ToggleSwitch1Click(Sender: TObject);
     procedure ping(ARequest: TRALRequest; AResponse: TRALResponse);

@@ -91,6 +91,9 @@
       <Item>
         <PackageName Value="PascalRAL"/>
       </Item>
+      <Item>
+        <PackageName Value="ralmodulewebpackage"/>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>

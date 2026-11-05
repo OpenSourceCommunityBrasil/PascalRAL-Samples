@@ -478,18 +478,7 @@ object fprincipal: Tfprincipal
   end
   object pooler: TRALSynopseServer
     Active = False
-    CompressType = ctNone
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
-      'Content-Type'
-      'Origin'
-      'Accept'
-      'Authorization'
-      'Content-Encoding'
-      'Accept-Encoding')
-    CORSOptions.AllowOrigin = '*'
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
@@ -565,16 +554,31 @@ object fprincipal: Tfprincipal
       end>
     Port = 8000
     Routes = <>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
     ShowServerStatus = True
     PoolCount = 32
     QueueSize = 1000
     SSL.Enabled = False
     Left = 480
     Top = 120
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = pooler
+    Left = 480
+    Top = 176
+  end
+  object RALCORSPlugin1: TRALCORSPlugin
+    Server = pooler
+    Options.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding')
+    Options.AllowOrigin = '*'
+    Options.MaxAge = 86400
+    Left = 480
+    Top = 232
   end
   object jwt: TRALServerJWTAuth
     Algorithm = tjaHSHA256

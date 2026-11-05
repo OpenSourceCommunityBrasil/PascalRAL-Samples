@@ -441,19 +441,7 @@ object fprincipal: Tfprincipal
   end
   object server: TRALSynopseServer
     Active = False
-    CompressType = ctNone
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
-      'Content-Type'
-      'Origin'
-      'Accept'
-      'Authorization'
-      'Content-Encoding'
-      'Accept-Encoding'
-    )
-    CORSOptions.AllowOrigin = '*'
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
@@ -508,16 +496,32 @@ object fprincipal: Tfprincipal
       end>
     Port = 8000
     Routes = <>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
     ShowServerStatus = True
     PoolCount = 32
     QueueSize = 1000
     SSL.Enabled = False
     Left = 362
     Top = 104
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = server
+    Left = 362
+    Top = 160
+  end
+  object RALCORSPlugin1: TRALCORSPlugin
+    Server = server
+    Options.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding'
+    )
+    Options.AllowOrigin = '*'
+    Options.MaxAge = 86400
+    Left = 362
+    Top = 216
   end
   object iconTray: TTrayIcon
     PopUpMenu = memPop

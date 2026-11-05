@@ -65,34 +65,44 @@ object RALForm1: TRALForm1
   end
   object server: TRALSynopseServer
     Active = False
-    CompressType = ctGZip
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
-      'Content-Type'
-      'Origin'
-      'Accept'
-      'Authorization'
-      'Content-Encoding'
-      'Accept-Encoding')
-    CORSOptions.AllowOrigin = '*'
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crAES256
-    CriptoOptions.Key = 'oiuy'
     IPConfig.IPv4Bind = '0.0.0.0'
     IPConfig.IPv6Bind = '::'
     IPConfig.IPv6Enabled = False
     ResponsePages = <>
     Port = 8000
     Routes = <>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
     ShowServerStatus = True
     PoolCount = 32
     QueueSize = 1000
     SSL.Enabled = False
     Left = 8
     Top = 88
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = server
+    CompressType = ctGZip
+    Left = 8
+    Top = 144
+  end
+  object RALCriptoPlugin1: TRALCriptoPlugin
+    Server = server
+    Key = 'oiuy'
+    Left = 8
+    Top = 200
+  end
+  object RALCORSPlugin1: TRALCORSPlugin
+    Server = server
+    Options.AllowHeaders.Strings = (
+      'Content-Type'
+      'Origin'
+      'Accept'
+      'Authorization'
+      'Content-Encoding'
+      'Accept-Encoding')
+    Options.AllowOrigin = '*'
+    Options.MaxAge = 86400
+    Left = 8
+    Top = 256
   end
 end

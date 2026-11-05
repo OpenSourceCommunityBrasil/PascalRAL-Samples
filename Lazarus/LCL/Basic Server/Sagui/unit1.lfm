@@ -26,9 +26,28 @@ object Form1: TForm1
   end
   object server: TRALSaguiServer
     Active = False
-    CompressType = ctNone
     CookieLife = 30
-    CORSOptions.AllowHeaders.Strings = (
+    IPConfig.IPv4Bind = '0.0.0.0'
+    IPConfig.IPv6Bind = '::'
+    IPConfig.IPv6Enabled = False
+    ResponsePages = <>
+    Port = 8000
+    Routes = <>
+    ShowServerStatus = True
+    ConnectionLimit = 9999999
+    PoolCount = 32
+    SSL.Enabled = False
+    Left = 176
+    Top = 16
+  end
+  object RALCompressPlugin1: TRALCompressPlugin
+    Server = server
+    Left = 176
+    Top = 72
+  end
+  object RALCORSPlugin1: TRALCORSPlugin
+    Server = server
+    Options.AllowHeaders.Strings = (
       'Content-Type'
       'Origin'
       'Accept'
@@ -36,24 +55,9 @@ object Form1: TForm1
       'Content-Encoding'
       'Accept-Encoding'
     )
-    CORSOptions.AllowOrigin = '*'
-    CORSOptions.MaxAge = 86400
-    CriptoOptions.CriptType = crNone
-    IPConfig.IPv4Bind = '0.0.0.0'
-    IPConfig.IPv6Bind = '::'
-    IPConfig.IPv6Enabled = False
-    ResponsePages = <>
-    Port = 8000
-    Routes = <>
-    Security.BruteForce.ExpirationTime = 1800000
-    Security.BruteForce.MaxTry = 3
-    Security.FloodTimeInterval = 30
-    Security.Options = []
-    ShowServerStatus = True
-    ConnectionLimit = 9999999
-    PoolCount = 32
-    SSL.Enabled = False
+    Options.AllowOrigin = '*'
+    Options.MaxAge = 86400
     Left = 176
-    Top = 16
+    Top = 128
   end
 end
