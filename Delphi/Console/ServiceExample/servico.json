@@ -1,0 +1,6 @@
+{
+  "Server": {
+    "Port": 8000,
+    "ShutdownRetryAfter": 5
+  }
+}
