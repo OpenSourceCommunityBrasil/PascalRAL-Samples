@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package demo.greet;
+
+// A unary call and a server-streaming call.
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc SayHellos (HelloRequest) returns (stream HelloReply);
+}
+
+message HelloRequest {
+  string name = 1;
+  int32 times = 2;
+}
+
+message HelloReply {
+  string message = 1;
+  int32 index = 2;
+}
