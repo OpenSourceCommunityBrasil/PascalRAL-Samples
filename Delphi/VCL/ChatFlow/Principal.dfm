@@ -1,0 +1,109 @@
+object fPrincipal: TfPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'RAL Chat - pedido de pizza em etapas (TRALChatFlow)'
+  ClientHeight = 360
+  ClientWidth = 640
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  TextHeight = 13
+  object pnlTopo: TPanel
+    Left = 0
+    Top = 0
+    Width = 640
+    Height = 41
+    Align = alTop
+    TabOrder = 0
+    object btnIniciar: TButton
+      Left = 12
+      Top = 8
+      Width = 90
+      Height = 25
+      Caption = 'Iniciar'
+      TabOrder = 0
+      OnClick = btnIniciarClick
+    end
+    object btnParar: TButton
+      Left = 108
+      Top = 8
+      Width = 90
+      Height = 25
+      Caption = 'Parar'
+      TabOrder = 1
+      OnClick = btnPararClick
+    end
+  end
+  object mLog: TMemo
+    Left = 0
+    Top = 41
+    Width = 640
+    Height = 319
+    Align = alClient
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 1
+  end
+  object Bot1: TRALChatBot
+    Channels = <
+      item
+        Channel = Telegram1
+      end>
+    PersistFile = 'chatflow.sessions'
+    OnError = Bot1Error
+    Left = 480
+    Top = 96
+  end
+  object Telegram1: TRALChatTelegram
+    TokenName = 'TELEGRAM_TOKEN'
+    TokenSource = tsEnvironment
+    Bot = Bot1
+    ReceiveMode = crmPolling
+    Left = 480
+    Top = 152
+  end
+  object Flow1: TRALChatFlow
+    Bot = Bot1
+    CancelWords.Strings = (
+      'cancel'
+      'cancelar')
+    FinishText = 'Anotado, {nome}: {quantidade} pizza(s) de {sabor}. Obrigado!'
+    OnCancel = Flow1Cancel
+    OnFinish = Flow1Finish
+    StartCommand = 'pedido'
+    Steps = <
+      item
+        Name = 'nome'
+        Prompt = 'Qual '#233' o seu nome?'
+        Validation = fvText
+      end
+      item
+        Name = 'sabor'
+        Options.Strings = (
+          'calabresa=Calabresa'
+          'mussarela=Mussarela'
+          'portuguesa=Portuguesa')
+        Prompt = 'Oi, {nome}! Qual sabor?'
+        Validation = fvOptions
+      end
+      item
+        ErrorText = 'Responda com um n'#250'mero, por favor.'
+        Name = 'quantidade'
+        Prompt = 'Quantas pizzas?'
+        Validation = fvInteger
+      end>
+    Left = 480
+    Top = 208
+  end
+  object Timer1: TTimer
+    Interval = 250
+    OnTimer = Timer1Timer
+    Left = 480
+    Top = 264
+  end
+end
