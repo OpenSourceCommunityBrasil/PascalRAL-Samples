@@ -93,8 +93,10 @@ begin
   FHealth.Checks.AddCheck('disco', ChecarDisco);
   FHealth.Server := AServer;
 
-  // /metrics no formato do Prometheus
+  // /metrics no formato do Prometheus; PhaseTimes separa o tempo de cada rota em
+  // antes do handler, o handler e depois dele (ral_http_request_phase_seconds)
   FMetricas := TRALMetricsPlugin.Create(nil);
+  FMetricas.PhaseTimes := True;
   FMetricas.Server := AServer;
 
   AServer.CreateRoute('produtos', Produtos).Allow([amGET]);
