@@ -1,0 +1,103 @@
+object fPrincipal: TfPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'RAL - LiveBindings sobre JSON (FMX)'
+  ClientHeight = 400
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object btnCarregar: TButton
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'Carregar'
+    OnClick = btnCarregarClick
+  end
+  object btnJSON: TButton
+    Position.X = 116.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Ver JSON'
+    OnClick = btnJSONClick
+  end
+  object edNome: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Position.X = 228.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object gridPessoas: TStringGrid
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 8.000000000000000000
+    Position.Y = 44.000000000000000000
+    Size.Width = 624.000000000000000000
+    Size.Height = 220.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+  end
+  object mmJSON: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 8.000000000000000000
+    Position.Y = 272.000000000000000000
+    Size.Width = 624.000000000000000000
+    Size.Height = 120.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+  end
+  object RALClient1: TRALClient
+    Left = 480
+    Top = 80
+  end
+  object RALJSONBindSourceAdapter1: TRALJSONBindSourceAdapter
+    Client = RALClient1
+    FieldDefs.Strings = (
+      'id:integer'
+      'name'
+      'score:float'
+      'active:boolean')
+    Route = 'pessoas'
+    Left = 480
+    Top = 136
+  end
+  object AdapterBindSource1: TAdapterBindSource
+    AutoActivate = True
+    Adapter = RALJSONBindSourceAdapter1
+    ScopeMappings = <>
+    Left = 480
+    Top = 192
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 560
+    Top = 80
+    object LinkGridToDataSource1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = AdapterBindSource1
+      GridControl = gridPessoas
+      Columns = <>
+    end
+    object LinkControlToFieldNome: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = AdapterBindSource1
+      FieldName = 'name'
+      Control = edNome
+      Track = True
+    end
+  end
+end
