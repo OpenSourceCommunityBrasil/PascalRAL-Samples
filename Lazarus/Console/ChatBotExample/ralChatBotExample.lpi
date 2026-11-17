@@ -97,6 +97,9 @@
       <Item>
         <PackageName Value="RALModuleChatTelegramPackage"/>
       </Item>
+      <Item>
+        <PackageName Value="RALModuleChatMetaPackage"/>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>
