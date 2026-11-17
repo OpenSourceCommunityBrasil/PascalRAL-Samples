@@ -15,7 +15,7 @@ uses
   FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.Stan.Def,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.ConsoleUI.Wait,
 
-  RALServer, RALTypes, RALDBBase, RALDBModule, RALDBFireDAC, RALDBCrudModule;
+  RALServer, RALTypes, RALDBBase, RALDBModule, RALDBFireDAC, RALDBCrudModule, RALSwaggerModule;
 
 const
   cPorta = 8000;
@@ -59,12 +59,16 @@ var
   FBanco: TRALDBModule;
   FCrud: TRALDBCrudModule;
   FRecurso: TRALDBCrudResource;
+  FSwagger: TRALSwaggerModule;
+  vCols: Integer;
+  vI: Integer;
   vArquivo, vBase: string;
   vNovo: Boolean;
 begin
   FServer := nil;
   FBanco := nil;
   FCrud := nil;
+  FSwagger := nil;
   vArquivo := ExtractFilePath(ParamStr(0)) + 'produtos.db';
   vNovo := not FileExists(vArquivo);
   try
@@ -82,11 +86,21 @@ begin
     FRecurso.VersionField := 'versao';
     FRecurso.DefaultSort := 'nome';
 
+    // code equivalent of the IDE verb "Read columns": fills Fields from the catalog
+    vCols := FCrud.ReadColumns(FRecurso);
+    WriteLn('Columns read of ', FRecurso.Route, ' (', vCols, '):');
+    for vI := 0 to FRecurso.Fields.Count - 1 do
+      WriteLn('  ', FRecurso.Fields[vI]);
+
     // read only, only the products under 10, only some columns
     FRecurso := FCrud.Resources.AddResource('/baratos', 'produtos');
     FRecurso.Operations := [roList, roGet];
     FRecurso.BaseFilter := 'preco < 10';
     FRecurso.Fields.CommaText := 'id,nome,preco';
+
+    // Swagger UI and swagger.json, with the schemas of the resources
+    FSwagger := TRALSwaggerModule.Create(nil);
+    FSwagger.Server := FServer;
 
     FCrud.Server := FServer;
     FServer.Port := cPorta;
@@ -101,6 +115,7 @@ begin
     WriteLn('  ', vBase, '/produtos?nome_cont=a&_fields=id,nome&_limit=3');
     WriteLn('  ', vBase, '/produtos?rql=and(gt(preco,10),lt(estoque,100))');
     WriteLn('  ', vBase, '/baratos');
+    WriteLn('  ', vBase, '/swagger/   (Swagger UI)');
     WriteLn;
     WriteLn('See the README.md for curl examples of every verb.');
     WriteLn('Press ENTER to finish');
@@ -108,6 +123,7 @@ begin
   finally
     if FServer <> nil then
       FServer.Stop;
+    FreeAndNil(FSwagger);
     FreeAndNil(FCrud);
     FreeAndNil(FBanco);
     FreeAndNil(FServer);

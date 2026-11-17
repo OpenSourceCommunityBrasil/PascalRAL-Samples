@@ -9,9 +9,11 @@ O programa cria, ao lado do executável, o banco SQLite `produtos.db` (se ele ai
 | `/produtos` | todos os verbos; `versao` é o `VersionField` (vira o ETag) |
 | `/baratos` | só leitura; `BaseFilter` `preco < 10` e só as colunas `id`, `nome` e `preco` |
 
+O mesmo servidor tem um `TRALSwaggerModule` (unit `RALSwaggerModule`, pacote `RALModuleSwaggerPackage`): abra `http://127.0.0.1:8000/swagger/` para ver a Swagger UI, com o esquema (colunas, tipos, obrigatórios na escrita) de cada recurso, lido do catálogo do banco. Na partida o programa também chama `FCrud.ReadColumns(Recurso)` e imprime as colunas lidas: é o equivalente em código do verbo "Ler colunas" da IDE (preenche `Fields` e, se vazio, `KeyFields`).
+
 ## Como rodar
 
-1. Instale/compile os pacotes `PascalRAL`, `RALDBPackage`, `RALDBFireDACPackage` e `IndyRAL` (ver a wiki, "Instalação").
+1. Instale/compile os pacotes `PascalRAL`, `RALDBPackage`, `RALDBFireDACPackage`, `RALModuleSwaggerPackage` e `IndyRAL` (ver a wiki, "Instalação").
 2. Compile e execute `RALDataAPIExample.dpr`. O SQLite vai estático no FireDAC (`FireDAC.Phys.SQLiteWrapper.Stat`), sem DLL.
 3. Teste de outro terminal com os `curl` abaixo. ENTER encerra o servidor.
 

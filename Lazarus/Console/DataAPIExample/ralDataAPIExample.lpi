@@ -97,6 +97,9 @@
       <Item>
         <PackageName Value="raldbsqldbpackage"/>
       </Item>
+      <Item>
+        <PackageName Value="RALModuleSwaggerPackage"/>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>
